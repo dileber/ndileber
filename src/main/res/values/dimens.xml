@@ -1,0 +1,13 @@
+<resources>
+
+
+    
+    
+<dimen name="alert_width">290dp</dimen>
+    <dimen name="common_circle_width">3dp</dimen>
+    <dimen name="progress_circle_radius">34dp</dimen>
+
+    <dimen name="toast_radius">3dp</dimen>
+    <dimen name="toast_up_down">5dp</dimen>
+    <dimen name="toast_left_right">8dp</dimen>
+</resources>

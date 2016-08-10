@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">NDileber</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="dialog_default_title">消息</string>
+    <string name="dialog_ok">确定</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="LOADING">加载中...</string>
+    <string name="dialog_error">错误</string>
+    <string name="dialog_success">成功</string>
+    <string name="dialog_warning">警告</string>
+
+</resources>
