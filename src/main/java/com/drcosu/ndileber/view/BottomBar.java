@@ -54,6 +54,10 @@ public class BottomBar extends LinearLayout {
                 if (mCurrentPosition == position) {
 
                 } else {
+
+                    if(onClickItemMenu !=null){
+                        onClickItemMenu.onClickItem(position);
+                    }
                     tab.setSelected(true);
                     mTabLayout.getChildAt(mCurrentPosition).setSelected(false);
                     mCurrentPosition = position;
@@ -79,5 +83,13 @@ public class BottomBar extends LinearLayout {
         });
     }
 
+    OnClickItemMenu onClickItemMenu = null;
 
+    public interface OnClickItemMenu{
+        void onClickItem(int position);
+    }
+
+    public void setOnClickItemMenu(OnClickItemMenu onClickItemMenu) {
+        this.onClickItemMenu = onClickItemMenu;
+    }
 }

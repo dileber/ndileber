@@ -67,11 +67,12 @@ public class ActivityManager {
     {
         if (activity != null)
         {
-            activity.finish();
+            if(!activity.isChangingConfigurations()){
+                activity.finish();
+            }
             activityStack.remove(activity);
             Logger.i(activity.getComponentName().getShortClassName()+" 出栈");
             activity = null;
-
         }
     }
 

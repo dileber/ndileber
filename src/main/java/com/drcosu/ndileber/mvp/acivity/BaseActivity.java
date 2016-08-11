@@ -69,16 +69,20 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
         /**
          * 将activity从栈中弹出
          */
         activityManager.popActivity(this);
-        /**
-         * 如果全部弹出则调用退出函数
-         */
-        if(activityManager.activityInStack()==0){
-            SApplication.getInstance().quit();
+        if(!isChangingConfigurations()){
+            /**
+             * 如果全部弹出则调用退出函数
+             */
+            if(activityManager.activityInStack()==0){
+                SApplication.getInstance().quit();
+            }
         }
+
     }
 
     /**
