@@ -83,6 +83,7 @@ public class BottomBar extends LinearLayout {
         });
     }
 
+
     OnClickItemMenu onClickItemMenu = null;
 
     public interface OnClickItemMenu{

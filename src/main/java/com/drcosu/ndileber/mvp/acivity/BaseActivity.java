@@ -46,12 +46,15 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (this.getClass().isAnnotationPresent(CloseTitle.class)) {
-            if(this.getClass().getAnnotation(CloseTitle.class).value()){
-                //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                getSupportActionBar().hide();
-            }
-        }
+        /**
+         * 主题采用noactionbar 添加toolsbar 这里废弃
+         */
+//        if (this.getClass().isAnnotationPresent(CloseTitle.class)) {
+//            if(this.getClass().getAnnotation(CloseTitle.class).value()){
+//                //this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+//                getSupportActionBar().hide();
+//            }
+//        }
         if (this.getClass().isAnnotationPresent(CloseStatusBar.class)) {
             if(this.getClass().getAnnotation(CloseStatusBar.class).value()){
                 getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -74,14 +77,6 @@ public class BaseActivity extends AppCompatActivity {
          * 将activity从栈中弹出
          */
         activityManager.popActivity(this);
-        if(!isChangingConfigurations()){
-            /**
-             * 如果全部弹出则调用退出函数
-             */
-            if(activityManager.activityInStack()==0){
-                SApplication.getInstance().quit();
-            }
-        }
 
     }
 

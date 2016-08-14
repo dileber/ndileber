@@ -23,7 +23,6 @@ public class SApplication extends Application{
 
 	@Override
 	public void onCreate() {
-		// TODO Auto-generated method stub
 		super.onCreate();
 		buglog();
 		instance = this;

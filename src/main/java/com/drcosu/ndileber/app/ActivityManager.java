@@ -53,8 +53,10 @@ public class ActivityManager {
      */
     public void pushActivity(@NonNull Activity activity)
     {
-        activityStack.add(activity);
-        Logger.i(activity.getComponentName().getShortClassName()+" 入栈");
+        //if(!activity.isChangingConfigurations()){
+            activityStack.add(activity);
+            Logger.i(activity.getComponentName().getShortClassName()+" 入栈");
+        //}
     }
 
     /**
@@ -67,12 +69,16 @@ public class ActivityManager {
     {
         if (activity != null)
         {
-            if(!activity.isChangingConfigurations()){
-                activity.finish();
-            }
             activityStack.remove(activity);
             Logger.i(activity.getComponentName().getShortClassName()+" 出栈");
-            activity = null;
+            if(!activity.isChangingConfigurations()){
+                activity.finish();
+                activity = null;
+                if(activityManager.activityInStack()==0){
+                    SApplication.getInstance().quit();
+                }
+            }
+
         }
     }
 

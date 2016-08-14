@@ -34,6 +34,17 @@ public class UUi {
         return view;
     }
 
+
+    public static  <T extends View> T getView(View mView, SparseArray<View> mViews, int id) {
+        T view = (T) mViews.get(id);
+        if (view == null) {
+            view = (T) mView.findViewById(id);
+            mViews.put(id, view);
+        }
+        return view;
+    }
+
+
     /**
      * 给多个view添加点击事件
      * @param listener
