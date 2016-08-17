@@ -24,13 +24,13 @@ public abstract class RetCallback<T> implements Callback<T>{
 
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
-        log(call);
+        RetLog.log(call);
         onSuccess(call, response);
     }
 
     @Override
     public void onFailure(Call<T> call, Throwable throwable) {
-        log(call);
+        RetLog.log(call);
         failure(call,throwable);
     }
 
@@ -49,5 +49,7 @@ public abstract class RetCallback<T> implements Callback<T>{
             Logger.d(sb.toString());
         }
     }
+
+
 
 }
