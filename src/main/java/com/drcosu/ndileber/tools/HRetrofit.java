@@ -25,7 +25,7 @@ public class HRetrofit {
     private HRetrofit(String baseUrl){
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(HJson.getGson()))
                 .client(genericClient())
                 .build();
     }

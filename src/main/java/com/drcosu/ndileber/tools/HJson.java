@@ -35,6 +35,10 @@ public class HJson {
         }
     }
 
+    public static Gson getGson() {
+        return gson;
+    }
+
     /**
      * 转成json
      *
