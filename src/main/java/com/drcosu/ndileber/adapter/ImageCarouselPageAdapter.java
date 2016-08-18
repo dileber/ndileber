@@ -1,10 +1,9 @@
-package com.adapter;
+package com.drcosu.ndileber.adapter;
 
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.gson.internal.bind.ReflectiveTypeAdapterFactory;
 import com.orhanobut.logger.Logger;
 
 import java.util.List;

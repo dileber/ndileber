@@ -1,27 +1,20 @@
 package com.drcosu.ndileber.mvp.fragment;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
-import android.support.v7.internal.widget.ThemeUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.adapter.ImageCarouselPageAdapter;
+import com.drcosu.ndileber.adapter.ImageCarouselPageAdapter;
 import com.drcosu.ndileber.R;
 import com.drcosu.ndileber.app.ActivityManager;
-import com.drcosu.ndileber.tools.DialogLinstener;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.orhanobut.logger.Logger;
 
