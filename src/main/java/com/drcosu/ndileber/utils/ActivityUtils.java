@@ -21,6 +21,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.orhanobut.logger.Logger;
+
 
 /**
  * This provides methods to help Activities load their UI.
