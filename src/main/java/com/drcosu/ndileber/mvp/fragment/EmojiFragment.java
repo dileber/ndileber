@@ -54,10 +54,20 @@ public class EmojiFragment extends BaseFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        Fragment fragment = getParentFragment();
+        if(fragment!=null){
+            setInteraction(fragment);
+        }else{
+            setInteraction(context);
+        }
+
+    }
+
+    private void setInteraction(Object o){
+        if (o instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) o;
         } else {
-            throw new RuntimeException(context.toString()
+            throw new RuntimeException(o.toString()
                     + " must implement OnFragmentInteractionListener");
         }
     }
