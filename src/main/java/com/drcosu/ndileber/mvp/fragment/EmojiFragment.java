@@ -16,22 +16,18 @@ import com.drcosu.ndileber.repository.EmojiRepository;
 
 public class EmojiFragment extends BaseFragment {
 
-    private static final String START = "start";
-    private static final String LAST = "last";
-
-    private int mStart;
-    private int mLast;
+    private static final String PAGE = "page";
+    private int mPage;
 
     private OnFragmentInteractionListener mListener;
 
     public EmojiFragment() {
     }
 
-    public static EmojiFragment newInstance(int start, int last) {
+    public static EmojiFragment newInstance(int page) {
         EmojiFragment fragment = new EmojiFragment();
         Bundle args = new Bundle();
-        args.putInt(START, start);
-        args.putInt(LAST, last);
+        args.putInt(PAGE, page);
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,8 +36,7 @@ public class EmojiFragment extends BaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mStart = getArguments().getInt(START);
-            mLast = getArguments().getInt(LAST);
+            mPage = getArguments().getInt(PAGE);
         }
     }
 
@@ -51,8 +46,8 @@ public class EmojiFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_emoji, container, false);
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.emoji_recycle);
-        recyclerView.setLayoutManager(new GridLayoutManager(context, 8));
-        recyclerView.setAdapter(new EmojiAdaper(EmojiRepository.icon.subList(mStart,mLast),mListener));
+        recyclerView.setLayoutManager(new GridLayoutManager(context, EmojiRepository.lie));
+        recyclerView.setAdapter(new EmojiAdaper(EmojiRepository.getIcon(mPage),mListener));
         return view;
     }
 
