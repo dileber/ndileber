@@ -158,45 +158,19 @@ public class DBManager {
             SQLiteStatement statement = sqliteDatabase.compileStatement(sql);
             int res = 0;
             if(bindArgs != null){
-
                 int size = bindArgs.length;
                 for(int i = 0; i < size; i++){
-                    //statement.bindString(i+1, bindArgs[i]);
                     bind(bindArgs[i],statement,i + 1);
                 }
-//                Method[] mm = statement.getClass().getDeclaredMethods();
-//                for (Method method : mm) {
-//                    SLog.i( method.getName());
-//                    /**
-//                     *  反射查看是否能获取executeUpdateDelete方法
-//                     *  查看源码可知 executeUpdateDelete是public的方法，但是好像被隐藏了所以不能被调用，
-//                     *      利用反射貌似只能在root以后的机器上才能调用，小米是可以，其他机器却不行，所以还是不能用。
-//                     */
-//                }
-                res = statement.executeUpdateDelete();
-                statement.close();
             }
+            res = statement.executeUpdateDelete();
+            statement.close();
             return res;
         }else{
             Logger.i( "数据库已关闭");
             return 0;
         }
     }
-
-//    /**
-//     * 删除数据
-//     * @param table         表名
-//     * @param whereClause   表示SQL语句中条件部分的语句
-//     * @param whereArgs     表示占位符的值
-//     * @return
-//     */
-//    public int deleteData(String table, String whereClause, String[] whereArgs){
-//        int result = 0;
-//        if(sqliteDatabase.isOpen()){
-//            result = sqliteDatabase.delete(table, whereClause, whereArgs);
-//        }
-//        return result;
-//    }
 
     /**
      * 查询数据
