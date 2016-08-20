@@ -244,6 +244,15 @@ public class DBManager {
         return mList;
     }
 
+    /**
+     *
+     * @param sql
+     * @param selectionArgs
+     * @param clazz
+     * @param <T>
+     * @return
+     * @throws Exception
+     */
     public <T> List<T> queryData2T(String sql, Object[] selectionArgs, Class<T> clazz) throws Exception{
         List<T> mList = new ArrayList<T>();
         if(sqliteDatabase.isOpen()){
@@ -257,17 +266,16 @@ public class DBManager {
                 }
             }
 
-
             Cursor cursor = sqliteDatabase.rawQuery(sql, selection);
             Field[] f;
             if(cursor != null && cursor.getCount() > 0) {
+                String[] column = cursor.getColumnNames();
+
                 while(cursor.moveToNext()){
                     T t = clazz.newInstance();
-                    f = clazz.getDeclaredFields();
-                    for(int i = 0; i < f.length; i++) {
-                        //为JavaBean 设值
-                        //invokeSet(object, f[i].getName(), cursor.getString(cursor.getColumnIndex(f[i].getName())));
-                        invokeSet(t,f[i].getName(), cursor.getString(cursor.getColumnIndex(f[i].getName())),f[i].getType());
+                    for(int i=0;i<column.length;i++){
+                        Logger.d(column[i]+" "+ cursor.getString(cursor.getColumnIndex(column[i])));
+                        invokeSet(t,column[i], cursor.getString(cursor.getColumnIndex(column[i])),clazz.getField(column[i]).getType());
                     }
                     mList.add(t);
                 }
@@ -486,12 +494,15 @@ public class DBManager {
      * @param <T>
      */
     public static <T>void  invokeSet(T t, String fieldName, String value,Class<? extends Object> typeClass) {
-
+        if(value==null){
+            return;
+        }
         Method method = getSetMethod(t.getClass(), fieldName);
         try {
             Constructor<? extends Object> cons = typeClass.getConstructor(String.class);
             Object attribute = cons.newInstance(value);
             method.invoke(t, new Object[] { attribute });
+
         } catch (Exception e) {
             e.printStackTrace();
         }
