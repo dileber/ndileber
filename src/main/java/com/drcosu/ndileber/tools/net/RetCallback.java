@@ -8,6 +8,7 @@ import com.orhanobut.logger.Logger;
 import org.apache.http.HttpException;
 
 import java.net.ConnectException;
+import java.net.HttpRetryException;
 import java.util.Set;
 
 import okhttp3.Headers;
@@ -54,6 +55,9 @@ public abstract class RetCallback<T> implements Callback<T>{
         while (t != null) {
             if (t instanceof ConnectException) {
                 UDialog.alert(UDialog.DIALOG_ERROR,networkMsg).show();
+            }
+            if (t instanceof HttpRetryException) {
+                Logger.d("错误代码"+((HttpRetryException)t).responseCode());
             }
             t = t.getCause();
         }
