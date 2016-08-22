@@ -1,19 +1,11 @@
 package com.drcosu.ndileber.tools.net;
 
 import com.drcosu.ndileber.app.SApplication;
-import com.drcosu.ndileber.tools.HJson;
 import com.drcosu.ndileber.tools.UDialog;
 import com.orhanobut.logger.Logger;
-
-import org.apache.http.HttpException;
-
 import java.net.ConnectException;
 import java.net.HttpRetryException;
-import java.util.Set;
-
-import okhttp3.Headers;
 import okhttp3.Request;
-import okhttp3.internal.framed.Header;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
