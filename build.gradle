@@ -12,11 +12,11 @@ buildscript {
 
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion '22.0.1'
+    compileSdkVersion 24
+    buildToolsVersion '24.0.1'
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 22
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
@@ -37,8 +37,8 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta3'
     compile 'com.facebook.fresco:fresco:0.10.0'
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.android.support:support-v4:22.2.1'
+    compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.android.support:support-v4:24.1.1'
     compile 'com.google.dagger:dagger:2.0'
-    compile 'com.android.support:recyclerview-v7:22.2.1'
+    compile 'com.android.support:recyclerview-v7:24.1.1'
 }
