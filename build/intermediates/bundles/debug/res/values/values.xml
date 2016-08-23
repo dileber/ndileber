@@ -3,6 +3,9 @@
     <color name="blue_btn_bg_color">#AEDEF4</color>
     <color name="blue_btn_bg_pressed_color">#96BFD2</color>
     <color name="button_text_color">#FFFFFF</color>
+    <color name="carousel_gray">#F4F4F1</color>
+    <color name="carousel_red">#ff0000</color>
+    <color name="colorPrimary">#3F51B5</color>
     <color name="error_stroke_color">#F27474</color>
     <color name="float_transparent">#00000000</color>
     <color name="gray_btn_bg_color">#D0D0D0</color>
@@ -16,6 +19,7 @@
     <color name="red_btn_bg_pressed_color">#CD5B55</color>
     <color name="success_stroke_color">#A5DC86</color>
     <color name="sweet_dialog_bg_color">#FFFFFF</color>
+    <color name="tab_unselect">#c9c9c9</color>
     <color name="text_color">#575757</color>
     <color name="toast_background">#575757</color>
     <color name="toast_text">#FFFFFF</color>
@@ -24,6 +28,7 @@
     <declare-styleable name="ProgressWheel"><attr format="boolean" name="matProg_progressIndeterminate"/><attr format="color" name="matProg_barColor"/><attr format="color" name="matProg_rimColor"/><attr format="dimension" name="matProg_rimWidth"/><attr format="float" name="matProg_spinSpeed"/><attr format="integer" name="matProg_barSpinCycleTime"/><attr format="dimension" name="matProg_circleRadius"/><attr format="boolean" name="matProg_fillRadius"/><attr format="dimension" name="matProg_barWidth"/><attr format="boolean" name="matProg_linearProgress"/></declare-styleable>
     <declare-styleable name="Rotate3dAnimation"><attr format="enum" name="rollType"><enum name="x" value="0"/><enum name="y" value="1"/><enum name="z" value="2"/></attr><attr format="float" name="fromDeg"/><attr format="float" name="toDeg"/><attr format="fraction" name="pivotX"/><attr format="fraction" name="pivotY"/></declare-styleable>
     <dimen name="alert_width">290dp</dimen>
+    <dimen name="carouse_height">200dp</dimen>
     <dimen name="common_circle_width">3dp</dimen>
     <dimen name="progress_circle_radius">34dp</dimen>
     <dimen name="toast_left_right">8dp</dimen>
