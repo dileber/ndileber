@@ -64,6 +64,7 @@ public class SApplication extends Application{
 	 */
 	public void quit(){
 		Logger.i("退出整个app");
+		ThreadExecutor.getInstance().stop();
 	}
 
 }

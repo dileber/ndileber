@@ -1,5 +1,7 @@
 package com.drcosu.ndileber.tools;
 
+import android.os.Environment;
+
 import java.lang.reflect.Method;
 
 /**
@@ -34,4 +36,14 @@ public class SSystem {
         return ret;
     }
 
+    /**
+     * 判断是否有sd卡
+     * @return
+     */
+    private static boolean isSdcard(){
+        if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            return false;
+        }
+        return true;
+    }
 }

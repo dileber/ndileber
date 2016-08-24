@@ -1,8 +1,11 @@
 package com.drcosu.ndileber.mvp.data.source.local;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.drcosu.ndileber.app.ActivityManager;
+import com.drcosu.ndileber.tools.HContentProvider;
 import com.drcosu.ndileber.tools.HPref;
 import com.drcosu.ndileber.utils.Check;
 
@@ -18,6 +21,8 @@ public class BaseLocalDataSource {
     protected HPref hPref = HPref.getInstance();
 
     protected DBManager dbManager = DBManager.getInstance();
+
+    protected HContentProvider hContentProvider = HContentProvider.getInstance();
 
 
 
