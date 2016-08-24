@@ -80,7 +80,6 @@ public class EmojiFragment extends BaseFragment {
 
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(String icon);
     }
 }

@@ -62,7 +62,7 @@ public class UDialog {
         return loadalert;
     }
 
-    public Dialog dialogOk(String content, final DialogLinstener dialogLinstener){
+    public static Dialog dialogOk(String content, final DialogLinstener dialogLinstener){
         Activity activity = ActivityManager.peekTopActivity();
         Dialog alert = new SweetAlertDialog(activity);
         ((SweetAlertDialog)alert).changeAlertType(SweetAlertDialog.WARNING_TYPE);
