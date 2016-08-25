@@ -19,7 +19,7 @@ public class UImage {
     public static void showThumb(Uri uri, SimpleDraweeView draweeView,int w,int h){
         ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri)
                 .setAutoRotateEnabled(true)
-                .setResizeOptions(new ResizeOptions(200, 200))
+                .setResizeOptions(new ResizeOptions(w, h))
                 .build();
 
         DraweeController controller = Fresco.newDraweeControllerBuilder()
