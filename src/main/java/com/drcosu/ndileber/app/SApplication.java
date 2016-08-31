@@ -20,6 +20,7 @@ public class SApplication extends Application{
 	private static SApplication instance;
 	private static Context context;
 	public static boolean netLog = true;
+	public static boolean crash = true;
 
 	@Override
 	public void onCreate() {
@@ -30,7 +31,9 @@ public class SApplication extends Application{
 		/**
 		 * android 崩溃记录
 		 */
-		AndroidCrash.getInstance().init();
+		if(crash){
+			AndroidCrash.getInstance().init();
+		}
 
 
 		Fresco.initialize(context);
@@ -66,5 +69,6 @@ public class SApplication extends Application{
 		Logger.i("退出整个app");
 		ThreadExecutor.getInstance().stop();
 	}
+
 
 }
