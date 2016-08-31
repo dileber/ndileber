@@ -13,7 +13,7 @@ import com.orhanobut.logger.Logger;
 /**
  * Created by shidawei on 16/6/2.
  */
-public class SApplication extends Application{
+public abstract class SApplication extends Application{
 
 	public static Typeface icon_font;
 
@@ -22,9 +22,12 @@ public class SApplication extends Application{
 	public static boolean netLog = true;
 	public static boolean crash = true;
 
+	public abstract void start();
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		start();
 		buglog();
 		instance = this;
 		context = instance.getApplicationContext();
