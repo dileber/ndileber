@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
@@ -21,6 +23,7 @@ import com.drcosu.ndileber.tools.UUi;
 import com.drcosu.ndileber.tools.annotation.CloseStatusBar;
 import com.drcosu.ndileber.tools.annotation.CloseTitle;
 import com.drcosu.ndileber.tools.annotation.HideKeyboard;
+import com.drcosu.ndileber.utils.UToolBar;
 import com.orhanobut.logger.Logger;
 
 
@@ -29,7 +32,7 @@ import com.orhanobut.logger.Logger;
  * 继承最新的AppCompatActivity 来做基础activity
  * Created by shidawei on 16/6/2.
  */
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     /**
      * 主要用于缓存view
@@ -67,7 +70,13 @@ public class BaseActivity extends AppCompatActivity {
          * 将activity 添加到activity栈中
          */
         activityManager.pushActivity(this);
+        setContentView(layoutViewId());
+        initView();
     }
+
+    protected abstract int layoutViewId();
+
+    protected abstract void initView();
 
     @Override
     protected void onDestroy() {
@@ -77,7 +86,51 @@ public class BaseActivity extends AppCompatActivity {
          * 将activity从栈中弹出
          */
         activityManager.popActivity(this);
+    }
 
+    private Toolbar toolbar;
+
+    public Toolbar getToolBar() {
+        return toolbar;
+    }
+
+    @Override
+    public void setTitle(CharSequence title) {
+        super.setTitle(title);
+        if (toolbar != null) {
+            toolbar.setTitle(title);
+        }
+    }
+
+    public void setToolBar(int toolbarId, UToolBar uToolBar) {
+        toolbar = getView(toolbarId);
+        if (uToolBar.titleId != 0) {
+            toolbar.setTitle(uToolBar.titleId);
+        }
+        if (!TextUtils.isEmpty(uToolBar.titleString)) {
+            toolbar.setTitle(uToolBar.titleString);
+        }
+        if (uToolBar.logoId != 0) {
+            toolbar.setLogo(uToolBar.logoId);
+        }
+        if(uToolBar.background !=0){
+            toolbar.setBackgroundColor(uToolBar.background);
+        }
+        setSupportActionBar(toolbar);
+
+        if (uToolBar.isNeedNavigate) {
+            toolbar.setNavigationIcon(uToolBar.navigateId);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onNavigateUpClicked();
+                }
+            });
+        }
+    }
+
+    public void onNavigateUpClicked() {
+        onBackPressed();
     }
 
     /**

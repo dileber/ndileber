@@ -2,6 +2,7 @@ package com.drcosu.ndileber.tools;
 
 import android.os.Environment;
 
+import java.io.File;
 import java.lang.reflect.Method;
 
 /**
@@ -40,10 +41,19 @@ public class SSystem {
      * 判断是否有sd卡
      * @return
      */
-    private static boolean isSdcard(){
+    public static boolean isSdcard(){
         if (!Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 判断是否有这个软件包
+     * @param packageName
+     * @return
+     */
+    public static boolean isInstallPackage(String packageName) {
+        return new File("/data/data/" + packageName).exists();
     }
 }

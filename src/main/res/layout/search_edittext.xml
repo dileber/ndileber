@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:weightSum="1"
+    android:gravity="center_vertical"
+    android:padding="8dp"
+    android:background="#dfdfdf"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:weightSum="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:background="@drawable/dileber_write_rect"
+        >
+
+        <EditText
+            android:layout_weight="1"
+            android:id="@+id/dileber_search_editext_edittext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:drawableLeft="@mipmap/dileber_search_icon"
+            android:background="@null"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:layout_centerHorizontal="true"
+            android:hint="请输入文字..."/>
+
+        <TextView
+            android:id="@+id/dileber_search_editext_delete"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@mipmap/dileber_close_yellow"
+            android:layout_marginRight="4dp"
+            android:visibility="gone"
+            />
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/dileber_search_editext_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/dileber_search_gray_button"
+        android:text="搜索"
+        />
+
+
+</LinearLayout>

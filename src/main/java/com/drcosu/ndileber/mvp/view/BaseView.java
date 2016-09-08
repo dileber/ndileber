@@ -1,5 +1,7 @@
 package com.drcosu.ndileber.mvp.view;
 
+import android.content.Context;
+
 import com.drcosu.ndileber.tools.DialogLinstener;
 
 /**
@@ -43,4 +45,7 @@ public interface BaseView<T> {
      * @param dialogLinstener
      */
     void dialogOk(String content, final DialogLinstener dialogLinstener);
+
+    Context getContext();
+
 }
