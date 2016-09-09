@@ -48,8 +48,12 @@ public abstract class SApplication extends Application{
 			icon_font = Typeface.createFromAsset(getAssets(), this.getClass().getAnnotation(SFontdType.class).value());
 		}
 
+		init();
 	}
-	
+
+	protected abstract void init();
+
+
 	public static Context getAppContext() {
 		return context;
 	}
