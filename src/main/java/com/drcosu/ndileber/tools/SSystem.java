@@ -69,7 +69,7 @@ public class SSystem {
      * @param pID
      * @return
      */
-    private String getAppName(int pID) {
+    public static String getAppName(int pID) {
         String processName = null;
         ActivityManager am = (ActivityManager) SApplication.getAppContext().getSystemService(Context.ACTIVITY_SERVICE);
         List l = am.getRunningAppProcesses();
