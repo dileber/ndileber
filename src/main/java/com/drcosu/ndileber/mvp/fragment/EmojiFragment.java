@@ -41,14 +41,26 @@ public class EmojiFragment extends BaseFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_emoji, container, false);
+    protected int layoutViewId() {
+        return R.layout.fragment_emoji;
+    }
+
+    @Override
+    protected void initView(View view, Bundle savedInstanceState) {
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.emoji_recycle);
         recyclerView.setLayoutManager(new GridLayoutManager(context, EmojiRepository.lie));
         recyclerView.setAdapter(new EmojiAdaper(EmojiRepository.getIcon(mPage),mListener));
-        return view;
+    }
+
+    @Override
+    protected void show() {
+
+    }
+
+    @Override
+    protected void hidden() {
+
     }
 
     @Override

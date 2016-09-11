@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -71,12 +73,12 @@ public abstract class BaseActivity extends AppCompatActivity {
          */
         activityManager.pushActivity(this);
         setContentView(layoutViewId());
-        initView();
+        initView(savedInstanceState);
     }
 
     protected abstract int layoutViewId();
 
-    protected abstract void initView();
+    protected abstract void initView(Bundle savedInstanceState);
 
     @Override
     protected void onDestroy() {
@@ -194,6 +196,11 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    public void switchContent(Fragment from, Fragment to) {
+        FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
+        transaction.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
     }
 
 }

@@ -12,4 +12,6 @@
     <dimen name="toast_left_right">8dp</dimen>
     <dimen name="carouse_height">200dp</dimen>
 
+    <dimen name="line">0.5dp</dimen>
+
 </resources>

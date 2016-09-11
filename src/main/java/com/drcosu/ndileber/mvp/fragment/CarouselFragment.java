@@ -166,14 +166,15 @@ public class CarouselFragment extends BaseFragment{
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_carousel, container, false);
+    protected int layoutViewId() {
+        return R.layout.fragment_carousel;
+    }
+
+    @Override
+    protected void initView(View view, Bundle savedInstanceState) {
         viewPager = getView(view,R.id.carousel_viewpager);
         linearLayout = getView(view,R.id.carousel_point);
         init();
-        return view;
     }
 
     private void init(){
@@ -251,5 +252,15 @@ public class CarouselFragment extends BaseFragment{
         } else {// 重新显示到最前端中
             mHandler.sendEmptyMessage(MSG_BREAK_SILENT);
         }
+    }
+
+    @Override
+    protected void show() {
+
+    }
+
+    @Override
+    protected void hidden() {
+
     }
 }
