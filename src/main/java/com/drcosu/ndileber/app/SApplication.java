@@ -20,7 +20,7 @@ public abstract class SApplication extends Application{
 	private static SApplication instance;
 	private static Context context;
 	public static boolean netLog = true;
-	public static boolean crash = true;
+	public static boolean crash = false;
 
 	public abstract void start();
 

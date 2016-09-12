@@ -2,6 +2,7 @@ package com.drcosu.ndileber.tools;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
@@ -57,6 +58,4 @@ public class HNetwork {
 		}
 		return false;
 	}
-
-
 }
