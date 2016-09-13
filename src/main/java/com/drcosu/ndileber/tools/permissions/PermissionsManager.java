@@ -50,6 +50,13 @@ import java.util.Set;
  * }
  * });
  *
+ * @Override
+ * public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+ *  @NonNull int[] grantResults) {
+ *  PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
+ }
+
+ *
  */
 public class PermissionsManager {
 

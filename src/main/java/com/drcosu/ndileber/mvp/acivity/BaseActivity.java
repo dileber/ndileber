@@ -73,7 +73,9 @@ public abstract class BaseActivity extends AppCompatActivity {
          * 将activity 添加到activity栈中
          */
         activityManager.pushActivity(this);
-        setContentView(layoutViewId());
+        if(layoutViewId()!=0){
+            setContentView(layoutViewId());
+        }
         initView(savedInstanceState);
     }
 
