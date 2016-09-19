@@ -23,4 +23,16 @@ public class Check {
         return reference;
     }
 
+    public static boolean checkNotUnll(Object ... objects){
+        if(objects==null){
+            return false;
+        }
+        for(int i=0;i<objects.length;i++){
+            if(objects[i]==null){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
