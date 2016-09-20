@@ -159,10 +159,10 @@ public class CarouselFragment extends BaseFragment{
             if(temp.equals(point.get(i))){
                 return;
             }
-            temp.setBackground(ContextCompat.getDrawable(ActivityManager.peekTopActivity(),R.drawable.grey_solid_round));
+            temp.setBackground(ContextCompat.getDrawable(ActivityManager.getCurrentActivity(),R.drawable.grey_solid_round));
         }
         temp = point.get(i);
-        temp.setBackground(ContextCompat.getDrawable(ActivityManager.peekTopActivity(),R.drawable.red_solid_round));
+        temp.setBackground(ContextCompat.getDrawable(ActivityManager.getCurrentActivity(),R.drawable.red_solid_round));
     }
 
     @Override

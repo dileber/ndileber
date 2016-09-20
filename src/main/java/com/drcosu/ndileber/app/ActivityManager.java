@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 
 import com.orhanobut.logger.Logger;
 
+import java.lang.ref.WeakReference;
 import java.util.Stack;
 
 /**
@@ -36,14 +37,49 @@ public class ActivityManager {
     public ActivityManager(){
         activityStack = new Stack<Activity>();
     }
+    static WeakReference<Activity> currentActivity;
 
     /**
+     *
+     * 通过getCurrentActivity 获得当前的activity
      *
      * 获取顶栈 的 activity
      * @return
      */
+    @Deprecated
     public static Activity peekTopActivity() {
         return activityStack.peek();
+    }
+
+    /**
+     * 设置当前活动的activity
+     * @param ac
+     */
+    public static synchronized  void setCurrentActivity(Activity ac) {
+        if (ac == null) {
+            currentActivity = null;
+        } else {
+            currentActivity = new WeakReference<Activity>(ac);
+        }
+    }
+
+    /**
+     * 清除当前活动的activity
+     * @param ac
+     */
+    public static synchronized  void clearCurrentActivity(Activity ac) {
+        Activity cur = currentActivity == null ? null : currentActivity.get();
+        if (cur != null && cur == ac) {
+            currentActivity = null;
+        }
+    }
+
+    /**
+     * 得到当前活动的activity
+     * @return
+     */
+    public synchronized static Activity getCurrentActivity() {
+        return currentActivity == null ? null : currentActivity.get();
     }
 
     /**

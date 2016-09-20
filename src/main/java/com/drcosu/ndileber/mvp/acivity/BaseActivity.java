@@ -88,12 +88,30 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         /**
          * 将activity从栈中弹出
          */
         activityManager.popActivity(this);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        activityManager.setCurrentActivity(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        activityManager.clearCurrentActivity(this);
+    }
+//
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//        activityManager.setCurrentActivity(this);
+//    }
+
 
     private Toolbar toolbar;
 

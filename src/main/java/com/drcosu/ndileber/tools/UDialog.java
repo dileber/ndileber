@@ -20,7 +20,7 @@ public class UDialog {
     public static final int DIALOG_WARNING = 4;
 
     public static Dialog alert(Integer type,String message){
-        Activity activity = ActivityManager.peekTopActivity();
+        Activity activity = ActivityManager.getCurrentActivity();
         SweetAlertDialog alertDialog = new SweetAlertDialog(activity);
         if(type==null){
             type = DIALOG_NORMAL;
@@ -52,7 +52,7 @@ public class UDialog {
 
 
     public static Dialog loading(){
-        Activity activity = ActivityManager.peekTopActivity();
+        Activity activity = ActivityManager.getCurrentActivity();
         Dialog loadalert = new SweetAlertDialog(activity);
         ((SweetAlertDialog)loadalert).changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
         ((SweetAlertDialog)loadalert).setTitleText(activity.getResources().getString(R.string.LOADING));
@@ -63,7 +63,7 @@ public class UDialog {
     }
 
     public static Dialog dialogOk(String content, final DialogLinstener dialogLinstener){
-        Activity activity = ActivityManager.peekTopActivity();
+        Activity activity = ActivityManager.getCurrentActivity();
         Dialog alert = new SweetAlertDialog(activity);
         ((SweetAlertDialog)alert).changeAlertType(SweetAlertDialog.WARNING_TYPE);
         ((SweetAlertDialog)alert).setTitleText(activity.getResources().getString(R.string.dialog_warning));

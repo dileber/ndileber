@@ -177,7 +177,7 @@ public class AndroidCrash implements Thread.UncaughtExceptionHandler{
             @Override
             public void run() {
                 Looper.prepare();
-                UUi.toast(ActivityManager.peekTopActivity(), msg, Toast.LENGTH_SHORT);
+                UUi.toast(ActivityManager.getCurrentActivity(), msg, Toast.LENGTH_SHORT);
 
                 Looper.loop();
             }
