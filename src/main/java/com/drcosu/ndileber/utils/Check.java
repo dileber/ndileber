@@ -23,7 +23,7 @@ public class Check {
         return reference;
     }
 
-    public static boolean checkNotUnll(Object ... objects){
+    public static boolean checkNotNulls(Object ... objects){
         if(objects==null){
             return false;
         }
