@@ -94,8 +94,8 @@ public class BottomBarTab extends FrameLayout {
         params.gravity = Gravity.CENTER;
         fIcon.setGravity(Gravity.CENTER);
         fIcon.setText(getResources().getString(icon));
-        int textsize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 15, getResources().getDisplayMetrics());
-        fIcon.setTextSize(textsize);
+        int textsize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, getResources().getDisplayMetrics());
+        fIcon.setTextSize(18);
         fIcon.setLayoutParams(params);
         fIcon.setTextColor(Color.parseColor("#c9c9c9"));
         addView(fIcon);
