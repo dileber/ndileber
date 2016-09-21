@@ -198,4 +198,16 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
         transaction.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        activityManager.setCurrentActivity(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        activityManager.clearCurrentActivity(this);
+    }
 }

@@ -21,6 +21,12 @@ public class HJson {
         }
     }
 
+    public static class DateSerializer implements JsonSerializer<Date> {
+        public JsonElement serialize(Date src, Type typeOfSrc, JsonSerializationContext context) {
+            return new JsonPrimitive(src.getTime());
+        }
+    }
+
     private static Gson gson = null;
     static {
         if (gson == null) {
@@ -29,8 +35,10 @@ public class HJson {
             //Json中的日期表达方式没有办法直接转换成我们的Date类型, 因此需要单独注册一个Date的反序列化类.
             //DateDeserializer ds = new DateDeserializer();
             //给GsonBuilder方法单独指定Date类型的反序列化方法
-            gsonb.registerTypeAdapter(Date.class, new DateDeserializer()).setDateFormat(DateFormat.LONG).create();
-            gson = gsonb.create();
+            gson = gsonb.registerTypeAdapter(Date.class, new DateDeserializer())
+                    .registerTypeAdapter(Date.class,new DateSerializer())
+                    .setDateFormat(DateFormat.LONG)
+                    .create();
 
         }
     }
@@ -38,6 +46,9 @@ public class HJson {
     public static Gson getGson() {
         return gson;
     }
+
+    public static Gson simpleGson = new Gson();
+
 
     /**
      * 转成json
