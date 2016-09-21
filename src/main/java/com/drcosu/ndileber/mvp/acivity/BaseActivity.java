@@ -51,7 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startView(savedInstanceState);
+
         /**
          * 主题采用noactionbar 添加toolsbar 这里废弃
          */
@@ -73,6 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity {
          * 将activity 添加到activity栈中
          */
         activityManager.pushActivity(this);
+        startView(savedInstanceState);
         if(layoutViewId()!=0){
             setContentView(layoutViewId());
         }

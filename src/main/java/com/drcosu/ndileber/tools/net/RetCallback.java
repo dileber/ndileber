@@ -38,13 +38,15 @@ public abstract class RetCallback<T> implements Callback<T>{
     protected abstract void failure(Call<T> call, Throwable throwable);
 
     protected void setCookie(Response<T> response) {
-        StringBuilder sb = new StringBuilder("");
         Headers headers = response.headers();
-        Set<String> name = headers.names();
-        for(String n : name){
-            sb.append("\t{").append(n).append(" = ").append(headers.get(n)).append("}");
-        }
-        Logger.d(sb.toString());
+        //Set<String> name = headers.names();
+//        for(String n : name){
+//            sb.append("\t{").append(n).append(" = ").append(headers.get(n)).append("}");
+//        }
+
+        String cookie = headers.get("Set-Cookie");
+        TCookie.putCookies(cookie);
+        Logger.d("log:"+cookie);
     }
 
 
