@@ -5,6 +5,9 @@ import com.drcosu.ndileber.tools.UDialog;
 import com.orhanobut.logger.Logger;
 import java.net.ConnectException;
 import java.net.HttpRetryException;
+import java.util.Set;
+
+import okhttp3.Headers;
 import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +37,17 @@ public abstract class RetCallback<T> implements Callback<T>{
 
     protected abstract void failure(Call<T> call, Throwable throwable);
 
+    protected void setCookie(Response<T> response) {
+        StringBuilder sb = new StringBuilder("");
+        Headers headers = response.headers();
+        Set<String> name = headers.names();
+        for(String n : name){
+            sb.append("\t{").append(n).append(" = ").append(headers.get(n)).append("}");
+        }
+        Logger.d(sb.toString());
+    }
+
+
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
         RetLog.log(call);
@@ -47,12 +61,14 @@ public abstract class RetCallback<T> implements Callback<T>{
         while (t != null) {
             if (t instanceof ConnectException) {
                 UDialog.alert(UDialog.DIALOG_ERROR,networkMsg).show();
+                Logger.d(networkMsg);
             }
             if (t instanceof HttpRetryException) {
                 Logger.d("错误代码"+((HttpRetryException)t).responseCode());
             }
             t = t.getCause();
         }
+        Logger.e(throwable,"网络错误");
         failure(call,throwable);
     }
 

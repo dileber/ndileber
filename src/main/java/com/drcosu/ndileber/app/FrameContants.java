@@ -1,5 +1,7 @@
 package com.drcosu.ndileber.app;
 
+import com.drcosu.ndileber.tools.HPref;
+
 /**
  * 框架常量类
  * Created by shidawei on 16/2/23.
@@ -19,7 +21,6 @@ public class FrameContants {
     public static final String SYSTEM_API_DEVICE_ID = "SYSTEM_API_DEVICE_ID";
 
     public static final String SYSTEM_API_UUID  = "SYSTEM_API_UUID";
-
 
 
 

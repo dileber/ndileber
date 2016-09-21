@@ -12,6 +12,8 @@ public interface BaseDataSource {
         void onSuccess(T t);
 
         void onFailure(DataSourceException e);
+
+
     }
 
 }
