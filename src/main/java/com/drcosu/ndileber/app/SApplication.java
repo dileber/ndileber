@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 
 import com.drcosu.ndileber.tools.AndroidCrash;
 import com.drcosu.ndileber.tools.annotation.SFontdType;
+import com.drcosu.ndileber.tools.net.RetCallback;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orhanobut.logger.Logger;
 
@@ -86,7 +87,7 @@ public abstract class SApplication extends Application{
 	 * @param call
 	 * @param response
      */
-	public abstract void appForbidden(Call call, Response response);
+	public abstract void appForbidden(Call call, Response response, RetCallback retCallback);
 
 
 }

@@ -24,6 +24,7 @@ public abstract class RetCallback<T> implements Callback<T>{
     //出错提示
     public static String networkMsg = "网络请求失败,请检查";
     public static String networkTimeOutMsg = "网络请求超时,请检查";
+    public static String networkForbiddenMsg = "用户权限没有";
     public static String parseMsg;
     public static String unknownMsg;
 
@@ -58,9 +59,11 @@ public abstract class RetCallback<T> implements Callback<T>{
     public void onResponse(Call<T> call, Response<T> response) {
         RetLog.log(call);
         Logger.d("log"+response.code());
-        onSuccess(call, response);
         if(response.code()== FORBIDDEN){
-            SApplication.getInstance().appForbidden(call,response);
+            Logger.d(networkForbiddenMsg);
+            SApplication.getInstance().appForbidden(call,response,this);
+        }else{
+            onSuccess(call, response);
         }
     }
 
