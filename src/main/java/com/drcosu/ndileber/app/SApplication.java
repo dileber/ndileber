@@ -10,6 +10,9 @@ import com.drcosu.ndileber.tools.annotation.SFontdType;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orhanobut.logger.Logger;
 
+import retrofit2.Call;
+import retrofit2.Response;
+
 /**
  * Created by shidawei on 16/6/2.
  */
@@ -76,6 +79,14 @@ public abstract class SApplication extends Application{
 		Logger.i("退出整个app");
 		ThreadExecutor.getInstance().stop();
 	}
+
+
+	/**
+	 * 前提使用本框架带的网络请求,当网络请求被发现用户没有权限的时候调用该方法(在这里可以操作的是重新登录或者弹框)
+	 * @param call
+	 * @param response
+     */
+	public abstract void appForbidden(Call call, Response response);
 
 
 }
