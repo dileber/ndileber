@@ -1,5 +1,9 @@
 package com.orhanobut.logger;
 
+import android.util.Log;
+
+import com.drcosu.ndileber.tools.HString;
+
 /**
  * Logger is a wrapper of {@link android.util.Log}
  * But more pretty, simple and powerful
@@ -22,6 +26,34 @@ public final class Logger {
    */
   public static Settings init(boolean log) {
     return init(DEFAULT_TAG,log);
+  }
+
+  /**
+   * 简单日志打印
+   * @param type
+   * @param message
+   */
+  public static void sl(int type,Object... message){
+    if(mlog){
+      String m = HString.concatObject(" ",message);
+      switch (type){
+        case Log.DEBUG:
+          d(m);
+          break;
+        case Log.ERROR:
+          e(m);
+          break;
+        case Log.INFO:
+          i(m);
+          break;
+        case Log.VERBOSE:
+          v(m);
+          break;
+        case Log.WARN:
+          w(m);
+          break;
+      }
+    }
   }
 
   /**
