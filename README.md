@@ -1,5 +1,5 @@
 # ndileber
-学习google的MVP框架，来重构dileber，包含很多实用工具
+学习google的MVP框架，来重构dileber，包含很多实用工具。
 dileber 包含了网络框架Retrofit ，并对其进行了封装，支持cookie，并对cookie失效进行了处理。
 
 
