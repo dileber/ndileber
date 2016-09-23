@@ -1,10 +1,13 @@
 package com.drcosu.ndileber.tools.net;
 
+import android.net.Network;
+
 import com.drcosu.ndileber.app.SApplication;
 import com.drcosu.ndileber.tools.UDialog;
 import com.orhanobut.logger.Logger;
 import java.net.ConnectException;
 import java.net.HttpRetryException;
+import java.net.SocketTimeoutException;
 import java.util.Set;
 
 import okhttp3.Headers;
@@ -20,6 +23,8 @@ public abstract class RetCallback<T> implements Callback<T>{
 
     //出错提示
     public static String networkMsg = "网络请求失败,请检查";
+    public static String networkTimeOutMsg = "网络请求超时,请检查";
+    public static String networkForbiddenMsg = "用户权限没有";
     public static String parseMsg;
     public static String unknownMsg;
 
@@ -53,7 +58,13 @@ public abstract class RetCallback<T> implements Callback<T>{
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
         RetLog.log(call);
-        onSuccess(call, response);
+        Logger.d("log"+response.code());
+        if(response.code()== FORBIDDEN){
+            Logger.d(networkForbiddenMsg);
+            SApplication.getInstance().appForbidden(call,response,this);
+        }else{
+            onSuccess(call, response);
+        }
     }
 
     @Override
@@ -67,6 +78,10 @@ public abstract class RetCallback<T> implements Callback<T>{
             }
             if (t instanceof HttpRetryException) {
                 Logger.d("错误代码"+((HttpRetryException)t).responseCode());
+            }
+            if(t instanceof SocketTimeoutException){
+                UDialog.alert(UDialog.DIALOG_ERROR,networkTimeOutMsg).show();
+                Logger.d(networkTimeOutMsg);
             }
             t = t.getCause();
         }
