@@ -1,6 +1,7 @@
 package com.drcosu.ndileber.mvp.acivity;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -226,5 +227,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
         transaction.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
     }
+
+    public <A extends Application> A getMyApplication() {
+        return (A) getApplication();
+    }
+
 
 }

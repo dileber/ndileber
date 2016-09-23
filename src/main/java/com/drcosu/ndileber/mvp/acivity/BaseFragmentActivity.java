@@ -1,5 +1,6 @@
 package com.drcosu.ndileber.mvp.acivity;
 
+import android.app.Application;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -210,4 +211,10 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         super.onPause();
         activityManager.clearCurrentActivity(this);
     }
+
+
+    public <A extends Application> A getMyApplication() {
+        return (A) getApplication();
+    }
+
 }
