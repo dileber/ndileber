@@ -51,6 +51,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         /**
@@ -70,10 +71,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (this.getClass().isAnnotationPresent(HideKeyboard.class)) {
             hideKeyboardWhenTouchOutside = this.getClass().getAnnotation(HideKeyboard.class).value();
         }
+
         /**
          * 将activity 添加到activity栈中
          */
         activityManager.pushActivity(this);
+        activityManager.setCurrentActivity(this);
         startView(savedInstanceState);
         if(layoutViewId()!=0){
             setContentView(layoutViewId());
