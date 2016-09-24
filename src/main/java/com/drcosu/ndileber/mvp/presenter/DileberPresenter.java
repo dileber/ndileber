@@ -15,9 +15,9 @@ public abstract class DileberPresenter<T1 extends BaseView,T2 extends BaseDataSo
     protected T2 mDataSource;
 
     public DileberPresenter(@NonNull T1 view, @NonNull T2 mDataSource){
-        mView = view;
-        mDataSource = mDataSource;
-        mView.setPresenter(this);
+        this.mView = view;
+        this.mDataSource = mDataSource;
+        this.mView.setPresenter(this);
     }
 
 }

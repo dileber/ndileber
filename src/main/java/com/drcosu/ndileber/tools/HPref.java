@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 
 import com.drcosu.ndileber.app.FrameContants;
 import com.drcosu.ndileber.app.SApplication;
+import com.drcosu.ndileber.mvp.data.model.SModel;
+import com.drcosu.ndileber.mvp.data.model.SWrapper;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -106,6 +108,9 @@ public class HPref {
                     editor.putInt(key, ret == null ? 0 : Short.parseShort(ret.toString()));
                 } else if (returnType.isAssignableFrom(Set.class)) {
                     editor.putStringSet(key,ret == null ? new HashSet<String>() :(Set<String>)ret);
+                } else if(returnType.isAssignableFrom(SModel.class)
+                        || returnType.isAssignableFrom(SWrapper.class)){
+                    editor.putString(key,HJson.toJson(ret));
                 }else {
                     editor.putString(key, ret.toString());
                 }
