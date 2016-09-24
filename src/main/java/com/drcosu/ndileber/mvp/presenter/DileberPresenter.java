@@ -8,7 +8,7 @@ import com.drcosu.ndileber.mvp.view.BaseView;
 /**
  * Created by shidawei on 2016/9/24.
  */
-public abstract class DileberPresenter<T1 extends BaseView<BasePresenter>,T2 extends BaseDataSource> implements BasePresenter {
+public abstract class DileberPresenter<T1 extends BaseView,T2 extends BaseDataSource> implements BasePresenter {
 
 
     T1 mView;
