@@ -11,12 +11,12 @@ import com.drcosu.ndileber.mvp.view.BaseView;
 public abstract class DileberPresenter<T1 extends BaseView,T2 extends BaseDataSource> implements BasePresenter {
 
 
-    T1 mView;
-    T2 mUserDataSource;
+    protected T1 mView;
+    protected T2 mDataSource;
 
-    public DileberPresenter(@NonNull T1 view, @NonNull T2 userDataSource){
+    public DileberPresenter(@NonNull T1 view, @NonNull T2 mDataSource){
         mView = view;
-        mUserDataSource = userDataSource;
+        mDataSource = mDataSource;
         mView.setPresenter(this);
     }
 
