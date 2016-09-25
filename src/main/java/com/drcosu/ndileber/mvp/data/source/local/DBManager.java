@@ -257,7 +257,7 @@ public class DBManager {
                     T t = clazz.newInstance();
                     for(int i=0;i<column.length;i++){
                         Logger.d(column[i]+" "+ cursor.getString(cursor.getColumnIndex(column[i])));
-                        Field field = clazz.getField(column[i]);
+                        Field field = clazz.getDeclaredField(column[i]);
                         field.setAccessible(true);
                         invokeSet(t,column[i], cursor.getString(cursor.getColumnIndex(column[i])),field.getType());
                     }
@@ -455,6 +455,7 @@ public class DBManager {
         try {
             Class[] parameterTypes = new Class[1];
             Field field = objectClass.getDeclaredField(fieldName);
+            field.setAccessible(true);
             parameterTypes[0] = field.getType();
             StringBuffer sb = new StringBuffer();
             sb.append("set");
