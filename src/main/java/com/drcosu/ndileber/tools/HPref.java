@@ -108,8 +108,8 @@ public class HPref {
                     editor.putInt(key, ret == null ? 0 : Short.parseShort(ret.toString()));
                 } else if (returnType.isAssignableFrom(Set.class)) {
                     editor.putStringSet(key,ret == null ? new HashSet<String>() :(Set<String>)ret);
-                } else if(returnType.isAssignableFrom(SModel.class)
-                        || returnType.isAssignableFrom(SWrapper.class)){
+                } else if(SModel.class.isAssignableFrom(returnType)
+                        || SWrapper.class.isAssignableFrom(returnType)){
                     editor.putString(key,HJson.toJson(ret));
                 }else {
                     editor.putString(key, ret.toString());

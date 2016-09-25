@@ -228,7 +228,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void switchContent(Fragment from, Fragment to) {
         FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
-        transaction.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
+        transaction.hide(from).show(to).commitAllowingStateLoss(); // 隐藏当前的fragment，显示下一个
     }
 
     public <A extends Application> A getMyApplication() {

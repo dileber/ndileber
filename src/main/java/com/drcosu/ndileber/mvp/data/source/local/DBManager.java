@@ -218,6 +218,14 @@ public class DBManager {
         return mList;
     }
 
+    public <T> T queryData2TOne(String sql, Object[] selectionArgs, Class<T> clazz) throws Exception{
+        List<T> list = queryData2T(sql,selectionArgs,clazz);
+        if(list!=null&&list.size()>0){
+            return list.get(0);
+        }
+        return null;
+    }
+
     /**
      *
      * @param sql
@@ -249,7 +257,9 @@ public class DBManager {
                     T t = clazz.newInstance();
                     for(int i=0;i<column.length;i++){
                         Logger.d(column[i]+" "+ cursor.getString(cursor.getColumnIndex(column[i])));
-                        invokeSet(t,column[i], cursor.getString(cursor.getColumnIndex(column[i])),clazz.getField(column[i]).getType());
+                        Field field = clazz.getField(column[i]);
+                        field.setAccessible(true);
+                        invokeSet(t,column[i], cursor.getString(cursor.getColumnIndex(column[i])),field.getType());
                     }
                     mList.add(t);
                 }
