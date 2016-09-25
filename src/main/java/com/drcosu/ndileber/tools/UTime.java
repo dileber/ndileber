@@ -93,6 +93,12 @@ public class UTime {
         return times;
     }
 
+    public static Date getDatetime(int year, int month, int day) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, day);
+        return calendar.getTime();
+    }
+
     public static String getFormatDatetime(int year, int month, int day) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         return formatter.format(new GregorianCalendar(year, month, day).getTime());
