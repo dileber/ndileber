@@ -16,7 +16,8 @@ public interface BaseDataSource {
         void onSuccess(T t);
 
         /**
-         * 请求失败，网络错误
+         *
+         * 请求失败，继承datasourceexception  来判断错误类型
          * @param e
          */
         void onFailure(DataSourceException e);
