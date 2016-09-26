@@ -9,10 +9,24 @@ public interface BaseDataSource {
 
     interface BaseCallback<T> {
 
+        /**
+         * 请求成功返回数据
+         * @param t
+         */
         void onSuccess(T t);
 
+        /**
+         * 请求失败，网络错误
+         * @param e
+         */
         void onFailure(DataSourceException e);
 
+        /**
+         * 请求数据错误
+         * @param e
+         * @param error
+         */
+        void onError(DataSourceException e,int error);
 
     }
 
