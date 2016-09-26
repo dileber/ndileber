@@ -21,13 +21,6 @@ public interface BaseDataSource {
          */
         void onFailure(DataSourceException e);
 
-        /**
-         * 请求数据错误
-         * @param e
-         * @param error
-         */
-        void onError(DataSourceException e,int error);
-
     }
 
 }
