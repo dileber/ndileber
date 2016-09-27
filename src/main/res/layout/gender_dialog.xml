@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="240dp"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="选择性别"
+        android:textSize="28dp"
+        android:padding="6dp"
+        android:gravity="center"
+        android:background="#565656"
+        android:textColor="@android:color/white"
+        />
+
+    <TextView
+        android:id="@+id/gender_dialog_men"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="男"
+        android:textSize="24dp"
+        android:padding="8dp"
+        android:gravity="center"
+        android:background="#737272"
+        android:textColor="#ffffff"
+        />
+    <TextView
+        android:id="@+id/gender_dialog_women"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="女"
+        android:textSize="24dp"
+        android:padding="8dp"
+        android:gravity="center"
+        android:background="#c7a3a3"
+        android:textColor="#ffffff"
+        />
+</LinearLayout>
