@@ -158,7 +158,15 @@ public class HPref {
                     (Integer) defaultValue));
         }else if(returnType.isAssignableFrom(Set.class)){
             return (T)  sp.getStringSet(k, (Set<String>) defaultValue);
-        } else {
+        } else if(SModel.class.isAssignableFrom(returnType)
+                || SWrapper.class.isAssignableFrom(returnType)){
+            String value = sp.getString(k,(String)defaultValue);
+            if(value==null){
+                return null;
+            }else{
+                return HJson.fromJson(value,returnType);
+            }
+        }{
             return (T) sp.getString(k, defaultValue == null ? null
                     : defaultValue.toString());
         }
