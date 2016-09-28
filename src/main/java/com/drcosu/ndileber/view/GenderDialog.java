@@ -11,8 +11,10 @@ import android.widget.TextView;
 import com.drcosu.ndileber.R;
 
 /**
+ * 这是个错误
  * Created by shidawei on 2016/9/25.
  */
+@Deprecated
 public class GenderDialog extends Dialog{
     public GenderDialog(Context context) {
         super(context);

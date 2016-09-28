@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -142,6 +143,23 @@ public class HJson {
             }.getType());
         }
         return map;
+    }
+
+
+    /**
+     * 如果报错则使用
+     * @param json
+     * @param cls
+     * @param <T>
+     * @return
+     */
+    public static <T> ArrayList<T> fromJsonList(String json, Class<T> cls) {
+        ArrayList<T> mList = new ArrayList<T>();
+        JsonArray array = new JsonParser().parse(json).getAsJsonArray();
+        for(final JsonElement elem : array){
+            mList.add(gson.fromJson(elem, cls));
+        }
+        return mList;
     }
 
 }
