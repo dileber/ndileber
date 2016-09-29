@@ -46,6 +46,11 @@ public class EmojiFragment extends BaseFragment {
     }
 
     @Override
+    protected void initView(Bundle savedInstanceState) {
+
+    }
+
+    @Override
     protected void initView(View view, Bundle savedInstanceState) {
         Context context = view.getContext();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.emoji_recycle);

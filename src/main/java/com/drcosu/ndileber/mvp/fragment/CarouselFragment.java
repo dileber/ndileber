@@ -171,6 +171,11 @@ public class CarouselFragment extends BaseFragment{
     }
 
     @Override
+    protected void initView(Bundle savedInstanceState) {
+
+    }
+
+    @Override
     protected void initView(View view, Bundle savedInstanceState) {
         viewPager = getView(view,R.id.carousel_viewpager);
         linearLayout = getView(view,R.id.carousel_point);
