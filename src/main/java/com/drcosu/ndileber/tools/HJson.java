@@ -162,4 +162,14 @@ public class HJson {
         return mList;
     }
 
+
+    public static <T1,T2> HashMap<T1, List<T2>> toMapsListT(String gsonString,Class<T1> cls1 ,Class<T2> cls2) {
+        HashMap<T1, List<T2>> map = null;
+        if (gson != null) {
+            map = gson.fromJson(gsonString, new TypeToken<HashMap<T1, List<T2>>>() {
+            }.getType());
+        }
+        return map;
+    }
+
 }

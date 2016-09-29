@@ -22,11 +22,25 @@ public abstract class BaseFragment extends Fragment{
      * 用 sparseArray 代替hashmap是个性能上不错的选择
      * SparseArray来代替HashMap了，但是要注意SparseArray中的key是int类型\
      */
+    @Deprecated
     protected final SparseArray<View> mViews = new SparseArray<View>();
 
+    /**
+     * 后期用 findView这个方法替换
+     * @param mView
+     * @param id
+     * @param <T>
+     * @return
+     */
+    @Deprecated
     public <T extends View> T getView(View mView,int id) {
         return UUi.getView(mView,mViews,id);
     }
+
+    protected <T extends View> T findView(int resId) {
+        return (T) (getView().findViewById(resId));
+    }
+
 
     protected abstract int layoutViewId();
 
@@ -34,10 +48,24 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view =  inflater.inflate(layoutViewId(), container, false);
-        initView(view,savedInstanceState);
         return view;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initView(getView(),savedInstanceState);
+        initView(savedInstanceState);
+    }
+
+    protected abstract void initView(Bundle savedInstanceState);
+
+    /**
+     * 后期用initView(Bundle savedInstanceState)来代替
+     * @param view
+     * @param savedInstanceState
+     */
+    @Deprecated
     protected abstract void initView(View view, Bundle savedInstanceState);
 
 

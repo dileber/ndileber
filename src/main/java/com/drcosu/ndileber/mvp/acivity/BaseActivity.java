@@ -133,7 +133,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void setToolBar(int toolbarId, UToolBar uToolBar) {
-        toolbar = getView(toolbarId);
+        toolbar = findView(toolbarId);
         if (uToolBar.titleId != 0) {
             toolbar.setTitle(uToolBar.titleId);
         }
@@ -164,13 +164,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
-     * 通过id获取view
+     * 通过id获取view 后期使用 findView来替换
      * @param id
      * @param <T>
      * @return
      */
+    @Deprecated
     public <T extends View> T getView(int id) {
         return UUi.getView(this,mViews,id);
+    }
+
+    protected <T extends View> T findView(int resId) {
+        return (T) (findViewById(resId));
     }
 
     /**
