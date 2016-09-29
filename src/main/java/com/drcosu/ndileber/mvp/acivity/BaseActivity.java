@@ -42,6 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 用 sparseArray 代替hashmap是个性能上不错的选择
      * SparseArray来代替HashMap了，但是要注意SparseArray中的key是int类型\
      */
+    @Deprecated
     protected final SparseArray<View> mViews = new SparseArray<View>();
 
     /**
