@@ -54,7 +54,7 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        Logger.sl(Log.DEBUG,"数据库版本有变动","DROP TABLE IF EXISTS " ,DATABASE_NAME,i," fdsa ",i1);
+        //Logger.sl(Log.DEBUG,"数据库版本有变动","DROP TABLE IF EXISTS " ,DATABASE_NAME,i," fdsa ",i1);
         Cursor cursor = sqLiteDatabase.rawQuery("select name from sqlite_master where type='table' and name !='android_metadata' and name!='sqlite_sequence' order by name", null);
         while(cursor.moveToNext()){
             //遍历出表名
