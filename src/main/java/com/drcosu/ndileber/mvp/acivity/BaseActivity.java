@@ -77,7 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity {
          * 将activity 添加到activity栈中
          */
         activityManager.pushActivity(this);
-        activityManager.setCurrentActivity(this);
+        ActivityManager.setCurrentActivity(this);
         startView(savedInstanceState);
         if(layoutViewId()!=0){
             setContentView(layoutViewId());
@@ -103,13 +103,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        activityManager.setCurrentActivity(this);
+        ActivityManager.setCurrentActivity(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        activityManager.clearCurrentActivity(this);
+        ActivityManager.clearCurrentActivity(this);
     }
 //
 //    @Override

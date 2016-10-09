@@ -1,16 +1,20 @@
 package com.drcosu.ndileber.app;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.orhanobut.logger.Logger;
 
 import java.lang.ref.WeakReference;
+import java.util.Map;
 import java.util.Stack;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * activity管理,每个类里再也看不到context乱传值了
+ * 可以控制多个activity 多例
  * Created by shidawei on 16/6/3.
  */
 public class ActivityManager {
@@ -19,19 +23,48 @@ public class ActivityManager {
 
     /**
      * activity  用一个栈来管理activity的生命周期 */
-    private static volatile Stack<Activity> activityStack;
+    private volatile Stack<Activity> activityStack;
 
-    private static ActivityManager activityManager;
+    //private static ActivityManager activityManager;
 
     public static ActivityManager getInstance(){
-        if(activityManager ==null){
+//        if(activityManager ==null){
+//            synchronized (ActivityManager.class){
+//                if(activityManager == null){
+//                    activityManager = new ActivityManager();
+//                }
+//            }
+//        }
+//        return activityManager;
+        return getInstance(BASE);
+    }
+
+    private static String BASE = "base";
+
+    private static volatile Map<String, ActivityManager> activityManagerMap = new ConcurrentHashMap<>();
+
+    private String name;
+
+    public static ActivityManager getInstance(String name){
+        if(!activityManagerMap.containsKey(name)){
             synchronized (ActivityManager.class){
-                if(activityManager == null){
-                    activityManager = new ActivityManager();
+                if(!activityManagerMap.containsKey(name)){
+                    ActivityManager activityManager = new ActivityManager();
+                    activityManager.setName(name);
+                    activityManagerMap.put(name, activityManager);
                 }
             }
         }
-        return activityManager;
+        return activityManagerMap.get(name);
+    }
+
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public ActivityManager(){
@@ -47,7 +80,7 @@ public class ActivityManager {
      * @return
      */
     @Deprecated
-    public static Activity peekTopActivity() {
+    public Activity peekTopActivity() {
         return activityStack.peek();
     }
 
@@ -91,7 +124,7 @@ public class ActivityManager {
     {
         //if(!activity.isChangingConfigurations()){
             activityStack.add(activity);
-            Logger.i(activity.getComponentName().getShortClassName()+" 入栈");
+            Logger.i("来自: "+getName()+" "+activity.getComponentName().getShortClassName()+" 入栈");
         //}
     }
 
@@ -106,13 +139,16 @@ public class ActivityManager {
         if (activity != null)
         {
             activityStack.remove(activity);
-            Logger.i(activity.getComponentName().getShortClassName()+" 出栈");
+            Logger.i("来自: "+getName()+" "+activity.getComponentName().getShortClassName()+" 出栈");
             if(!activity.isChangingConfigurations()){
                 activity.finish();
                 activity = null;
-                if(activityManager.activityInStack()==0){
-                    SApplication.getInstance().quit();
+                if(getName().equals(BASE)){
+                    if(activityInStack()==0){
+                        SApplication.getInstance().quit();
+                    }
                 }
+
             }
 
         }
@@ -137,13 +173,15 @@ public class ActivityManager {
                 activity.finish();
                 activity = null;
             }else {
-                Logger.i("app 退出");
+                if(getName().equals(BASE))
+                    Logger.i("app 退出");
                 break;
             }
         }
     }
 
 
+    @Deprecated
     public void finishOtherActivity(NewActivityCallBack newActivityCallBack){
         while (true){
             if(activityInStack()>0){
@@ -159,6 +197,7 @@ public class ActivityManager {
         }
     }
 
+    @Deprecated
     public interface NewActivityCallBack{
         void createActivity(Activity activity);
     }

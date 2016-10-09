@@ -43,7 +43,6 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startView(savedInstanceState);
         /**
          * 主题采用noactionbar 添加toolsbar 这里废弃
          */
@@ -65,6 +64,8 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
          * 将activity 添加到activity栈中
          */
         activityManager.pushActivity(this);
+        ActivityManager.setCurrentActivity(this);
+        startView(savedInstanceState);
         if(layoutViewId()!=0){
             setContentView(layoutViewId());
         }
@@ -203,13 +204,14 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        activityManager.setCurrentActivity(this);
+        ActivityManager.setCurrentActivity(this);
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        activityManager.clearCurrentActivity(this);
+        ActivityManager.clearCurrentActivity(this);
     }
 
 
