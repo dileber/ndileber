@@ -180,6 +180,23 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     /**
+     * 给指定的控件设置监听器
+     * @param listener  OnClick监听器
+     * @param views    需要被设置监听器的控件，int型的id或者view子类均可
+     */
+    protected void setOnClickLinstenerToView(View.OnClickListener listener, Object... views){
+        for(Object view:views){
+            if (view instanceof View){
+                ((View)view).setOnClickListener(listener);
+            }else if(view instanceof Integer){
+                findViewById((Integer) view).setOnClickListener(listener);
+            }else {
+                throw new RuntimeException("Wrong view object to add View.OnClickListener: \n"+ view.getClass().getName()+" : "+view);
+            }
+        }
+    }
+
+    /**
      * 键盘点击消失
      */
     protected boolean hideKeyboardWhenTouchOutside = false;
