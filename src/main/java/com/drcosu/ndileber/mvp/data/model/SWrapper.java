@@ -6,6 +6,14 @@ package com.drcosu.ndileber.mvp.data.model;
  */
 public class SWrapper{
 
+    public SWrapper() {
+    }
+
+    public SWrapper(Integer state, String msg) {
+        this.state = state;
+        this.msg = msg;
+    }
+
     Integer state;
     String msg;
 

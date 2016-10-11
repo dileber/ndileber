@@ -12,6 +12,7 @@ import com.orhanobut.logger.Logger;
 
 import java.lang.reflect.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -187,6 +188,25 @@ public class DBManager {
             return cursor;
         }
         return null;
+    }
+
+    public long queryDataCount(String sql, Object[] selectionArgs)throws Exception{
+        String[] selection = null;
+        if(selectionArgs!=null){
+            selection = new String[selectionArgs.length];
+            for(int i=0;i<selectionArgs.length;i++){
+                Object o = selectionArgs[i];
+                String mz = String.valueOf(o);
+                selection[i] = mz;
+            }
+        }
+        Cursor cursor =queryData2Cursor(sql,selection);
+        long count = 0;
+        if(cursor!=null){
+            count = cursor.getLong(0);
+        }
+        cursor.close();
+        return count;
     }
 
     /**
@@ -437,6 +457,8 @@ public class DBManager {
         } else if (object instanceof Integer)
         {
             statement.bindLong(pos, (Integer)object);
+        }else if (object instanceof Date){
+            statement.bindLong(pos, ((Date) object).getTime());
         }else {
             statement.bindString(pos,object.toString());
         }
