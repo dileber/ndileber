@@ -4,7 +4,7 @@ package com.drcosu.ndileber.mvp.data;
  * Created by shidawei on 16/8/4.
  */
 public class DataSourceException extends Exception{
-    private int code;
+    private Integer code;
     public DataSourceException(String msg){
         super(msg);
     }
@@ -13,7 +13,7 @@ public class DataSourceException extends Exception{
         super(msg);
     }
 
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 }
