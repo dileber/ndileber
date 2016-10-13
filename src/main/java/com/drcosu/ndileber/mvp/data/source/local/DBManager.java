@@ -510,7 +510,7 @@ public class DBManager {
             Object attribute;
             if(Date.class.isAssignableFrom(typeClass)){
                 Logger.sl(Log.DEBUG,"如果是date则进入");
-                Constructor<? extends Object> cons = typeClass.getConstructor(Long.class);
+                Constructor<? extends Object> cons = typeClass.getConstructor(long.class);
                 attribute = cons.newInstance(Long.parseLong(value));
             }else {
                 Constructor<? extends Object> cons = typeClass.getConstructor(String.class);
@@ -520,7 +520,7 @@ public class DBManager {
 
         } catch (Exception e) {
             e.printStackTrace();
-            Logger.e("数据库插入报错",e);
+            //Logger.e("数据库插入报错",e);
         }
     }
 
