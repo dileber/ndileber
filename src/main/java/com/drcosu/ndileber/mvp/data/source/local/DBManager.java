@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.drcosu.ndileber.app.SApplication;
@@ -506,12 +507,20 @@ public class DBManager {
         }
         Method method = getSetMethod(t.getClass(), fieldName);
         try {
-            Constructor<? extends Object> cons = typeClass.getConstructor(String.class);
-            Object attribute = cons.newInstance(value);
+            Object attribute;
+            if(Date.class.isAssignableFrom(typeClass)){
+                Logger.sl(Log.DEBUG,"如果是date则进入");
+                Constructor<? extends Object> cons = typeClass.getConstructor(Long.class);
+                attribute = cons.newInstance(Long.parseLong(value));
+            }else {
+                Constructor<? extends Object> cons = typeClass.getConstructor(String.class);
+                attribute = cons.newInstance(value);
+            }
             method.invoke(t, new Object[] { attribute });
 
         } catch (Exception e) {
             e.printStackTrace();
+            Logger.e("数据库插入报错",e);
         }
     }
 
