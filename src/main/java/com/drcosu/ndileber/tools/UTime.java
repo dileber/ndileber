@@ -185,6 +185,88 @@ public class UTime {
         return showDataString;
     }
 
+    public static String getTimeShowStringBest(Date currentTime){
+        String dataString;
+        Calendar todayStart = Calendar.getInstance();
+        todayStart.set(Calendar.HOUR_OF_DAY, 0);
+        todayStart.set(Calendar.MINUTE, 0);
+        todayStart.set(Calendar.SECOND, 0);
+        todayStart.set(Calendar.MILLISECOND, 0);
+        Date todaybegin = todayStart.getTime();
+        Date tomorrowbegin = new Date(todaybegin.getTime() + 3600 * 24 * 1000);
+        Date houtianbegin = new Date(tomorrowbegin.getTime() + 3600 * 24 * 1000);
+        Date dahoutianbegin = new Date(houtianbegin.getTime() + 3600 * 24 * 1000);
+        Date yesterdaybegin = new Date(todaybegin.getTime() - 3600 * 24 * 1000);
+        Date preyesterday = new Date(yesterdaybegin.getTime() - 3600 * 24 * 1000);
+        String st = getTodayTimeBucket(currentTime);
+
+        if(currentTime.getTime()>dahoutianbegin.getTime()){
+            SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            dataString = dateformatter.format(currentTime);
+        }else if(currentTime.getTime()>houtianbegin.getTime()){
+            dataString = "后天 "+st;
+        }else if(currentTime.getTime()>tomorrowbegin.getTime()){
+            dataString = "明天 "+st;
+        }else if(currentTime.getTime()>todaybegin.getTime()){
+            dataString = "今天 "+st;
+        }else if(currentTime.getTime()>yesterdaybegin.getTime()){
+            dataString = "昨天 "+st;
+        }else if(currentTime.getTime()>preyesterday.getTime()){
+            dataString = "前天 "+st;
+        }else{
+            SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            dataString = dateformatter.format(currentTime);
+        }
+
+//
+//        if(currentTime.getTime()>todaybegin.getTime()&&currentTime.getTime()<tomorrowbegin.getTime()){
+//
+//        }else if(currentTime.getTime()>tomorrowbegin.getTime()&&currentTime.getTime()<houtianbegin.getTime()){
+//
+//        }
+//
+//
+//        if(currentTime.before(todaybegin)&&currentTime.after(yesterdaybegin)){
+//            dataString = "昨天 "+st;
+//        }else if(currentTime.before(yesterdaybegin)&&currentTime.after(preyesterday)){
+//            dataString = "前天 "+st;
+//        }else if(currentTime.before(tomorrowbegin)&&currentTime.after(todaybegin)){
+//            dataString = "今天 "+st;
+//        }else if(currentTime.before(houtianbegin)&&currentTime.after(tomorrowbegin)){
+//            dataString = "明天 "+st;
+//        }else if(currentTime.before(dahoutianbegin)&&currentTime.after(houtianbegin)){
+//            dataString = "后天 "+st;
+//        }else {
+//            SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+//            dataString = dateformatter.format(currentTime);
+//        }
+
+//
+//
+//        if(!currentTime.before(tomorrowbegin)){
+//            dataString = "明天 "+st;
+//        }else if (!currentTime.before(todaybegin)) {
+//
+//
+//            if(!currentTime.before(dahoutianbegin)){
+//                SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+//                dataString = dateformatter.format(currentTime);
+//            }else if(!currentTime.before(houtianbegin)){
+//                dataString = "后天 "+st;
+//            }else {
+//                dataString = "今天 "+st;
+//            }
+//        } else if (!currentTime.before(yesterdaybegin)) {
+//            dataString = "昨天 "+st;
+//        } else if (!currentTime.before(preyesterday)) {
+//            dataString = "前天 "+st;
+//        } else {
+//            SimpleDateFormat dateformatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+//            dataString = dateformatter.format(currentTime);
+//        }
+        return dataString;
+    }
+
     public static String getTimeShowString(long milliseconds, boolean abbreviate) {
         String dataString;
         String timeStringBy24;
