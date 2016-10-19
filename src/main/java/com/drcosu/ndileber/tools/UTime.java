@@ -42,7 +42,7 @@ public class UTime {
     public static Date addHour(Date date,int amount){
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
-        cal.add(Calendar.HOUR, amount);
+        cal.add(Calendar.HOUR_OF_DAY, amount);
         return cal.getTime();
     }
 
