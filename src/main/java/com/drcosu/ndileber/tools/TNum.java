@@ -18,7 +18,7 @@ public class TNum {
      * @return
      */
     public static String moneyFormat(int point,boolean keep){
-        String start = "##,###,###,###,###";
+        String start = "##,###,###,###,##0";
         StringBuilder end = new StringBuilder(".");
         boolean first = false;
         for(int i=0;i<point;i++){
