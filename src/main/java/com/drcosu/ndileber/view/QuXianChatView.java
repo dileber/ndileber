@@ -369,7 +369,7 @@ public class QuXianChatView extends View implements View.OnTouchListener{
                 }
                 jianBianPath.lineTo(lastx,gridY - 20 - 10);
                 canvas.drawPath(curvePath, chartLinePaint);
-                Shader mShader = new LinearGradient(0,30 + 10,0,gridY - 20 - 10,new int[] {colors.get(n),Color.TRANSPARENT},null,Shader.TileMode.REPEAT);
+                Shader mShader = new LinearGradient(0,30 + 10,0,gridY - 20 - 10,new int[] {colors.get(n),Color.argb(30,255,255,255)},null,Shader.TileMode.REPEAT);
 //新建一个线性渐变，前两个参数是渐变开始的点坐标，第三四个参数是渐变结束的点的坐标。连接这2个点就拉出一条渐变线了，玩过PS的都懂。然后那个数组是渐变的颜色。下一个参数是渐变颜色的分布，如果为空，每个颜色就是均匀分布的。最后是模式，这里设置的是循环渐变
 
                 chartJianbianPaint.setShader(mShader);
