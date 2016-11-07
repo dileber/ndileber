@@ -1,9 +1,12 @@
 # ndileber
-学习google的MVP框架，来重构dileber，包含很多实用工具。
-dileber 包含了网络框架Retrofit ，并对其进行了封装，支持cookie，并对cookie失效进行了处理。
+学习google的MVP框架，来重构dileber，包含很多实用工具。  
+
+dileber 包含了网络框架Retrofit ，并对其进行了封装，支持cookie，并对cookie失效进行了处理。  
 
 
-实用工具1.BottomBar用来创建菜单栏使用如下
+
+实用工具1.BottomBar用来创建菜单栏使用如下  
+
 
 mBar= (BottomBar) findViewById(R.id.bar);
         mBar.addItem(new BottomBarTab(this,R.string.home2,BottomBarTab.TYPE_FONT)).
@@ -16,3 +19,39 @@ mBar.setOnClickItemMenu(new BottomBar.OnClickItemMenu() {
             public void onClickItem(int position) {
            }
 });
+
+教程如下：  
+[android开发（如何开发一个可以维护的好项目）：一 、定义基类][1]
+
+
+[开发一个好项目：二、actvity简便跳转，创建菜单按钮，正确使用fragment][2]
+
+
+[开发一个好项目：三、创建数据源，首先创建本地数据源][3]
+
+
+[android开发（如何开发一个可以维护的好项目）：四 、项目结构][4]
+
+
+[开发一个好项目：五、创建数据源，创建网络数据Service和网络数据源][5]
+
+
+[开发一个好项目：六、创建数据源，创建数据仓库][6]
+
+
+[开发一个好项目：七、创建Contract类，连接presenter和view][7]
+
+
+[开发一个好项目：八、创建view][8]
+
+
+
+
+  [1]: http://blog.csdn.net/s297165331/article/details/53006941
+  [2]: http://blog.csdn.net/s297165331/article/details/53006947
+  [3]: http://blog.csdn.net/s297165331/article/details/53006956
+  [4]: http://blog.csdn.net/s297165331/article/details/53006959
+  [5]: http://blog.csdn.net/s297165331/article/details/53006968
+  [6]: http://blog.csdn.net/s297165331/article/details/53008061
+  [7]: http://blog.csdn.net/s297165331/article/details/53008083
+  [8]: http://blog.csdn.net/s297165331/article/details/53008096
