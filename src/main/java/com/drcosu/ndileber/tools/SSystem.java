@@ -7,6 +7,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import com.drcosu.ndileber.app.SApplication;
@@ -98,5 +100,159 @@ public class SSystem {
         }
         return processName;
     }
-    
+
+    /**
+     * 判断当前进程是否是主进程
+     * @param context
+     * @return
+     */
+    public static boolean inMainProcess(Context context) {
+        String packageName = context.getPackageName();
+        String processName = getProcessName(context);
+        return packageName.equals(processName);
+    }
+
+    /**
+     * 获取当前进程名
+     * @param context
+     * @return 进程名
+     */
+    public static final String getProcessName(Context context) {
+        String processName = null;
+
+        // ActivityManager
+        ActivityManager am = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE));
+
+        while (true) {
+            for (ActivityManager.RunningAppProcessInfo info : am.getRunningAppProcesses()) {
+                if (info.pid == android.os.Process.myPid()) {
+                    processName = info.processName;
+                    break;
+                }
+            }
+
+            // go home
+            if (!TextUtils.isEmpty(processName)) {
+                return processName;
+            }
+
+            // take a rest and again
+            try {
+                Thread.sleep(100L);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 获取当前屏幕的信息
+     * @param context
+     * @return
+     */
+    public static Screen getScreen(Context context) {
+        if (null == context) {
+            return null;
+        }
+        Screen screen = new Screen();
+        DisplayMetrics dm = context.getApplicationContext().getResources().getDisplayMetrics();
+        screen.screenWidth = dm.widthPixels;
+        screen.screenHeight = dm.heightPixels;
+        screen.screenMin = (screen.screenWidth > screen.screenHeight) ? screen.screenHeight : screen.screenWidth;
+        screen.screenMax = (screen.screenWidth < screen.screenHeight) ? screen.screenHeight : screen.screenWidth;
+        screen.density = dm.density;
+        screen.scaleDensity = dm.scaledDensity;
+        screen.xdpi = dm.xdpi;
+        screen.ydpi = dm.ydpi;
+        screen.densityDpi = dm.densityDpi;
+        return screen;
+    }
+
+    public static class Screen {
+        int screenWidth;
+        int screenHeight;
+
+        int screenMax;
+        int screenMin;
+
+        float density;
+        float scaleDensity;
+        float xdpi;
+        float ydpi;
+        int densityDpi;
+
+        public int getScreenWidth() {
+            return screenWidth;
+        }
+
+        public void setScreenWidth(int screenWidth) {
+            this.screenWidth = screenWidth;
+        }
+
+        public int getScreenHeight() {
+            return screenHeight;
+        }
+
+        public void setScreenHeight(int screenHeight) {
+            this.screenHeight = screenHeight;
+        }
+
+        public float getDensity() {
+            return density;
+        }
+
+        public void setDensity(float density) {
+            this.density = density;
+        }
+
+        public float getScaleDensity() {
+            return scaleDensity;
+        }
+
+        public void setScaleDensity(float scaleDensity) {
+            this.scaleDensity = scaleDensity;
+        }
+
+        public float getXdpi() {
+            return xdpi;
+        }
+
+        public void setXdpi(float xdpi) {
+            this.xdpi = xdpi;
+        }
+
+        public float getYdpi() {
+            return ydpi;
+        }
+
+        public void setYdpi(float ydpi) {
+            this.ydpi = ydpi;
+        }
+
+        public int getDensityDpi() {
+            return densityDpi;
+        }
+
+        public void setDensityDpi(int densityDpi) {
+            this.densityDpi = densityDpi;
+        }
+
+        public int getScreenMax() {
+            return screenMax;
+        }
+
+        public void setScreenMax(int screenMax) {
+            this.screenMax = screenMax;
+        }
+
+        public int getScreenMin() {
+            return screenMin;
+        }
+
+        public void setScreenMin(int screenMin) {
+            this.screenMin = screenMin;
+        }
+    }
+
+
 }
