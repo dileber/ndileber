@@ -41,14 +41,40 @@ public abstract class BaseFragment extends Fragment{
         return (T) (getView().findViewById(resId));
     }
 
-
+    /**
+     * 优先使用
+     * @return
+     */
+    @Deprecated
     protected abstract int layoutViewId();
 
+    /**
+     * 多种情况，可以用绑定的view
+     * @return
+     */
+    protected abstract View layoutView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
+
+    /**
+     * 为了能够做绑定，加一个判断
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =  inflater.inflate(layoutViewId(), container, false);
-        return view;
+        super.onCreateView(inflater, container, savedInstanceState);
+        View layout = layoutView(inflater,container,savedInstanceState);
+        if(layoutViewId()!=0){
+            View view =  inflater.inflate(layoutViewId(), container, false);
+            return view;
+        }else if(layout!=null){
+            return layout;
+        }else {
+            return null;
+        }
+
     }
 
     @Override

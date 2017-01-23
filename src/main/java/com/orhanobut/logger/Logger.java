@@ -2,6 +2,7 @@ package com.orhanobut.logger;
 
 import android.util.Log;
 
+import com.drcosu.ndileber.app.BaseConfiger;
 import com.drcosu.ndileber.tools.HString;
 
 /**
@@ -13,7 +14,7 @@ public final class Logger {
 
   private static Printer printer = new LoggerPrinter();
 
-  private static boolean mlog = true;
+  private static boolean mlog = BaseConfiger.BUG_STATIC;
 
   //no instance
   private Logger() {
