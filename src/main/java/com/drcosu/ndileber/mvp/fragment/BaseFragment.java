@@ -45,7 +45,6 @@ public abstract class BaseFragment extends Fragment{
      * 优先使用
      * @return
      */
-    @Deprecated
     protected abstract int layoutViewId();
 
     /**
