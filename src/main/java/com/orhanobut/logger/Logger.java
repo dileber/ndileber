@@ -3,6 +3,7 @@ package com.orhanobut.logger;
 import android.util.Log;
 
 import com.drcosu.ndileber.app.BaseConfiger;
+import com.drcosu.ndileber.tools.HJson;
 import com.drcosu.ndileber.tools.HString;
 
 /**
@@ -27,6 +28,14 @@ public final class Logger {
    */
   public static Settings init(boolean log) {
     return init(DEFAULT_TAG,log);
+  }
+
+  /**
+   * 对象json化
+   * @param o
+     */
+  public static void o(Object o){
+    json(HJson.toJson(o));
   }
 
   /**
