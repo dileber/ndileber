@@ -46,6 +46,22 @@ public class UTime {
         return cal.getTime();
     }
 
+    /**
+     * 格式化时间
+     * @param pattern
+     * @param date
+     * @return
+     */
+    public static String getDateStr(String pattern,long date){
+        return getDateStr(pattern,new Date(date));
+    }
+
+    /**
+     * 格式化时间
+     * @param pattern
+     * @param date
+     * @return
+     */
     public static String getDateStr(String pattern,Date date){
         SimpleDateFormat df = new SimpleDateFormat(pattern);
         return df.format(date);

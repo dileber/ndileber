@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
@@ -12,13 +14,16 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.drcosu.ndileber.app.ActivityManager;
 import com.drcosu.ndileber.app.SApplication;
@@ -72,6 +77,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (this.getClass().isAnnotationPresent(HideKeyboard.class)) {
             hideKeyboardWhenTouchOutside = this.getClass().getAnnotation(HideKeyboard.class).value();
         }
+
 
         /**
          * 将activity 添加到activity栈中
