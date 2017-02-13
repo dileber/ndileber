@@ -28,11 +28,14 @@ import android.widget.Toast;
 import com.drcosu.ndileber.app.ActivityManager;
 import com.drcosu.ndileber.app.SApplication;
 import com.drcosu.ndileber.tools.UUi;
+import com.drcosu.ndileber.tools.annotation.CheckKeyboard;
 import com.drcosu.ndileber.tools.annotation.CloseStatusBar;
 import com.drcosu.ndileber.tools.annotation.CloseTitle;
 import com.drcosu.ndileber.tools.annotation.HideKeyboard;
 import com.drcosu.ndileber.utils.UToolBar;
 import com.orhanobut.logger.Logger;
+
+import java.lang.reflect.Field;
 
 
 /**
@@ -89,6 +92,49 @@ public abstract class BaseActivity extends AppCompatActivity {
             setContentView(layoutViewId());
         }
         initView(savedInstanceState);
+        if (this.getClass().isAnnotationPresent(CheckKeyboard.class)) {
+            if(this.getClass().getAnnotation(CheckKeyboard.class).value()){
+                checkKeyboard();
+            }
+        }
+    }
+
+    private ViewTreeObserver.OnGlobalLayoutListener check_onGloba = null;
+    private boolean check_laast = false;
+
+    protected CheckOnGlobaLinstener checkOnGlobaLinstener = null;
+
+    public interface CheckOnGlobaLinstener{
+        void showKeyboard();
+    }
+
+    /**
+     *     检查键盘是否打开
+     */
+    protected void setCheckOnGlobaLinstener(CheckOnGlobaLinstener checkOnGlobaLinstener) {
+        this.checkOnGlobaLinstener = checkOnGlobaLinstener;
+    }
+
+    public void checkKeyboard(){
+        final View decorView = getWindow().getDecorView();
+        check_onGloba = new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Rect rect = new Rect();
+                decorView.getWindowVisibleDisplayFrame(rect);
+                //计算出可见屏幕的高度
+                int displayHight = rect.bottom - rect.top;
+                //获得屏幕整体的高度
+                int hight = decorView.getHeight();
+                boolean visible = (double) displayHight / hight < 0.8;
+
+                if(visible&&visible!= check_laast){
+                    checkOnGlobaLinstener.showKeyboard();
+                }
+                check_laast = visible;
+            }
+        };
+        decorView.getViewTreeObserver().addOnGlobalLayoutListener(check_onGloba);
     }
 
     protected abstract void startView(Bundle savedInstanceState);
@@ -100,10 +146,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if(check_onGloba!=null){
+            View decorView = getWindow().getDecorView();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                decorView.getViewTreeObserver().removeOnGlobalLayoutListener(check_onGloba);
+            }else{
+                decorView.getViewTreeObserver().removeGlobalOnLayoutListener(check_onGloba);
+            }
+        }
         /**
          * 将activity从栈中弹出
          */
         activityManager.popActivity(this);
+
     }
 
     @Override
