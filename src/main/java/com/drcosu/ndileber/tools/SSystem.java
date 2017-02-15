@@ -147,15 +147,11 @@ public class SSystem {
 
     /**
      * 获取当前屏幕的信息
-     * @param context
      * @return
      */
-    public static Screen getScreen(Context context) {
-        if (null == context) {
-            return null;
-        }
+    public static Screen getScreen() {
         Screen screen = new Screen();
-        DisplayMetrics dm = context.getApplicationContext().getResources().getDisplayMetrics();
+        DisplayMetrics dm = SApplication.getAppContext().getResources().getDisplayMetrics();
         screen.screenWidth = dm.widthPixels;
         screen.screenHeight = dm.heightPixels;
         screen.screenMin = (screen.screenWidth > screen.screenHeight) ? screen.screenHeight : screen.screenWidth;

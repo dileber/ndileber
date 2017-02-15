@@ -1,5 +1,7 @@
 package com.drcosu.ndileber.tools;
 
+import java.util.UUID;
+
 /**
  * Created by shidawei on 16/1/18.
  */
@@ -60,6 +62,15 @@ public final class HString {
     public static String getStringValue(Object obj){
 
         return obj==null?"":obj.toString();
+    }
+
+    /**
+     * 获取32位uuid
+     *
+     * @return
+     */
+    public static String get32UUID() {
+        return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
 }
