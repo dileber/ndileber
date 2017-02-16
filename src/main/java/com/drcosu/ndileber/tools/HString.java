@@ -1,5 +1,8 @@
 package com.drcosu.ndileber.tools;
 
+import com.drcosu.ndileber.tools.string.MD5;
+
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -71,6 +74,47 @@ public final class HString {
      */
     public static String get32UUID() {
         return UUID.randomUUID().toString().replaceAll("-", "");
+    }
+
+    /**
+     * 生成唯一号
+     *
+     * @return
+     */
+    public static String get36UUID() {
+        UUID uuid = UUID.randomUUID();
+        String uniqueId = uuid.toString();
+        return uniqueId;
+    }
+
+    public static String makeMd5(String source) {
+        return MD5.getStringMD5(source);
+    }
+
+    public static String getPercentString(float percent) {
+        return String.format(Locale.US, "%d%%", (int) (percent * 100));
+    }
+
+
+    /**
+     * 删除字符串中的空白符
+     *
+     * @param content
+     * @return String
+     */
+    public static String removeBlanks(String content) {
+        if (content == null) {
+            return null;
+        }
+        StringBuilder buff = new StringBuilder();
+        buff.append(content);
+        for (int i = buff.length() - 1; i >= 0; i--) {
+            if (' ' == buff.charAt(i) || ('\n' == buff.charAt(i)) || ('\t' == buff.charAt(i))
+                    || ('\r' == buff.charAt(i))) {
+                buff.deleteCharAt(i);
+            }
+        }
+        return buff.toString();
     }
 
 }

@@ -6,56 +6,88 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
+import android.telephony.TelephonyManager;
 
 import com.drcosu.ndileber.app.SApplication;
 
 
 public class HNetwork {
 
-	private ConnectivityManager con;
-	private static volatile HNetwork instance;
-
-	public static HNetwork getInstance() {
-		if (instance == null) {
-			synchronized (HNetwork.class) {
-				if (instance == null)
-					instance = new HNetwork();
-			}
+	/**
+	 * 获取可用的网络信息
+	 *
+	 * @param context
+	 * @return
+	 */
+	private static NetworkInfo getActiveNetworkInfo(Context context) {
+		try {
+			ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+			return cm.getActiveNetworkInfo();
+		} catch (Exception e) {
+			return null;
 		}
-		return instance;
 	}
 
-	public HNetwork() {
-		// TODO Auto-generated constructor stub
-		con=(ConnectivityManager) SApplication.getAppContext().getSystemService(Activity.CONNECTIVITY_SERVICE);
-	}
-	
 	/**
 	 */
-	public boolean checkNetwork() {
+	public static boolean checkNetwork() {
 		// TODO Auto-generated method stub
-		NetworkInfo info=con.getActiveNetworkInfo();
-		if (info != null && info.isConnected()) {  
-            // 判断当前网络是否已经连接  
-            if (info.getState() == State.CONNECTED) {
-            	return true;
-            }else{
-            	return false;
-            }
-        } 
-		return false;
-	}
-
-	public boolean isWifi() {
-		// TODO Auto-generated method stub
-		if(checkNetwork()){
-			State wifi = con.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
-			//判断wifi已连接的条件
-			if(wifi == State.CONNECTED||wifi==State.CONNECTING){
-				return true;
-			}
+		NetworkInfo networkInfo = getActiveNetworkInfo(SApplication.getAppContext());
+		if (networkInfo != null) {
+			return networkInfo.isAvailable();
+		} else {
 			return false;
 		}
-		return false;
 	}
+
+	/**
+	 * 当前网络是否是wifi网络
+	 *
+	 * @return
+	 */
+	public static boolean isWifi() {
+		try {
+			ConnectivityManager cm = (ConnectivityManager) SApplication.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo ni = cm.getActiveNetworkInfo();
+			if (ni != null) {
+				if (ni.getType() == ConnectivityManager.TYPE_WIFI) {
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public static String getNetworkInfo(Context context) {
+		String info = "";
+		ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+		if (connectivity != null) {
+			NetworkInfo activeNetInfo = connectivity.getActiveNetworkInfo();
+			if (activeNetInfo != null) {
+				if (activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+					info = activeNetInfo.getTypeName();
+				} else {
+					StringBuilder sb = new StringBuilder();
+					TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+					sb.append(activeNetInfo.getTypeName());
+					sb.append(" [");
+					if (tm != null) {
+						// Result may be unreliable on CDMA networks
+						sb.append(tm.getNetworkOperatorName());
+						sb.append("#");
+					}
+					sb.append(activeNetInfo.getSubtypeName());
+					sb.append("]");
+					info = sb.toString();
+				}
+			}
+		}
+		return info;
+	}
+
 }

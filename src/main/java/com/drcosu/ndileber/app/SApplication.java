@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import com.drcosu.ndileber.tools.AndroidCrash;
 import com.drcosu.ndileber.tools.annotation.SFontdType;
 import com.drcosu.ndileber.tools.net.RetCallback;
+import com.drcosu.ndileber.tools.storage.UStorage;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.orhanobut.logger.Logger;
 
@@ -31,15 +32,21 @@ public abstract class SApplication extends Application{
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		start();
-		buglog();
+		/**
+		 * 缓存文件初始化
+		 */
 		instance = this;
 		context = instance.getApplicationContext();
+
+		UStorage.init(this,null);
+		start();
+		buglog();
+
 		/**
 		 * android 崩溃记录
 		 */
 		if(crash){
-			AndroidCrash.getInstance().init();
+			AndroidCrash.getInstance();
 		}
 
 
@@ -51,6 +58,7 @@ public abstract class SApplication extends Application{
 			Logger.i("加载字体图标");
 			icon_font = Typeface.createFromAsset(getAssets(), this.getClass().getAnnotation(SFontdType.class).value());
 		}
+
 
 		init();
 	}

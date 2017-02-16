@@ -9,6 +9,7 @@ import java.io.File;
 
 /**
  * 需要初始化的存储工具
+ * 文件将全部通过这个工具存储在内存卡上
  */
 public class UStorage {
 	public final static long K = 1024;
@@ -28,7 +29,7 @@ public class UStorage {
 	 * @param fileType
 	 * @return 可用的保存路径或者null
 	 */
-	private static String getWritePath( String fileName, StorageType fileType) {
+	public static String getWritePath( String fileName, StorageType fileType) {
 		String path = ExternalStorage.getInstance().getWritePath(fileName, fileType);
 		if (TextUtils.isEmpty(path)) {
 			return null;
