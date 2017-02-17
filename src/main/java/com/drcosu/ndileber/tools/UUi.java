@@ -66,6 +66,9 @@ public class UUi {
      * @param duration
      */
     public static void toast(Activity activity,String msg,int duration) {
+        if(activity==null){
+            return;
+        }
         View layout = activity.getLayoutInflater().inflate(R.layout.deleber_toast, null);
         TextView txt = (TextView) layout.findViewById(R.id.main_toast_text);
         txt.setText(msg);
