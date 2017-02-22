@@ -145,11 +145,16 @@ public class SSystem {
         }
     }
 
+    private static Screen mScreen= null;
+
     /**
      * 获取当前屏幕的信息
      * @return
      */
     public static Screen getScreen() {
+        if(mScreen!=null){
+            return mScreen;
+        }
         Screen screen = new Screen();
         DisplayMetrics dm = SApplication.getAppContext().getResources().getDisplayMetrics();
         screen.screenWidth = dm.widthPixels;
@@ -161,6 +166,7 @@ public class SSystem {
         screen.xdpi = dm.xdpi;
         screen.ydpi = dm.ydpi;
         screen.densityDpi = dm.densityDpi;
+        mScreen = screen;
         return screen;
     }
 

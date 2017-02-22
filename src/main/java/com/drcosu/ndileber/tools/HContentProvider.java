@@ -53,8 +53,10 @@ public class HContentProvider {
         while (cursor.moveToNext()) {
             T t = clazz.newInstance();
             for(int i=0;i<projection.length;i++){
-                Logger.d(projection[i]+":"+cursor.getString(i));
-                invokeSet(t,projection[i], cursor.getString(cursor.getColumnIndex(projection[i])),clazz.getField(projection[i]).getType());
+                //Logger.d(projection[i]+":"+cursor.getString(i));
+                Field field = clazz.getDeclaredField(projection[i]);
+                field.setAccessible(true);
+                invokeSet(t,projection[i], cursor.getString(cursor.getColumnIndex(projection[i])),field.getType());
             }
             mList.add(t);
         }
