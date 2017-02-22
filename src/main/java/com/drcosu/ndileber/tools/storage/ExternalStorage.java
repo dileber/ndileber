@@ -21,6 +21,10 @@ class ExternalStorage {
 
 	}
 
+	public String getSdkStorageRoot() {
+		return sdkStorageRoot;
+	}
+
 	synchronized public static ExternalStorage getInstance() {
 		if (instance == null) {
 			instance = new ExternalStorage();

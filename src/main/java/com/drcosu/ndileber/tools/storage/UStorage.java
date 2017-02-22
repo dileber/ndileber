@@ -23,6 +23,10 @@ public class UStorage {
         ExternalStorage.getInstance().init(context, rootPath);
     }
 
+	public static String getStorageRoot(){
+		return ExternalStorage.getInstance().getSdkStorageRoot();
+	}
+
 	/**
 	 *
 	 * @param fileName
