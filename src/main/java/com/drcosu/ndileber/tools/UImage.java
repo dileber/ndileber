@@ -1,7 +1,11 @@
 package com.drcosu.ndileber.tools;
 
+import android.graphics.drawable.Animatable;
 import android.net.Uri;
+import android.support.annotation.Nullable;
+import android.view.ViewGroup;
 
+import com.facebook.common.util.UriUtil;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
@@ -31,4 +35,41 @@ public class UImage {
         draweeView.setController(controller);
     }
 
+    public static void loadDrawable(SimpleDraweeView draweeView, int resId) {
+        Uri uri = new Uri.Builder().scheme(UriUtil.LOCAL_RESOURCE_SCHEME).path(String.valueOf(resId)).build();
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(uri).setOldController(draweeView.getController())
+                .build();
+        draweeView.setController(controller);
+    }
+
+
+    public static void loadFile(final SimpleDraweeView draweeView, String filePath, final int reqWidth, final int reqHeight) {
+        Uri uri = new Uri.Builder()
+                .scheme(UriUtil.LOCAL_FILE_SCHEME)
+                .path(filePath)
+                .build();
+        ImageRequest request = ImageRequestBuilder.newBuilderWithSource(uri).
+                setAutoRotateEnabled(true)
+                .setLocalThumbnailPreviewsEnabled(true)
+                .setResizeOptions(new ResizeOptions(reqWidth, reqHeight))
+                .build();
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setImageRequest(request)
+                .setOldController(draweeView.getController())
+                .setControllerListener(new BaseControllerListener<ImageInfo>() {
+                    @Override
+                    public void onFinalImageSet(String id, @Nullable ImageInfo imageInfo, @Nullable Animatable anim) {
+                        if (imageInfo == null) {
+                            return;
+                        }
+                        ViewGroup.LayoutParams vp = draweeView.getLayoutParams();
+                        vp.width = reqWidth;
+                        vp.height = reqHeight;
+                        draweeView.requestLayout();
+                    }
+                }).build();
+        draweeView.setController(controller);
+    }
 }
+
