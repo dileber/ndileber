@@ -15,6 +15,8 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
 import com.drcosu.ndileber.R;
+import com.drcosu.ndileber.mvp.data.model.SModel;
+import com.drcosu.ndileber.mvp.data.model.SelectModel;
 import com.drcosu.ndileber.tools.UUi;
 
 import java.util.ArrayList;
@@ -57,10 +59,10 @@ public void onDismissListener(View v, int nType) {
  * Created by liuhongxia on 2016/05/30
  */
 
-public class SelectDialog extends BaseNoticeWindow implements OnClickListener {
+public class SelectDialog<T extends SelectModel> extends BaseNoticeWindow implements OnClickListener {
 
 
-    private List<String> mDataList = new ArrayList<String>(0);
+    private List<T> mDataList = new ArrayList<>(0);
 
     private Context mContext;
     private String mTitleText = null;
@@ -75,7 +77,7 @@ public class SelectDialog extends BaseNoticeWindow implements OnClickListener {
 
 
 
-    public static class Builder {
+    public static class Builder<T extends SelectModel> {
         Context mContext;
         String mTitleText = null;
         int mTitleBackgroundColor = -1;
@@ -84,7 +86,7 @@ public class SelectDialog extends BaseNoticeWindow implements OnClickListener {
         int mTitleTextSize = 18;
         int mButtonSize = 14;
         int mLastButtonSize = 17;
-        List<String> mDataList;
+        List<T> mDataList;
 
 
         public Builder(Context context) {
@@ -141,11 +143,13 @@ public class SelectDialog extends BaseNoticeWindow implements OnClickListener {
             return this;
         }
 
-        public Builder setDataList(List<String> list) {
+        public Builder setDataList(List<T> list) {
             mDataList = list;
             return this;
         }
     }
+
+
 
     public SelectDialog(Builder builder) {
         mContext = builder.mContext;
@@ -224,14 +228,31 @@ public class SelectDialog extends BaseNoticeWindow implements OnClickListener {
                 tDiscardBtn.setBackgroundColor(getColor(R.color.dileber_white));
                 tDiscardBtn.setTextColor(getColor(R.color.dileber_topbar));
             } else {
-                tDiscardBtn.setText(mDataList.get(i));
+                tDiscardBtn.setText(mDataList.get(i).getTitle());
                 tDiscardBtn.setTextSize(mButtonSize);
                 tDiscardBtn.setBackgroundColor(getColor(R.color.dileber_white));
                 tDiscardBtn.setTextColor(mButtonColor);
 
                 tDiscardBtn.setTag(i);
             }
-            tDiscardBtn.setOnClickListener(this);
+            final int mtag = i;
+            tDiscardBtn.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener == null) {
+                        dismiss();
+                        return;
+                    }
+
+                    if (v.getTag() != null) {
+                        mListener.onSureListener(v,mDataList.get(mtag));
+                    } else {
+                        mListener.onDiscardListener(v);
+                    }
+
+                    Dismiss(v, BaseNoticeWindow.TYPE_DISMISS_BUTTON);
+                }
+            });
             tDiscardBtn.setGravity(Gravity.CENTER);
             TextView textView = new TextView(mContext);
             textView.setBackgroundColor(getColor(R.color.dileber_line));
@@ -294,18 +315,7 @@ public class SelectDialog extends BaseNoticeWindow implements OnClickListener {
     @Override
     public void onClick(View v) {
 
-        if (mListener == null) {
-            dismiss();
-            return;
-        }
 
-        if (v.getTag() != null) {
-            mListener.onSureListener(v);
-        } else {
-            mListener.onDiscardListener(v);
-        }
-
-        Dismiss(v, BaseNoticeWindow.TYPE_DISMISS_BUTTON);
     }
 
     private void Dismiss(View v, int nType) {
@@ -317,6 +327,8 @@ public class SelectDialog extends BaseNoticeWindow implements OnClickListener {
 
         dismiss();
     }
+
+
 }
 
 

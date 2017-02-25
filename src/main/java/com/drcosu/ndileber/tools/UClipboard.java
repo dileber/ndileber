@@ -8,10 +8,9 @@ public class UClipboard {
 	/**
 	 * 拷贝文字到剪贴版
 	 * @param context
-	 * @param lable 描述
 	 * @param text 内容
      */
-	public static final void clipboardCopyText(Context context, CharSequence lable, CharSequence text) {
+	public static final void clipboardCopyText(Context context, CharSequence text) {
 		ClipboardManager cm = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
 		if (cm != null) {
 			ClipData clipData = ClipData.newPlainText("simple text",text);

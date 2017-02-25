@@ -3,7 +3,9 @@ package com.drcosu.ndileber.tools.selectdialog;
 import android.view.View;
 import android.widget.PopupWindow;
 
-public abstract class BaseNoticeWindow extends PopupWindow {
+import com.drcosu.ndileber.mvp.data.model.SelectModel;
+
+public abstract class BaseNoticeWindow  extends PopupWindow {
 
 	public static final int TYPE_DISMISS_NORMAL = 1;
 	public static final int TYPE_DISMISS_BUTTON = 2;
@@ -18,9 +20,9 @@ public abstract class BaseNoticeWindow extends PopupWindow {
 		this.mListener = mListener;
 	}
 
-	public interface OnButtonListener {
+	public interface OnButtonListener<T extends SelectModel> {
 
-		public void onSureListener(View v);
+		public void onSureListener(View v, T selectModel);
 
 		public void onDiscardListener(View v);
 		
