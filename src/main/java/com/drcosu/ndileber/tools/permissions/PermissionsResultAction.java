@@ -25,6 +25,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ *
+ * 将实例传递给 requestpermissionsifnecessaryforresult方法。结  *果将被送回你无论是ongranted（所有的权限已被授予），或ondenied（所需*的权限被拒绝）。
+ *你把你的ongranted方法和通知功能,用户什么都在ondenied方法不工作。
+
  * This abstract class should be used to create an if/else action that the PermissionsManager
  * can execute when the permissions you request are granted or denied. Simple use involves
  * creating an anonymous instance of it and passing that instance to the
@@ -45,6 +49,8 @@ public abstract class PermissionsResultAction {
   public PermissionsResultAction() {}
 
   /**
+   *  *如果您是在后台线程中使用权限请求，则希望
+   *回调是在UI线程中,通过looper刷新ui
    * Alternate Constructor. Pass the looper you wish the PermissionsResultAction
    * callbacks to be executed on if it is not the current Looper. For instance,
    * if you are making a permissions request from a background thread but wish the
@@ -56,6 +62,7 @@ public abstract class PermissionsResultAction {
   public PermissionsResultAction(@NonNull Looper looper) {mLooper = looper;}
 
   /**
+   * 当所有权限已被用户授予,把所有你的权限敏感的代码，可以只需执行所
    * This method is called when ALL permissions that have been
    * requested have been granted by the user. In this method
    * you should put all your permissions sensitive code that can
@@ -64,16 +71,18 @@ public abstract class PermissionsResultAction {
   public abstract void onGranted();
 
   /**
+   * 当一个权限被拒绝的时候调用
    * This method is called when a permission has been denied by
    * the user. It provides you with the permission that was denied
    * and will be executed on the Looper you pass to the constructor
    * of this class, or the Looper that this object was created on.
    *
-   * @param permission the permission that was denied.
+   * @param permission the permission that was denied. 被拒绝的权限
    */
   public abstract void onDenied(String permission);
 
   /**
+   * 忽视未发现的权限
    * This method is used to determine if a permission not
    * being present on the current Android platform should
    * affect whether the PermissionsResultAction should continue
@@ -98,6 +107,12 @@ public abstract class PermissionsResultAction {
     return true;
   }
 
+  /**
+   * 返回授权 结果
+   * @param permission
+   * @param result
+   * @return
+     */
   @SuppressWarnings("WeakerAccess")
   @CallSuper
   protected synchronized final boolean onResult(final @NonNull String permission, int result) {
@@ -110,6 +125,10 @@ public abstract class PermissionsResultAction {
   }
 
   /**
+   *
+   * *当一个特定的权限已更改。
+   *此方法将调用所有权限，所以该方法确定
+   *如果授权影响到该状态，是否可以继续进行
    * This method is called when a particular permission has changed.
    * This method will be called for all permissions, so this method determines
    * if the permission affects the state or not and whether it can proceed with
@@ -123,6 +142,7 @@ public abstract class PermissionsResultAction {
   @SuppressWarnings("WeakerAccess")
   @CallSuper
   protected synchronized final boolean onResult(final @NonNull String permission, Permissions result) {
+    //先从权限列表里移除当前权限
     mPermissions.remove(permission);
     if (result == Permissions.GRANTED) {
       if (mPermissions.isEmpty()) {
@@ -134,7 +154,7 @@ public abstract class PermissionsResultAction {
         });
         return true;
       }
-    } else if (result == Permissions.DENIED) {
+    } else if (result == Permissions.DENIED) {//权限被拒
       new Handler(mLooper).post(new Runnable() {
         @Override
         public void run() {
@@ -144,11 +164,11 @@ public abstract class PermissionsResultAction {
       return true;
     } else if (result == Permissions.NOT_FOUND) {
       if (shouldIgnorePermissionNotFound(permission)) {
-        if (mPermissions.isEmpty()) {
+        if (mPermissions.isEmpty()) {//权限为空
           new Handler(mLooper).post(new Runnable() {
             @Override
             public void run() {
-              onGranted();
+              onGranted();//去授权
             }
           });
           return true;
@@ -157,7 +177,7 @@ public abstract class PermissionsResultAction {
         new Handler(mLooper).post(new Runnable() {
           @Override
           public void run() {
-            onDenied(permission);
+            onDenied(permission);//拒绝权限
           }
         });
         return true;
@@ -167,15 +187,18 @@ public abstract class PermissionsResultAction {
   }
 
   /**
+   *     *注册指定的权限对象的permissionsresultaction
+   *让它知道哪些权限来查找更改。
    * This method registers the PermissionsResultAction object for the specified permissions
    * so that it will know which permissions to look for changes to. The PermissionsResultAction
    * will then know to look out for changes to these permissions.
    *
-   * @param perms the permissions to listen for
+   * @param perms the permissions to listen for名单
    */
   @SuppressWarnings("WeakerAccess")
   @CallSuper
   protected synchronized final void registerPermissions(@NonNull String[] perms) {
+    //把名单加到权限集合里
     Collections.addAll(mPermissions, perms);
   }
 }

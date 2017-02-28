@@ -36,6 +36,7 @@ import java.util.Set;
 /**
  * A class to help you manage your permissions simply.
  *
+ * 权限管理类
  * 用法
  *
  * PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
@@ -80,6 +81,12 @@ public class PermissionsManager {
   }
 
   /**
+   * 此方法使用反射来读取清单类中的所有权限。
+   *因为一些权限不存在于旧版本的安卓系统中，
+   *因为他们不存在，他们将被拒绝时，你检查是否有权限
+   *因为一个新的权限，往往是补充，那里没有以前的
+   *所需的许可。我们初始化一组可用的权限，并检查组
+   *检查是否有权限，当我们被拒绝时权限仍然不存在
    * This method uses reflection to read all the permissions in the Manifest class.
    * This is necessary because some permissions do not exist on older versions of Android,
    * since they do not exist, they will be denied when you check whether you have permission
@@ -102,11 +109,14 @@ public class PermissionsManager {
   }
 
   /**
+   *
+   * 此方法检索在应用程序清单中声明的所有权限。
+   * 它返回一个非空数组，可以声明的权限。
    * This method retrieves all the permissions declared in the application's manifest.
    * It returns a non null array of permisions that can be declared.
    *
-   * @param activity the Activity necessary to check what permissions we have.
-   * @return a non null array of permissions that are declared in the application manifest.
+   * @param activity the Activity necessary to check what permissions we have. 检查我们需要哪些权限
+   * @return a non null array of permissions that are declared in the application manifest. 返回在应用程序清单中声明的非空数组
    */
   @NonNull
   private synchronized String[] getManifestPermissions(@NonNull final Activity activity) {
@@ -136,9 +146,10 @@ public class PermissionsManager {
    * received. The list of permissions passed to this method are registered
    * in the PermissionsResultAction object so that it will be notified of changes
    * made to these permissions.
+   * 在permissionsresultaction对象，它将变更通知这些权限
    *
-   * @param permissions the required permissions for the action to be executed.
-   * @param action      the action to add to the current list of pending actions.
+   * @param permissions the required permissions for the action to be executed. 权限所需的操作的权限。
+   * @param action      the action to add to the current list of pending actions. 将 动作添加到当前正在执行的动作列表中。
    */
   private synchronized void addPendingAction(@NonNull String[] permissions,
       @Nullable PermissionsResultAction action) {
@@ -150,12 +161,13 @@ public class PermissionsManager {
   }
 
   /**
+   * 删除从队列中等待的动作和执行该动作
    * This method removes a pending action from the list of pending actions.
    * It is used for cases where the permission has already been granted, so
    * you immediately wish to remove the pending action from the queue and
    * execute the action.
    *
-   * @param action the action to remove
+   * @param action the action to remove 移除动作
    */
   private synchronized void removePendingAction(@Nullable PermissionsResultAction action) {
     for (Iterator<WeakReference<PermissionsResultAction>> iterator = mPendingActions.iterator();
@@ -168,6 +180,7 @@ public class PermissionsManager {
   }
 
   /**
+   * 这个静态方法可以用来检查你是否有一个特定的权限。
    * This static method can be used to check whether or not you have a specific permission.
    * It is basically a less verbose method of using {@link ActivityCompat#checkSelfPermission(Context, String)}
    * and will simply return a boolean whether or not you have the permission. If you pass
@@ -175,9 +188,9 @@ public class PermissionsManager {
    * However, the Activity parameter is nullable so that you can pass in a reference that you
    * are not always sure will be valid or not (e.g. getActivity() from Fragment).
    *
-   * @param context    the Context necessary to check the permission
-   * @param permission the permission to check
-   * @return true if you have been granted the permission, false otherwise
+   * @param context    the Context necessary to check the permission 检查权限的上下文对象
+   * @param permission the permission to check 要检查的权限
+   * @return true if you have been granted the permission, false otherwise 返回是否授权了此权限
    */
   @SuppressWarnings("unused")
   public synchronized boolean hasPermission(@Nullable Context context, @NonNull String permission) {
@@ -186,6 +199,8 @@ public class PermissionsManager {
   }
 
   /**
+   * 这个静态方法可以用来检查你是否有几个特定的权限。
+   * 为每一个权限，并将简单地返回一个布尔值是否你有所有的权限
    * This static method can be used to check whether or not you have several specific permissions.
    * It is simpler than checking using {@link ActivityCompat#checkSelfPermission(Context, String)}
    * for each permission and will simply return a boolean whether or not you have all the permissions.
@@ -193,9 +208,9 @@ public class PermissionsManager {
    * permission. However, the Activity parameter is nullable so that you can pass in a reference
    * that you are not always sure will be valid or not (e.g. getActivity() from Fragment).
    *
-   * @param context     the Context necessary to check the permission
-   * @param permissions the permissions to check
-   * @return true if you have been granted all the permissions, false otherwise
+   * @param context     the Context necessary to check the permission 需要检查 权限的上下文
+   * @param permissions the permissions to check 权限 数组
+   * @return true if you have been granted all the permissions, false otherwise 返回你是否有所有的权限
    */
   @SuppressWarnings("unused")
   public synchronized boolean hasAllPermissions(@Nullable Context context, @NonNull String[] permissions) {
@@ -210,6 +225,7 @@ public class PermissionsManager {
   }
 
   /**
+   * 这种方法的是获取清单里面的所有权限。permissionsresultaction  用于通知允许用户允许或拒绝每一个权限。
    * This method will request all the permissions declared in your application manifest
    * for the specified {@link PermissionsResultAction}. The purpose of this method is to enable
    * all permissions to be requested at one shot. The PermissionsResultAction is used to notify
@@ -220,8 +236,8 @@ public class PermissionsManager {
    * null. Additionally, you will not receive any notification of permissions being granted
    * if you provide a null PermissionsResultAction.
    *
-   * @param activity the Activity necessary to request and check permissions.
-   * @param action   the PermissionsResultAction used to notify you of permissions being accepted.
+   * @param activity the Activity necessary to request and check permissions. 需要检查权限的activity
+   * @param action   the PermissionsResultAction used to notify you of permissions being accepted. permissionsresultaction用于权限接受通知你
    */
   @SuppressWarnings("unused")
   public synchronized void requestAllManifestPermissionsIfNecessary(final @Nullable Activity activity,
@@ -234,6 +250,13 @@ public class PermissionsManager {
   }
 
   /**
+   * 该方法将请求的权限，如果
+   *他们需要被要求（即我们没有许可），并会增加
+   * permissionsresultaction到队列被通知的权限被授予或
+   *否认。在预Android棉花糖的情况下，将立即授予权限。
+   *活动变量为空，但如果它是无效的，不能执行的方法。
+   *这是唯一可作为一种礼貌片段，getactivity()可能产量空
+   *如果该片段没有添加到其父活动中
    * This method should be used to execute a {@link PermissionsResultAction} for the array
    * of permissions passed to this method. This method will request the permissions if
    * they need to be requested (i.e. we don't have permission yet) and will add the
@@ -243,9 +266,9 @@ public class PermissionsManager {
    * This is only nullable as a courtesy for Fragments where getActivity() may yeild null
    * if the Fragment is not currently added to its parent Activity.
    *
-   * @param activity    the activity necessary to request the permissions.
-   * @param permissions the list of permissions to request for the {@link PermissionsResultAction}.
-   * @param action      the PermissionsResultAction to notify when the permissions are granted or denied.
+   * @param activity    the activity necessary to request the permissions. 请求权限的活动
+   * @param permissions the list of permissions to request for the {@link PermissionsResultAction}. 权限列表
+   * @param action      the PermissionsResultAction to notify when the permissions are granted or denied. permissionsresultaction通知当权限授予或拒绝。
    */
   @SuppressWarnings("unused")
   public synchronized void requestPermissionsIfNecessaryForResult(@Nullable Activity activity,
@@ -271,6 +294,12 @@ public class PermissionsManager {
   }
 
   /**
+   * 该方法将请求的权限，如果
+   *他们需要被要求（即我们没有许可），并会增加
+   * permissionsresultaction到队列被通知的权限被授予或
+   *否认。在预Android棉花糖(6.0)的情况下，将立即授予权限。
+   *但如果 getactivity()返回null，这方法
+   *将无法工作作为活动引用，必须检查权限。
    * This method should be used to execute a {@link PermissionsResultAction} for the array
    * of permissions passed to this method. This method will request the permissions if
    * they need to be requested (i.e. we don't have permission yet) and will add the
@@ -279,9 +308,9 @@ public class PermissionsManager {
    * The Fragment variable is used, but if {@link Fragment#getActivity()} returns null, this method
    * will fail to work as the activity reference is necessary to check for permissions.
    *
-   * @param fragment    the fragment necessary to request the permissions.
-   * @param permissions the list of permissions to request for the {@link PermissionsResultAction}.
-   * @param action      the PermissionsResultAction to notify when the permissions are granted or denied.
+   * @param fragment    the fragment necessary to request the permissions. 需要检查 权限的fragmnet
+   * @param permissions the list of permissions to request for the {@link PermissionsResultAction}.需要请求的权限列表
+   * @param action      the PermissionsResultAction to notify when the permissions are granted or denied. permissionsresultaction通知当权限授予或拒绝。
    */
   @SuppressWarnings("unused")
   public synchronized void requestPermissionsIfNecessaryForResult(@NonNull Fragment fragment,
@@ -308,6 +337,9 @@ public class PermissionsManager {
   }
 
   /**
+   * 这个方法通知permissionsmanager，权限已经改变。如果你正在做
+   *使用活动的权限请求，则应调用此方法,将通知所有悬而未决  的,permissionsresultaction当前对象
+   *在队列中，并将从挂起的请求列表中删除权限请求。
    * This method notifies the PermissionsManager that the permissions have change. If you are making
    * the permissions requests using an Activity, then this method should be called from the
    * Activity callback onRequestPermissionsResult() with the variables passed to that method. If
@@ -316,8 +348,8 @@ public class PermissionsManager {
    * It will notify all the pending PermissionsResultAction objects currently
    * in the queue, and will remove the permissions request from the list of pending requests.
    *
-   * @param permissions the permissions that have changed.
-   * @param results     the values for each permission.
+   * @param permissions the permissions that have changed. 已更改的权限。
+   * @param results     the values for each permission. 每个权限的值
    */
   @SuppressWarnings("unused")
   public synchronized void notifyPermissionsChange(@NonNull String[] permissions, @NonNull int[] results) {
@@ -341,13 +373,14 @@ public class PermissionsManager {
   }
 
   /**
+   * 在安卓设备前要求权限（安卓6，api23）,根据权限状态，直接进行或拒绝工作
    * When request permissions on devices before Android M (Android 6.0, API Level 23)
    * Do the granted or denied work directly according to the permission status
    *
-   * @param activity    the activity to check permissions
-   * @param permissions the permissions names
+   * @param activity    the activity to check permissions 检测权限的activity
+   * @param permissions the permissions names 权限数组
    * @param action      the callback work object, containing what we what to do after
-   *                    permission check
+   *                    permission check 我们执行某项操作后权限检查
    */
   private void doPermissionWorkBeforeAndroidM(@NonNull Activity activity,
       @NonNull String[] permissions,
@@ -371,11 +404,11 @@ public class PermissionsManager {
    * If a permission is not granted, add it to the result list
    * if a permission is granted, do the granted work, do not add it to the result list
    *
-   * @param activity    the activity to check permissions
-   * @param permissions all the permissions names
+   * @param activity    the activity to check permissions 检查权限的activity
+   * @param permissions all the permissions names 所有权限的名字
    * @param action      the callback work object, containing what we what to do after
-   *                    permission check
-   * @return a list of permissions names that are not granted yet
+   *                    permission check 我们执行某项操作后权限检查
+   * @return a list of permissions names that are not granted yet 尚未授予的权限名称列表
    */
   @NonNull
   private List<String> getPermissionsListToRequest(@NonNull Activity activity,
