@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.drcosu.ndileber.R;
 import com.drcosu.ndileber.app.ActivityManager;
+import com.drcosu.ndileber.app.SApplication;
 
 /**
  * UI类工具
@@ -84,45 +85,41 @@ public class UUi {
 
     /**
      * dip 转 px
-     * @param context
      * @param dipValue
      * @return
      */
-    public static int dip2px(Context context, float dipValue) {
-        float scale = context.getResources().getDisplayMetrics().density;
+    public static int dip2px(float dipValue) {
+        float scale = SApplication.getAppContext().getResources().getDisplayMetrics().density;
         return (int)(dipValue * scale + 0.5F);
     }
 
     /**
      * px 转 dp
-     * @param context
      * @param pxValue
      * @return
      */
-    public static int px2dip(Context context, float pxValue) {
-        float scale = context.getResources().getDisplayMetrics().density;
+    public static int px2dip(float pxValue) {
+        float scale = SApplication.getAppContext().getResources().getDisplayMetrics().density;
         return (int)(pxValue / scale + 0.5F);
     }
 
     /**
      * px转sp
-     * @param context
      * @param pxValue
      * @return
      */
-    public static int px2sp(Context context, float pxValue) {
-        float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+    public static int px2sp(float pxValue) {
+        float fontScale = SApplication.getAppContext().getResources().getDisplayMetrics().scaledDensity;
         return (int)(pxValue / fontScale + 0.5F);
     }
 
     /**
      * sp转px
-     * @param context
      * @param spValue
      * @return
      */
-    public static int sp2px(Context context, float spValue) {
-        float fontScale = context.getResources().getDisplayMetrics().scaledDensity;
+    public static int sp2px(float spValue) {
+        float fontScale = SApplication.getAppContext().getResources().getDisplayMetrics().scaledDensity;
         return (int)(spValue * fontScale + 0.5F);
     }
 
