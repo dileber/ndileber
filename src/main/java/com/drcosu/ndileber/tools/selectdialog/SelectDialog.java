@@ -171,7 +171,7 @@ public class SelectDialog<T extends SelectModel> extends BaseNoticeWindow implem
         }
         //头部标题TextView
         LayoutParams titleParams = new LayoutParams(
-                LayoutParams.MATCH_PARENT, UUi.dip2px(mContext, 44));
+                LayoutParams.MATCH_PARENT, UUi.dip2px(44));
         TextView titleTextView = new TextView(mContext);
         titleTextView.setLayoutParams(titleParams);
         titleTextView.setBackgroundColor(getColor(R.color.dileber_topbar));
@@ -184,8 +184,8 @@ public class SelectDialog<T extends SelectModel> extends BaseNoticeWindow implem
         LinearLayout layout = new LinearLayout(mContext);
         LayoutParams layoutParams = new LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        layoutParams.leftMargin = UUi.dip2px(mContext, 50);
-        layoutParams.rightMargin = UUi.dip2px(mContext, 50);
+        layoutParams.leftMargin = UUi.dip2px(50);
+        layoutParams.rightMargin = UUi.dip2px( 50);
         layout.setLayoutParams(layoutParams);
         layout.setGravity(Gravity.CENTER);
         layout.setOrientation(LinearLayout.VERTICAL);
@@ -195,9 +195,9 @@ public class SelectDialog<T extends SelectModel> extends BaseNoticeWindow implem
 
         //button的属性
         LayoutParams btnParams = new LayoutParams(
-                LayoutParams.MATCH_PARENT, UUi.dip2px(mContext,44));
-        btnParams.leftMargin = UUi.dip2px(mContext, 15);
-        btnParams.rightMargin = UUi.dip2px(mContext, 15);
+                LayoutParams.MATCH_PARENT, UUi.dip2px(44));
+        btnParams.leftMargin = UUi.dip2px( 15);
+        btnParams.rightMargin = UUi.dip2px( 15);
 
         //主Layout
         LinearLayout mainLayout = new LinearLayout(mContext);
@@ -212,9 +212,9 @@ public class SelectDialog<T extends SelectModel> extends BaseNoticeWindow implem
 
         //textView的属性
         LayoutParams textParams = new LayoutParams(
-                LayoutParams.MATCH_PARENT, UUi.dip2px(mContext,1));
-        textParams.leftMargin = UUi.dip2px(mContext, 15);
-        textParams.rightMargin = UUi.dip2px(mContext, 15);
+                LayoutParams.MATCH_PARENT, UUi.dip2px(1));
+        textParams.leftMargin = UUi.dip2px( 15);
+        textParams.rightMargin = UUi.dip2px( 15);
 
         int size = mDataList.size();
         for (int i = 0; i < size + 1; i++) {
