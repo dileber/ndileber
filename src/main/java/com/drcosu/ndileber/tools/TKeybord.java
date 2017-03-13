@@ -95,6 +95,8 @@ public class TKeybord {
 //    }
 
     /**
+     *
+     * 在使用完调用
      * Fix for https://code.google.com/p/android/issues/detail?id=171190 .
      *
      * When a view that has focus gets detached, we wait for the main thread to be idle and then

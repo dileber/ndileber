@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.drcosu.ndileber.app.ActivityManager;
 import com.drcosu.ndileber.app.SApplication;
+import com.drcosu.ndileber.tools.TKeybord;
 import com.drcosu.ndileber.tools.UUi;
 import com.drcosu.ndileber.tools.annotation.CheckKeyboard;
 import com.drcosu.ndileber.tools.annotation.CloseStatusBar;
@@ -154,6 +155,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 decorView.getViewTreeObserver().removeGlobalOnLayoutListener(check_onGloba);
             }
         }
+        TKeybord.fixFocusedViewLeak(this.getApplication());
         /**
          * 将activity从栈中弹出
          */
