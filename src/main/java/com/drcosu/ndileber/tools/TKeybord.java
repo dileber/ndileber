@@ -15,6 +15,7 @@ import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.drcosu.ndileber.app.SApplication;
 import com.orhanobut.logger.Logger;
 
 import java.lang.reflect.Field;
@@ -29,13 +30,22 @@ public class TKeybord {
 
     /**
      * 打开键盘
+     * 废弃，使用 {@link #openKeybord(EditText)}
      * @param mEditText
      * @param mContext
      */
-    public static void openKeybord(EditText mEditText, Context mContext)
-    {
+    @Deprecated
+    public static void openKeybord(EditText mEditText, Context mContext) {
         Logger.d("openKeybord");
-        InputMethodManager imm = (InputMethodManager) mContext
+        openKeybord(mEditText);
+    }
+
+    /**
+     * 打开键盘
+     * @param mEditText
+     */
+    public static void openKeybord(EditText mEditText){
+        InputMethodManager imm = (InputMethodManager) SApplication.getAppContext()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(mEditText, InputMethodManager.RESULT_SHOWN);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,
@@ -44,13 +54,23 @@ public class TKeybord {
 
     /**
      * 关闭软键盘
+     * 废弃，使用 {@link #closeKeybord(EditText)}
      * @param mEditText
      * @param mContext
      */
-    public static void closeKeybord(EditText mEditText, Context mContext)
+    @Deprecated
+    public static void closeKeybord(EditText mEditText, Context mContext) {
+        closeKeybord(mEditText);
+    }
+
+    /**
+     * 关闭软键盘
+     * @param mEditText
+     */
+    public static void closeKeybord(EditText mEditText)
     {
         Logger.d("closeKeybord");
-        InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) SApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
     }
 
