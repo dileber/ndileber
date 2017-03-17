@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 
 import com.drcosu.ndileber.tools.AndroidCrash;
+import com.drcosu.ndileber.tools.TKeybord;
 import com.drcosu.ndileber.tools.annotation.SFontdType;
 import com.drcosu.ndileber.tools.net.RetCallback;
 import com.drcosu.ndileber.tools.storage.UStorage;
@@ -87,6 +88,7 @@ public abstract class SApplication extends Application{
 	public void quit(){
 		Logger.i("退出整个app");
 		ThreadExecutor.getInstance().stop();
+		TKeybord.fixFocusedViewLeak(this);
 	}
 
 

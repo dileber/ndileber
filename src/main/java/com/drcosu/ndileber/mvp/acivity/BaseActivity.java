@@ -155,7 +155,6 @@ public abstract class BaseActivity extends AppCompatActivity {
                 decorView.getViewTreeObserver().removeGlobalOnLayoutListener(check_onGloba);
             }
         }
-        TKeybord.fixFocusedViewLeak(this.getApplication());
         /**
          * 将activity从栈中弹出
          */
