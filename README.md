@@ -44,6 +44,20 @@ mBar.setOnClickItemMenu(new BottomBar.OnClickItemMenu() {
 
 [开发一个好项目：八、创建view][8]
 
+[开发一个好项目：九、android奔溃日记记录系统][9]
+
+[Android 框架Dileber ：一、ActivityManager的使用][10]
+
+[Android 框架Dileber ：二、HPref的使用][11]
+
+[Android 框架Dileber ：四、SelectDialog的使用][12]
+
+[Android 框架Dileber ：三、HJson，HNetwork，HSafe的使用][14]
+
+[android 框架Dileber ：五，提供一套免费使用的图标库，超级棒的工具][13]
+
+
+
 
 
 
@@ -55,3 +69,9 @@ mBar.setOnClickItemMenu(new BottomBar.OnClickItemMenu() {
   [6]: http://blog.csdn.net/s297165331/article/details/53008061
   [7]: http://blog.csdn.net/s297165331/article/details/53008083
   [8]: http://blog.csdn.net/s297165331/article/details/53008096
+  [9]: http://blog.csdn.net/s297165331/article/details/57077261
+  [10]: http://blog.csdn.net/s297165331/article/details/53045048
+  [11]: http://blog.csdn.net/s297165331/article/details/53045055
+  [12]: http://blog.csdn.net/s297165331/article/details/57077342
+  [13]: http://blog.csdn.net/s297165331/article/details/69684454
+  [14]: http://blog.csdn.net/s297165331/article/details/69689390
