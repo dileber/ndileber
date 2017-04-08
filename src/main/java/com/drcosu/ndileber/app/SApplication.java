@@ -24,10 +24,13 @@ public abstract class SApplication extends Application{
 
 	public static Typeface icon_font;
 
+	public static Typeface default_icon_font;
+
 	private static SApplication instance;
 	private static Context context;
 	public static boolean netLog = true;
 	public static boolean crash = false;
+	public static boolean loadDeaultFont = false;
 
 	public abstract void start();
 
@@ -59,6 +62,10 @@ public abstract class SApplication extends Application{
 		if (this.getClass().isAnnotationPresent(SFontdType.class)) {
 			Logger.i("加载字体图标");
 			icon_font = Typeface.createFromAsset(getAssets(), this.getClass().getAnnotation(SFontdType.class).value());
+		}
+
+		if(loadDeaultFont){
+			default_icon_font = Typeface.createFromAsset(getAssets(),"defaultIcomoon.ttf");
 		}
 
 
