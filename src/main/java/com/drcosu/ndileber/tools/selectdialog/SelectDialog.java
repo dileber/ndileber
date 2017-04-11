@@ -164,6 +164,10 @@ public class SelectDialog<T extends SelectModel> extends BaseNoticeWindow implem
         init();
     }
 
+    TextView titleTextView;
+
+    LinearLayout layout;
+
     private void init(){
 
         if (null == mDataList) {
@@ -172,7 +176,7 @@ public class SelectDialog<T extends SelectModel> extends BaseNoticeWindow implem
         //头部标题TextView
         LayoutParams titleParams = new LayoutParams(
                 LayoutParams.MATCH_PARENT, UUi.dip2px(44));
-        TextView titleTextView = new TextView(mContext);
+        titleTextView = new TextView(mContext);
         titleTextView.setLayoutParams(titleParams);
         titleTextView.setBackgroundColor(getColor(R.color.dileber_topbar));
         titleTextView.setTextColor(mTitleTextColor);
@@ -181,7 +185,7 @@ public class SelectDialog<T extends SelectModel> extends BaseNoticeWindow implem
         titleTextView.setGravity(Gravity.CENTER);
 
         //用于添加button和textview的layout
-        LinearLayout layout = new LinearLayout(mContext);
+        layout = new LinearLayout(mContext);
         LayoutParams layoutParams = new LayoutParams(
                 LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         layoutParams.leftMargin = UUi.dip2px(50);
@@ -281,6 +285,13 @@ public class SelectDialog<T extends SelectModel> extends BaseNoticeWindow implem
         });
     }
 
+    /**
+     * 修改完数据刷新
+     */
+    public void refesh(){
+        init();
+    }
+
     public void show(View parent) {
         if (!((Activity) mContext).isFinishing()) {
             this.showAtLocation(parent, Gravity.CENTER, 0, 0);
@@ -310,6 +321,10 @@ public class SelectDialog<T extends SelectModel> extends BaseNoticeWindow implem
         }else{
             return mContext.getResources().getColor(id);
         }
+    }
+
+    public void setTitle(String title){
+        titleTextView.setText(title);
     }
 
     @Override

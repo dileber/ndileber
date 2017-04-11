@@ -34,6 +34,7 @@ public class UToolBar {
 
     }
 
+    @Deprecated
     public UToolBar(int titleId, String titleString, int logoId, int navigateId, boolean isNeedNavigate, int background) {
         this.titleId = titleId;
         this.titleString = titleString;
@@ -83,11 +84,14 @@ public class UToolBar {
         isNeedNavigate = needNavigate;
     }
 
+    @Deprecated
     public int getBackground() {
         return background;
     }
 
+    @Deprecated
     public void setBackground(int background) {
         this.background = background;
     }
+
 }

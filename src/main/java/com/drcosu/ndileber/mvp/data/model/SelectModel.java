@@ -5,7 +5,16 @@ package com.drcosu.ndileber.mvp.data.model;
  */
 public class SelectModel extends SModel{
 
-    private int id;
+    public SelectModel(){
+
+    }
+
+    public SelectModel(int id, String title) {
+        this.id = id;
+        this.title = title;
+    }
+
+    protected int id;
 
     public int getId() {
         return id;
@@ -15,7 +24,7 @@ public class SelectModel extends SModel{
         this.id = id;
     }
 
-    private String title;
+    protected String title;
 
     public void setTitle(String title) {
         this.title = title;
