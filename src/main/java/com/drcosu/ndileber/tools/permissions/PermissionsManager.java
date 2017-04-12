@@ -39,24 +39,54 @@ import java.util.Set;
  * 权限管理类
  * 用法
  *
- * PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
- * @Override
- * public void onGranted() {
- * //				Toast.makeText(MainActivity.this, "All permissions have been granted", Toast.LENGTH_SHORT).show();
- * }
- *
- *  @Override
- * public void onDenied(String permission) {
- * //Toast.makeText(MainActivity.this, "Permission " + permission + " has been denied", Toast.LENGTH_SHORT).show();
- * }
- * });
- *
- * @Override
- * public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
- *  @NonNull int[] grantResults) {
- *  PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
+ @TargetApi(23)
+private void requestPermissions() {
+PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
+@Override
+public void onGranted() {
+//toast("权限OK",Toast.LENGTH_SHORT);
+}
+@Override
+public void onDenied(String permission) {
+UUi.toast(MainActivity.this,permission+"没有权限，需要用户在设置中添加权限",Toast.LENGTH_SHORT);
+}
+});
+}
+ @Override
+ public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+ @NonNull int[] grantResults) {
+ PermissionsManager.getInstance().notifyPermissionsChange(permissions, grantResults);
  }
 
+ //判断是否有camera权限，如果没有的话，就去授权，有的话就直接去页面
+ boolean hasPermission = PermissionsManager.getInstance().hasPermission(
+ this, Manifest.permission.CAMERA);
+ if (hasPermission == false) {//没有授权成功
+ grantLoactionPermissons();//去授权
+ }else{//授权成功去定位
+ IdcardActivity.start(this);
+ }
+
+ 单个权限授权
+
+private void grantLoactionPermissons() {
+        PermissionsManager.getInstance().requestPermissionsIfNecessaryForResult(
+        this, new String[]{Manifest.permission.CAMERA}, new PermissionsResultAction() {
+@Override
+public void onGranted() {
+        IdcardActivity.start(MainActivity.this);
+
+        }
+
+@Override
+public void onDenied(String permission) {
+        UUi.toast(MainActivity.this,permission+"没有权限，需要用户在设置中添加权限",Toast.LENGTH_SHORT);
+        }
+        });
+
+        }
+ *
+ *
  *
  */
 public class PermissionsManager {
