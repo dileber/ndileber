@@ -118,4 +118,29 @@ public abstract class BaseFragment extends Fragment{
      */
     protected abstract void hidden();
 
+    protected OnBaseInteractionListener mBaseListener;
+
+    public interface OnBaseInteractionListener {
+        void onRightButtonString(String str, View.OnClickListener onClickListener);
+        void onTitleName(String title);
+    }
+
+    protected void setRightButton(String str,View.OnClickListener onClickListener) {
+        if (mBaseListener != null) {
+            mBaseListener.onRightButtonString(str,onClickListener);
+        }
+    }
+
+    protected void setTitle(String title){
+        if (mBaseListener != null) {
+            mBaseListener.onTitleName(title);
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mBaseListener = null;
+    }
+
 }
