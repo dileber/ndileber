@@ -25,10 +25,12 @@ public abstract class RetCallback<T> implements Callback<T>{
     public static String networkMsg = "网络请求失败,请检查";
     public static String networkTimeOutMsg = "网络请求超时,请检查";
     public static String networkForbiddenMsg = "用户权限没有";
+    public static String networkSuccessMsg = "网络请求成功";
     public static String parseMsg;
     public static String unknownMsg;
 
     //对应HTTP的状态码
+    private static final int SUCCESS = 200;
     private static final int UNAUTHORIZED = 401;
     private static final int FORBIDDEN = 403;
     private static final int NOT_FOUND = 404;
@@ -58,11 +60,14 @@ public abstract class RetCallback<T> implements Callback<T>{
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
         RetLog.log(call);
-        Logger.d("log"+response.code());
+        if(response.code()==SUCCESS){
+            Logger.d(networkSuccessMsg);
+        }
         if(response.code()== FORBIDDEN){
             Logger.d(networkForbiddenMsg);
             SApplication.getInstance().appForbidden(call,response,this);
         }else{
+            Logger.o(response.body());
             onSuccess(call, response);
         }
     }
