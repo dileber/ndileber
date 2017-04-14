@@ -1,6 +1,7 @@
 package com.drcosu.ndileber.utils;
 
 import android.support.annotation.Nullable;
+import android.widget.TextView;
 
 /**
  * Created by shidawei on 16/6/2.
@@ -21,6 +22,13 @@ public class Check {
             throw new NullPointerException(String.valueOf(errorMessage));
         }
         return reference;
+    }
+
+    public static String checkStringNotEmpty(String str, @Nullable Object errorMessage){
+        if (str == null||str.trim().equals("")) {
+            throw new NullPointerException(String.valueOf(errorMessage));
+        }
+        return str.trim();
     }
 
     public static boolean checkNotNulls(Object ... objects){

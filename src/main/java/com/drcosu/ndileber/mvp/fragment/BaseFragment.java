@@ -121,19 +121,19 @@ public abstract class BaseFragment extends Fragment{
     protected OnBaseInteractionListener mBaseListener;
 
     public interface OnBaseInteractionListener {
-        void onRightButtonString(String str, View.OnClickListener onClickListener);
-        void onTitleName(String title);
+        void onRightButtonString(BaseFragment fragment,String str, View.OnClickListener onClickListener);
+        void onTitleName(BaseFragment fragment,String title);
     }
 
-    protected void setRightButton(String str,View.OnClickListener onClickListener) {
+    protected void setActivityRightButton(BaseFragment fragment,String str,View.OnClickListener onClickListener) {
         if (mBaseListener != null) {
-            mBaseListener.onRightButtonString(str,onClickListener);
+            mBaseListener.onRightButtonString(fragment,str,onClickListener);
         }
     }
 
-    protected void setTitle(String title){
+    protected void setActivityTitle(BaseFragment fragment,String title){
         if (mBaseListener != null) {
-            mBaseListener.onTitleName(title);
+            mBaseListener.onTitleName(fragment,title);
         }
     }
 
