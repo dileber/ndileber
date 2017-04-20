@@ -9,6 +9,7 @@ import com.drcosu.ndileber.tools.UDialog;
 import com.drcosu.ndileber.tools.UUi;
 
 /**
+ * 直接可以使用的默认的Activity
  * Created by shidawei on 2017/4/20.
  */
 
