@@ -49,8 +49,10 @@ public abstract class BaseFragment extends Fragment{
 
     /**
      * 多种情况，可以用绑定的view
+     * 下一版本将会改造
      * @return
      */
+    @Deprecated
     protected abstract View layoutView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 
     /**
