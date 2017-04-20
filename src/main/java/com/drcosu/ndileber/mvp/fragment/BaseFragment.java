@@ -66,6 +66,10 @@ public abstract class BaseFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
+        return initLayout(inflater,container,savedInstanceState);
+    }
+
+    protected View initLayout(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View layout = layoutView(inflater,container,savedInstanceState);
         if(layoutViewId()!=0){
             View view =  inflater.inflate(layoutViewId(), container, false);
@@ -75,7 +79,6 @@ public abstract class BaseFragment extends Fragment{
         }else {
             return null;
         }
-
     }
 
     @Override

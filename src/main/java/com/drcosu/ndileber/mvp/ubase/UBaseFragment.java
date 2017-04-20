@@ -4,7 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.drcosu.ndileber.mvp.fragment.BaseFragment;
 import com.drcosu.ndileber.mvp.presenter.BasePresenter;
@@ -49,6 +51,30 @@ public abstract class UBaseFragment extends BaseFragment implements BView {
         }
     }
 
+    protected abstract boolean retain();
+
+    /**
+     * 过时不用，下一版本将这个方法剔除
+     * @param inflater
+     * @param container
+     * @param savedInstanceState
+     * @return
+     */
+    @Deprecated
+    @Override
+    protected View layoutView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return null;
+    }
+
+    @Override
+    protected View initLayout(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view =  inflater.inflate(layoutViewId(), container, false);
+        if(retain()){
+            setRetainInstance(retain());
+        }
+        return view;
+    }
+
     @Override
     public void dialogOk(String content, DialogLinstener dialogLinstener) {
         UDialog.dialogOk(content, dialogLinstener);
@@ -58,6 +84,8 @@ public abstract class UBaseFragment extends BaseFragment implements BView {
     public Context getActivityContext() {
         return getActivity();
     }
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
