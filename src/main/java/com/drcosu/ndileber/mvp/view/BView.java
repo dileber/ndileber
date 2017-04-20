@@ -39,6 +39,6 @@ public interface BView {
      */
     void dialogOk(String content, final DialogLinstener dialogLinstener);
 
-    @Deprecated
-    Context getContext();
+    Context getActivityContext();
+
 }
