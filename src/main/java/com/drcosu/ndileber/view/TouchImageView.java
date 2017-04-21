@@ -8,6 +8,7 @@ import android.graphics.PointF;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.view.MotionEvent;
@@ -24,7 +25,7 @@ import java.util.TimerTask;
  * 图片缩放控件
  * Created by jing on 2016/8/24.
  */
-public class TouchImageView extends ImageView {
+public class TouchImageView extends AppCompatImageView {
 
     // private static final String TAG = "Touch";
     // These matrices will be used to move and zoom image

@@ -1,6 +1,7 @@
 package com.drcosu.ndileber.view;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
@@ -10,7 +11,7 @@ import android.widget.EditText;
  * 支持多行的editText同时支持imeOptions
  * Created by jing on 2016/8/19.
  */
-public class MultiLineEditText extends EditText{
+public class MultiLineEditText extends AppCompatEditText{
     public MultiLineEditText(Context context) {
         super(context);
     }
