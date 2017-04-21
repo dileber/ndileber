@@ -6,6 +6,9 @@ package com.drcosu.ndileber.mvp.data.model;
  */
 public class SWrapper{
 
+    public static final int SUCCESS = 0;
+    public static final int FAILURE = -1;
+
     public SWrapper() {
     }
 

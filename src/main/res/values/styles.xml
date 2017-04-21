@@ -1,5 +1,8 @@
 <resources>
 
+    <style name="DileberTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:listDivider">@drawable/dileber_divider</item>
+    </style>
 
 <style name="alert_dialog" parent="android:Theme.Dialog">
         <item name="android:windowIsFloating">true</item>
