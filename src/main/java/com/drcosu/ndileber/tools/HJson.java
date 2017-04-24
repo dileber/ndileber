@@ -39,7 +39,7 @@ public class HJson {
             //给GsonBuilder方法单独指定Date类型的反序列化方法
             gson = gsonb.registerTypeAdapter(Date.class, new DateDeserializer())
                     .registerTypeAdapter(Date.class,new DateSerializer())
-                    .setDateFormat(DateFormat.LONG).setLenient()
+                    .setDateFormat(DateFormat.LONG)
                     .create();
 
         }
