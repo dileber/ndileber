@@ -24,7 +24,10 @@ public class SFont extends AppCompatTextView {
     public SFont(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         Typeface typeface = SApplication.icon_font;
-        checkNotNull(typeface,"字体图标为空");
+        //checkNotNull(typeface,"字体图标为空");
+        if(typeface==null){
+            typeface = SApplication.default_icon_font;
+        }
         setTypeface(typeface);
     }
 

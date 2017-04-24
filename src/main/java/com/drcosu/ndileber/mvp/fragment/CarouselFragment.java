@@ -137,7 +137,7 @@ public class CarouselFragment extends BaseFragment{
     List<View> point = null;
     private View point() {
         View view = new View(getActivity());
-        view.setBackground(ContextCompat.getDrawable(getActivity(),R.drawable.grey_solid_round));
+        view.setBackgroundResource(R.drawable.grey_solid_round);
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(8, 8);
         //view.setPadding(5,5,5,5);
         params.setMargins(3, 5, 3, 5);
@@ -160,10 +160,10 @@ public class CarouselFragment extends BaseFragment{
             if(temp.equals(point.get(i))){
                 return;
             }
-            temp.setBackground(ContextCompat.getDrawable(ActivityManager.getCurrentActivity(),R.drawable.grey_solid_round));
+            temp.setBackgroundResource(R.drawable.grey_solid_round);
         }
         temp = point.get(i);
-        temp.setBackground(ContextCompat.getDrawable(ActivityManager.getCurrentActivity(),R.drawable.red_solid_round));
+        temp.setBackgroundResource(R.drawable.red_solid_round);
     }
 
     @Override
