@@ -66,4 +66,28 @@ public class TNum {
         return nf.format(decimal);
     }
 
+    /**
+     *获取小数
+     * @param decimal 数据
+     * @param num 保留几位
+     * @param model 是否要四舍五入
+     * @param keep 不足是否要补0
+     * @return
+     */
+    public static String getDecimal(double decimal,int num,boolean model,boolean keep) {
+        if(num<0){
+            num=0;
+        }
+        String result = getDecimal(decimal, num, model);
+        if(keep&&num>0){
+            String formatStr = "0.";
+            for(int i=0;i<num;i++){
+                formatStr = formatStr + "0";
+            }
+            return new DecimalFormat(formatStr).format(Double.valueOf(result));
+        }else{
+            return result;
+        }
+    }
+
 }
