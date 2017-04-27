@@ -1,6 +1,7 @@
 package com.drcosu.ndileber.mvp.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.SparseArray;
@@ -148,4 +149,13 @@ public abstract class BaseFragment extends Fragment{
         mBaseListener = null;
     }
 
+    public void setOnClickListener(View.OnClickListener listener, @IdRes int... ids) {
+        if (ids == null) {
+            return;
+        }
+        for (int id : ids) {
+            findView(id).setOnClickListener(listener);
+        }
+
+    }
 }

@@ -26,6 +26,7 @@ public class UUi {
      * @param <T>
      * @return
      */
+    @Deprecated
     public static  <T extends View> T getView(Activity activity, SparseArray<View> mViews, int id) {
         T view = (T) mViews.get(id);
         if (view == null) {
@@ -51,6 +52,7 @@ public class UUi {
      * @param listener
      * @param views
      */
+    @Deprecated
     public static void setOnClickListener(View.OnClickListener listener, View... views) {
         if (views == null) {
             return;

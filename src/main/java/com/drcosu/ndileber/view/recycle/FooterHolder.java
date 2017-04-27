@@ -35,7 +35,6 @@ public class FooterHolder extends DileberHolder {
                     break;
                 case Loading:
                     foot_progress.setVisibility(View.VISIBLE);
-
                     foot_text.setText(R.string.foot_loading);
                     break;
                 case End:
