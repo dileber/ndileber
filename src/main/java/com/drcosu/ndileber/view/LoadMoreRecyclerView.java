@@ -20,9 +20,12 @@ import com.drcosu.ndileber.R;
 /**
  * 支持上拉加载更多的
  *
+ * 没必要重新写view，直接使用linster 和 adapter就够了 ,这个没用了 over
+ *
  * @author 紫韶
  * @version $$Id: LoadMoreRecyclerView.java, v 0.1 11/17/15 10:07 alicx Exp $$
  */
+@Deprecated
 public class LoadMoreRecyclerView extends RecyclerView {
     /**
      * item 类型

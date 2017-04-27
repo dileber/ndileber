@@ -3,16 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/global_bg"
+    android:id="@+id/foot_layout"
     android:gravity="center"
     android:orientation="horizontal"
     android:padding="10dp" >
 
     <ProgressBar
+        android:id="@+id/foot_progress"
         android:layout_width="25dp"
         android:layout_height="25dp" >
     </ProgressBar>
 
     <TextView
+        android:id="@+id/foot_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"

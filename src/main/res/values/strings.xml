@@ -12,6 +12,10 @@
     <string name="dialog_success">成功</string>
     <string name="dialog_warning">警告</string>
     <string name="loading">加载中...</string>
+    <string name="foot_loading">加载中...</string>
+    <string name="foot_normal">下拉加载</string>
+    <string name="foot_end">已经到底了</string>
+    <string name="foot_networkerror">网络错误，请重新加载</string>
 
     <string name="dileber_unknow_size">未知大小</string>
 
