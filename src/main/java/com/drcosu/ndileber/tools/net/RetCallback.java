@@ -1,10 +1,15 @@
 package com.drcosu.ndileber.tools.net;
 
 import android.net.Network;
+import android.net.ParseException;
 
 import com.drcosu.ndileber.app.SApplication;
 import com.drcosu.ndileber.tools.UDialog;
+import com.google.gson.JsonParseException;
 import com.orhanobut.logger.Logger;
+
+import org.json.JSONException;
+
 import java.net.ConnectException;
 import java.net.HttpRetryException;
 import java.net.SocketTimeoutException;
@@ -124,19 +129,21 @@ public abstract class RetCallback<T> implements Callback<T>{
                 //UDialog.alert(UDialog.DIALOG_ERROR,networkMsg).show();
             Logger.d(networkMsg);
             failure(call,new NetWorkException(networkMsg));
-            return;
-        }
-//        if (e instanceof HttpRetryException) {
-//            Logger.d("错误代码"+((HttpRetryException)e).responseCode());
-//        }
-        if(e instanceof SocketTimeoutException){
+        } else if(e instanceof SocketTimeoutException){
             //UDialog.alert(UDialog.DIALOG_ERROR,networkTimeOutMsg).show();
             Logger.d(networkTimeOutMsg);
             failure(call,new NetWorkException(networkTimeOutMsg));
-            return;
+        }else{
+            Logger.e(e,"网络错误");
+            failure(call,e);
         }
-        Logger.e(e,"网络错误");
-        failure(call,e);
+
+
+//        if (e instanceof HttpRetryException) {
+//            Logger.d("错误代码"+((HttpRetryException)e).responseCode());
+//        }
+
+
 
 //        Throwable t = throwable;
 //        while (t != null) {
