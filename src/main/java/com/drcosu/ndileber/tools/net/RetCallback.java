@@ -60,38 +60,101 @@ public abstract class RetCallback<T> implements Callback<T>{
     @Override
     public void onResponse(Call<T> call, Response<T> response) {
         RetLog.log(call);
-        if(response.code()==SUCCESS){
-            Logger.d(networkSuccessMsg);
+        switch (response.code()){
+            case SUCCESS:
+                Logger.d(networkSuccessMsg);
+                Logger.o(response.body());
+                onSuccess(call, response);
+                break;
+            case NOT_FOUND:
+                failure(call,new NetWorkException(NOT_FOUND,"没有找到该资源"));
+                break;
+            case REQUEST_TIMEOUT:
+                failure(call,new NetWorkException(REQUEST_TIMEOUT,"请求超时"));
+                break;
+            case INTERNAL_SERVER_ERROR:
+                failure(call,new NetWorkException(INTERNAL_SERVER_ERROR,"服务器内部错误"));
+                break;
+            case BAD_GATEWAY:
+                failure(call,new NetWorkException(BAD_GATEWAY,"网关错误"));
+                break;
+            case SERVICE_UNAVAILABLE:
+                failure(call,new NetWorkException(SERVICE_UNAVAILABLE,"服务不可用"));
+                break;
+            case GATEWAY_TIMEOUT:
+                failure(call,new NetWorkException(GATEWAY_TIMEOUT,"网关超时"));
+                break;
+            case UNAUTHORIZED:
+                failure(call,new NetWorkException(UNAUTHORIZED,"身份验证未验证"));
+                break;
+            case FORBIDDEN:
+                Logger.d(networkForbiddenMsg);
+                failure(call,new NetWorkException(FORBIDDEN,"服务器没有授权"));
+                SApplication.getInstance().appForbidden(call,response,this);
+                break;
+            default:
+                failure(call,new NetWorkException(response.code(),"服务器返回失败"));
+
         }
-        if(response.code()== FORBIDDEN){
-            Logger.d(networkForbiddenMsg);
-            SApplication.getInstance().appForbidden(call,response,this);
-        }else{
-            Logger.o(response.body());
-            onSuccess(call, response);
-        }
+
+//        if(response.code()==SUCCESS){
+//            Logger.d(networkSuccessMsg);
+//        }
+//        if(response.code()== FORBIDDEN){
+//            Logger.d(networkForbiddenMsg);
+//            SApplication.getInstance().appForbidden(call,response,this);
+//        }else{
+//            Logger.o(response.body());
+//            onSuccess(call, response);
+//        }
     }
 
     @Override
-    public void onFailure(Call<T> call, Throwable throwable) {
+    public void onFailure(Call<T> call, Throwable e) {
         RetLog.log(call);
-        Throwable t = throwable;
-        while (t != null) {
-            if (t instanceof ConnectException) {
-                UDialog.alert(UDialog.DIALOG_ERROR,networkMsg).show();
-                Logger.d(networkMsg);
-            }
-            if (t instanceof HttpRetryException) {
-                Logger.d("错误代码"+((HttpRetryException)t).responseCode());
-            }
-            if(t instanceof SocketTimeoutException){
-                UDialog.alert(UDialog.DIALOG_ERROR,networkTimeOutMsg).show();
-                Logger.d(networkTimeOutMsg);
-            }
-            t = t.getCause();
+
+        Throwable throwable = e;
+        //获取最根源的异常
+        while(throwable.getCause() != null){
+            e = throwable;
+            throwable = throwable.getCause();
         }
-        Logger.e(throwable,"网络错误");
-        failure(call,throwable);
+
+        if (e instanceof ConnectException) {
+                //UDialog.alert(UDialog.DIALOG_ERROR,networkMsg).show();
+            Logger.d(networkMsg);
+            failure(call,new NetWorkException(networkMsg));
+            return;
+        }
+//        if (e instanceof HttpRetryException) {
+//            Logger.d("错误代码"+((HttpRetryException)e).responseCode());
+//        }
+        if(e instanceof SocketTimeoutException){
+            //UDialog.alert(UDialog.DIALOG_ERROR,networkTimeOutMsg).show();
+            Logger.d(networkTimeOutMsg);
+            failure(call,new NetWorkException(networkTimeOutMsg));
+            return;
+        }
+        Logger.e(e,"网络错误");
+        failure(call,e);
+
+//        Throwable t = throwable;
+//        while (t != null) {
+//            if (t instanceof ConnectException) {
+//                UDialog.alert(UDialog.DIALOG_ERROR,networkMsg).show();
+//                Logger.d(networkMsg);
+//            }
+//            if (t instanceof HttpRetryException) {
+//                Logger.d("错误代码"+((HttpRetryException)t).responseCode());
+//            }
+//            if(t instanceof SocketTimeoutException){
+//                UDialog.alert(UDialog.DIALOG_ERROR,networkTimeOutMsg).show();
+//                Logger.d(networkTimeOutMsg);
+//            }
+//            t = t.getCause();
+//        }
+//        Logger.e(throwable,"网络错误");
+//        failure(call,throwable);
     }
 
     public void log(Call<T> call){
