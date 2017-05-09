@@ -2,6 +2,7 @@ package com.drcosu.ndileber.tools.net;
 
 import android.net.Network;
 import android.net.ParseException;
+import android.util.Log;
 
 import com.drcosu.ndileber.app.SApplication;
 import com.drcosu.ndileber.tools.UDialog;
@@ -118,25 +119,31 @@ public abstract class RetCallback<T> implements Callback<T>{
     public void onFailure(Call<T> call, Throwable e) {
         RetLog.log(call);
 
-        Throwable throwable = e;
-        //获取最根源的异常
-        while(throwable.getCause() != null){
-            e = throwable;
-            throwable = throwable.getCause();
+        if (call.isCanceled()) {
+            Logger.sl(Log.DEBUG, "request is canceled");
+        } else {
+            Throwable throwable = e;
+            //获取最根源的异常
+            while(throwable.getCause() != null){
+                e = throwable;
+                throwable = throwable.getCause();
+            }
+
+            if (e instanceof ConnectException) {
+                //UDialog.alert(UDialog.DIALOG_ERROR,networkMsg).show();
+                Logger.d(networkMsg);
+                failure(call,new NetWorkException(networkMsg));
+            } else if(e instanceof SocketTimeoutException){
+                //UDialog.alert(UDialog.DIALOG_ERROR,networkTimeOutMsg).show();
+                Logger.d(networkTimeOutMsg);
+                failure(call,new NetWorkException(networkTimeOutMsg));
+            }else{
+                Logger.e(e,"网络错误");
+                failure(call,e);
+            }
         }
 
-        if (e instanceof ConnectException) {
-                //UDialog.alert(UDialog.DIALOG_ERROR,networkMsg).show();
-            Logger.d(networkMsg);
-            failure(call,new NetWorkException(networkMsg));
-        } else if(e instanceof SocketTimeoutException){
-            //UDialog.alert(UDialog.DIALOG_ERROR,networkTimeOutMsg).show();
-            Logger.d(networkTimeOutMsg);
-            failure(call,new NetWorkException(networkTimeOutMsg));
-        }else{
-            Logger.e(e,"网络错误");
-            failure(call,e);
-        }
+
 
 
 //        if (e instanceof HttpRetryException) {
