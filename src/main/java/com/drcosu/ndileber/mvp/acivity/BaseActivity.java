@@ -33,6 +33,7 @@ import com.drcosu.ndileber.tools.annotation.CheckKeyboard;
 import com.drcosu.ndileber.tools.annotation.CloseStatusBar;
 import com.drcosu.ndileber.tools.annotation.CloseTitle;
 import com.drcosu.ndileber.tools.annotation.HideKeyboard;
+import com.drcosu.ndileber.tools.net.RetManager;
 import com.drcosu.ndileber.utils.UToolBar;
 import com.orhanobut.logger.Logger;
 
@@ -159,6 +160,7 @@ public abstract class BaseActivity extends AppCompatActivity {
          * 将activity从栈中弹出
          */
         activityManager.popActivity(this);
+        RetManager.getInstance().clearRequest(this);
 
     }
 
