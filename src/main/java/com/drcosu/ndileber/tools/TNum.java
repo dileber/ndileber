@@ -80,14 +80,33 @@ public class TNum {
         }
         String result = getDecimal(decimal, num, model);
         if(keep&&num>0){
-            String formatStr = "0.";
-            for(int i=0;i<num;i++){
-                formatStr = formatStr + "0";
-            }
-            return new DecimalFormat(formatStr).format(Double.valueOf(result));
+//            String formatStr = "0.";
+//            for(int i=0;i<num;i++){
+//                formatStr = formatStr + "0";
+//            }
+
+            return new DecimalFormat(decimalFormat(num,keep)).format(Double.valueOf(result));
         }else{
             return result;
         }
+    }
+
+    public static String decimalFormat(int point,boolean keep){
+        String start = "#############0";
+        StringBuilder end = new StringBuilder(".");
+        boolean first = false;
+        for(int i=0;i<point;i++){
+            first = true;
+            if(keep){
+                end.append(mKeep);
+            }else{
+                end.append(noKeep);
+            }
+        }
+        if(first){
+            return start+end.toString();
+        }
+        return start;
     }
 
 }
