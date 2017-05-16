@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.annotation.ColorInt;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -222,6 +223,17 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    public void setStyle(@ColorInt int color){
+        toolbar.setBackgroundColor(color);
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            Window window = getWindow();
+            window.setStatusBarColor(color);
+            //底部导航栏
+            //window.setNavigationBarColor(color);
+        }
+
     }
 
     public void onNavigateUpClicked() {

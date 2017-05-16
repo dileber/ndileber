@@ -1,5 +1,7 @@
 package com.drcosu.ndileber.utils;
 
+import android.support.annotation.ColorInt;
+
 import com.drcosu.ndileber.R;
 
 /**
@@ -84,13 +86,11 @@ public class UToolBar {
         isNeedNavigate = needNavigate;
     }
 
-    @Deprecated
     public int getBackground() {
         return background;
     }
 
-    @Deprecated
-    public void setBackground(int background) {
+    public void setBackground(@ColorInt int background) {
         this.background = background;
     }
 
