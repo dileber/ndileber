@@ -17,6 +17,6 @@ public abstract class DileberAdapter <VH extends DileberHolder> extends Recycler
         holder.load();
     }
 
-    public abstract void addViewHolderData(VH holder, int position);
+    protected abstract void addViewHolderData(VH holder, int position);
 
 }
