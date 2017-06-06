@@ -31,7 +31,7 @@ public abstract class UBaseFragment extends BaseFragment implements BView {
 
     @Override
     public void showAlert(Integer type, String message) {
-        UDialog.alert(type,message).show();
+        UDialog.alert(getActivity(),type,message).show();
     }
 
     Dialog dialog;
@@ -39,7 +39,7 @@ public abstract class UBaseFragment extends BaseFragment implements BView {
     @Override
     public void loading() {
         if(dialog==null){
-            dialog =UDialog.loading();
+            dialog =UDialog.loading(getActivity());
         }
         dialog.show();
     }
@@ -117,6 +117,14 @@ public abstract class UBaseFragment extends BaseFragment implements BView {
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnBaseInteractionListener) {
+            mBaseListener = (OnBaseInteractionListener) context;
+        }
     }
 
 }

@@ -23,7 +23,7 @@ public abstract class UBaseActivity extends BaseActivity implements BView {
 
     @Override
     public void showAlert(Integer type, String message) {
-        UDialog.alert(type,message).show();
+        UDialog.alert(this,type,message).show();
     }
 
     Dialog dialog;

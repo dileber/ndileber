@@ -2,6 +2,7 @@ package com.drcosu.ndileber.tools;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 
 import com.drcosu.ndileber.R;
 import com.drcosu.ndileber.app.ActivityManager;
@@ -18,9 +19,7 @@ public class UDialog {
     public static final int DIALOG_SUCCESS = 2;
     public static final int DIALOG_NORMAL = 3;
     public static final int DIALOG_WARNING = 4;
-
-    public static Dialog alert(Integer type,String message){
-        Activity activity = ActivityManager.getCurrentActivity();
+    public static Dialog alert(Context activity,Integer type,String message){
         SweetAlertDialog alertDialog = new SweetAlertDialog(activity);
         if(type==null){
             type = DIALOG_NORMAL;
@@ -49,17 +48,25 @@ public class UDialog {
         return alertDialog;
     }
 
+    public static Dialog alert(Integer type,String message){
+        Activity activity = ActivityManager.getCurrentActivity();
+        return alert(activity,type,message);
+    }
 
+
+    public static Dialog loading(Context context){
+        Dialog loadalert = new SweetAlertDialog(context);
+        ((SweetAlertDialog)loadalert).changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
+        ((SweetAlertDialog)loadalert).setTitleText(context.getResources().getString(R.string.LOADING));
+        //loadalert.show();
+        loadalert.setCancelable(false);
+        ((SweetAlertDialog)loadalert).getProgressHelper().setBarColor(context.getResources().getColor(R.color.blue_btn_bg_color));
+        return loadalert;
+    }
 
     public static Dialog loading(){
         Activity activity = ActivityManager.getCurrentActivity();
-        Dialog loadalert = new SweetAlertDialog(activity);
-        ((SweetAlertDialog)loadalert).changeAlertType(SweetAlertDialog.PROGRESS_TYPE);
-        ((SweetAlertDialog)loadalert).setTitleText(activity.getResources().getString(R.string.LOADING));
-        //loadalert.show();
-        loadalert.setCancelable(false);
-        ((SweetAlertDialog)loadalert).getProgressHelper().setBarColor(activity.getResources().getColor(R.color.blue_btn_bg_color));
-        return loadalert;
+        return loading(activity);
     }
 
     public static Dialog dialogOk(String content, final DialogLinstener dialogLinstener){
