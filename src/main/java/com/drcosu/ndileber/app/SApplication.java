@@ -8,10 +8,13 @@ import android.graphics.Typeface;
 import com.drcosu.ndileber.tools.AndroidCrash;
 import com.drcosu.ndileber.tools.TKeybord;
 import com.drcosu.ndileber.tools.UImagePipelineConfig;
+import com.drcosu.ndileber.tools.okhttp.UOkHttp;
 import com.drcosu.ndileber.tools.annotation.SFontdType;
 import com.drcosu.ndileber.tools.net.RetCallback;
 import com.drcosu.ndileber.tools.storage.UStorage;
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.orhanobut.logger.Logger;
 
 import retrofit2.Call;
@@ -53,9 +56,7 @@ public abstract class SApplication extends Application{
 		if(crash){
 			AndroidCrash.getInstance();
 		}
-
-
-		Fresco.initialize(context);
+		Fresco.initialize(context, UImagePipelineConfig.getOkHttpCacheConfig(this));
 		/**
 		 * 字体图标注解
 		 */

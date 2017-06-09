@@ -17,7 +17,7 @@ import com.drcosu.ndileber.tools.UUi;
 import com.orhanobut.logger.Logger;
 
 /**
- * 直接可以使用的默认的fragment
+ * 直接可以使用的默认的fragment 使用UBaseFragment 必须使用 UBaseActivity或者继承 BaseActivity 实现 BView
  * Created by shidawei on 2017/4/20.
  */
 
@@ -26,28 +26,43 @@ public abstract class UBaseFragment extends BaseFragment implements BView {
 
     @Override
     public void toast(String msg, int duration) {
-        UUi.toast(getActivity(),msg,duration);
+        if(getActivity() instanceof BView){
+            ((BView)getActivity()).toast(msg, duration);
+        }
+        //UUi.toast(getActivity(),msg,duration);
     }
+
+    //Dialog alert;
 
     @Override
     public void showAlert(Integer type, String message) {
-        UDialog.alert(getActivity(),type,message).show();
+        if(getActivity() instanceof BView){
+            ((BView)getActivity()).showAlert(type, message);
+        }
+//        alert = UDialog.alert(getActivity(),type,message);
+//        alert.show();
     }
 
-    Dialog dialog;
+//    Dialog dialog;
 
     @Override
     public void loading() {
-        if(dialog==null){
-            dialog =UDialog.loading(getActivity());
+//        if(dialog==null){
+//            dialog =UDialog.loading(getActivity());
+//        }
+//        dialog.show();
+        if(getActivity() instanceof BView){
+            ((BView)getActivity()).loading();
         }
-        dialog.show();
     }
 
     @Override
     public void loadDialogDismiss() {
-        if(dialog!=null){
-            dialog.dismiss();
+//        if(dialog!=null){
+//            dialog.dismiss();
+//        }
+        if(getActivity() instanceof BView){
+            ((BView)getActivity()).loadDialogDismiss();
         }
     }
 
@@ -75,9 +90,15 @@ public abstract class UBaseFragment extends BaseFragment implements BView {
         return view;
     }
 
+//    Dialog dialogok;
+
     @Override
     public void dialogOk(String content, DialogLinstener dialogLinstener) {
-        UDialog.dialogOk(content, dialogLinstener);
+//        dialogok = UDialog.dialogOk(content, dialogLinstener);
+//        dialogok.show();
+        if(getActivity() instanceof BView){
+            ((BView)getActivity()).dialogOk(content, dialogLinstener);
+        }
     }
 
     @Override
@@ -101,9 +122,15 @@ public abstract class UBaseFragment extends BaseFragment implements BView {
         if(presenter!=null){
             presenter.onDestroy();
         }
-        if(dialog!=null){
-            dialog.dismiss();
-        }
+//        if(dialog!=null){
+//            dialog.dismiss();
+//        }
+//        if(alert!=null){
+//            alert.dismiss();
+//        }
+//        if(dialogok!=null){
+//            dialogok.dismiss();
+//        }
     }
 
     /**
@@ -127,4 +154,8 @@ public abstract class UBaseFragment extends BaseFragment implements BView {
         }
     }
 
+    @Override
+    public void finishActivity() {
+        getActivity().finish();
+    }
 }

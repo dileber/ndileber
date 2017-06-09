@@ -41,4 +41,6 @@ public interface BView {
 
     Context getActivityContext();
 
+    void finishActivity();
+
 }

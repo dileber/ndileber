@@ -21,9 +21,12 @@ public abstract class UBaseActivity extends BaseActivity implements BView {
         UUi.toast(this,msg,duration);
     }
 
+    Dialog alert;
+
     @Override
     public void showAlert(Integer type, String message) {
-        UDialog.alert(this,type,message).show();
+        alert = UDialog.alert(this,type,message);
+        alert.show();
     }
 
     Dialog dialog;
@@ -43,9 +46,12 @@ public abstract class UBaseActivity extends BaseActivity implements BView {
         }
     }
 
+    Dialog dialogok;
+
     @Override
     public void dialogOk(String content, DialogLinstener dialogLinstener) {
-        UDialog.dialogOk(content,dialogLinstener).show();
+        dialogok = UDialog.dialogOk(content,dialogLinstener);
+        dialogok.show();
     }
 
     @Override
@@ -59,6 +65,16 @@ public abstract class UBaseActivity extends BaseActivity implements BView {
         if(dialog!=null){
             dialog.dismiss();
         }
+        if(alert!=null){
+            alert.dismiss();
+        }
+        if(dialogok!=null){
+            dialogok.dismiss();
+        }
+    }
 
+    @Override
+    public void finishActivity() {
+        this.finish();
     }
 }

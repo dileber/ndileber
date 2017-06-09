@@ -42,6 +42,8 @@ dependencies {
     //compile 'com.squareup.okhttp3:okhttp:3.0.0-RC1'
     compile 'com.squareup.okhttp3:okhttp:3.7.0'
 
+    compile "com.facebook.fresco:imagepipeline-okhttp3:0.12.0+"
+
     compile ('com.squareup.retrofit2:converter-gson:2.2.0') {
         exclude group: 'com.squareup.okhttp3', module: 'okhttp'
     }
