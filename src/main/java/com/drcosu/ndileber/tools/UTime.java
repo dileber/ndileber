@@ -1,5 +1,7 @@
 package com.drcosu.ndileber.tools;
 
+import android.util.SparseArray;
+
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -465,6 +467,59 @@ public class UTime {
             sb.append(second).append("秒");
         }
         return sb.toString();
+    }
+
+    public enum Week{
+        XINQI("星期"),ZHOU("周");
+        String t;
+        Week(String t){
+            this.t = t;
+        }
+
+        public String getS() {
+            return t;
+        }
+    }
+
+    /**
+     * 取指定日期为星期几
+     * @param time 指定日期
+     * @return
+     */
+    public static String getWeekNumber(Week type,Date time) {
+        String week = "日";
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(time);
+        int intTemp = calendar.get(Calendar.DAY_OF_WEEK) - 1;
+        return getWeekNumber(type,intTemp);
+    }
+
+    public static String getWeekNumber(Week type,int day) {
+        String week = "日";
+        switch (day){
+            case 0:
+                week = "日";
+                break;
+            case 1:
+                week = "一";
+                break;
+            case 2:
+                week = "二";
+                break;
+            case 3:
+                week = "三";
+                break;
+            case 4:
+                week = "四";
+                break;
+            case 5:
+                week = "五";
+                break;
+            case 6:
+                week = "六";
+                break;
+        }
+        return type.getS()+week;
     }
 
 }
