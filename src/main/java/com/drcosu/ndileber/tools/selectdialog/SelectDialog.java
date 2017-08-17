@@ -26,37 +26,37 @@ import java.util.List;
  * 选择弹框
  *
  * ここは使いかだ
- final List<String> list = new ArrayList<String>();
- list.add("美女你好");
- list.add("帅哥你好");
- list.add("世界你好");
+ final List<SelectModel> list = new ArrayList<>();
+ SelectModel clear = new SelectModel(0,context.getString(R.string.clear_message));
+ list.add(clear);
  //构造实例化选择弹窗
- SelectDialog chooseDialog = new SelectDialog.Builder(MainActivity.this)
+ SelectDialog<SelectModel> chooseDialog = new SelectDialog.Builder<SelectModel>(context)
  .setDataList(list)
- .setButtonColor(getResources().getColor(R.color.text_10))
+ .setButtonColor(ContextCompat.getColor(context,R.color.colorPrimary))
  .setButtonSize(14)
  .setLastButtonSize(14)
- .setTitleText("编辑选择")
+ .setTitleText(context.getString(R.string.delete_message))
  .build();
  //对选择弹窗item点击事件监听
  chooseDialog.setButtonListener(new BaseNoticeWindow.OnButtonListener() {
 @Override
-public void onSureListener(View v) {
-mShowTextView.setText(list.get((Integer) v.getTag()));
+public void onSureListener(View v, SelectModel selectModel) {
+
 }
+
 @Override
 public void onDiscardListener(View v) {
 
 }
+
 @Override
 public void onDismissListener(View v, int nType) {
 
 }
 });
- chooseDialog.show(mShowTextView);
-
+ chooseDialog.show(itemView);
  *
- * Created by liuhongxia on 2016/05/30
+ * Created by wangergou on 2016/05/30
  */
 
 public class SelectDialog<T extends SelectModel> extends BaseNoticeWindow implements OnClickListener {
