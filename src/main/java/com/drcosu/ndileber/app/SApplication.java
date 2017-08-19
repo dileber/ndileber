@@ -8,14 +8,11 @@ import android.graphics.Typeface;
 import com.drcosu.ndileber.tools.AndroidCrash;
 import com.drcosu.ndileber.tools.TKeybord;
 import com.drcosu.ndileber.tools.UImagePipelineConfig;
-import com.drcosu.ndileber.tools.okhttp.UOkHttp;
 import com.drcosu.ndileber.tools.annotation.SFontdType;
+import com.drcosu.ndileber.tools.log.ULog;;
 import com.drcosu.ndileber.tools.net.RetCallback;
 import com.drcosu.ndileber.tools.storage.UStorage;
 import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
-import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.orhanobut.logger.Logger;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -28,14 +25,10 @@ public abstract class SApplication extends Application{
 	public static Typeface icon_font;
 
 	public static Typeface default_icon_font;
-
+	public static boolean netLog = true;
 	private static SApplication instance;
 	private static Context context;
-	public static boolean netLog = true;
-	public static boolean crash = false;
 	public static boolean loadDeaultFont = false;
-
-	public abstract void start();
 
 	@Override
 	public void onCreate() {
@@ -46,22 +39,14 @@ public abstract class SApplication extends Application{
 		instance = this;
 		context = instance.getApplicationContext();
 
-		UStorage.init(this,null);
-		start();
-		buglog();
+		Initializer.init(this);
 
-		/**
-		 * android 崩溃记录
-		 */
-		if(crash){
-			AndroidCrash.getInstance();
-		}
-		Fresco.initialize(context, UImagePipelineConfig.getOkHttpCacheConfig(this));
+
 		/**
 		 * 字体图标注解
 		 */
 		if (this.getClass().isAnnotationPresent(SFontdType.class)) {
-			Logger.i("加载字体图标");
+			ULog.i("加载字体图标");
 			icon_font = Typeface.createFromAsset(getAssets(), this.getClass().getAnnotation(SFontdType.class).value());
 		}
 
@@ -85,17 +70,10 @@ public abstract class SApplication extends Application{
 	}
 
 	/**
-	 * 输出log 日志
-	 */
-	protected void buglog(){
-		Logger.init(BaseConfiger.BUG_NAME,BaseConfiger.BUG_STATIC);
-	}
-
-	/**
 	 * 退出整个app
 	 */
 	public void quit(){
-		Logger.i("退出整个app");
+		ULog.i("退出整个app");
 		ThreadExecutor.getInstance().stop();
 		TKeybord.fixFocusedViewLeak(this);
 	}

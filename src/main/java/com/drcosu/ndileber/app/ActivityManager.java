@@ -1,11 +1,9 @@
 package com.drcosu.ndileber.app;
 
 import android.app.Activity;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.lang.ref.WeakReference;
 import java.util.Map;
@@ -124,7 +122,7 @@ public class ActivityManager {
     {
         //if(!activity.isChangingConfigurations()){
             activityStack.add(activity);
-            Logger.i("来自: "+getName()+" "+activity.getComponentName().getShortClassName()+" 入栈");
+            ULog.i("来自: "+getName()+" "+activity.getComponentName().getShortClassName()+" 入栈");
         //}
     }
 
@@ -139,7 +137,7 @@ public class ActivityManager {
         if (activity != null)
         {
             activityStack.remove(activity);
-            Logger.i("来自: "+getName()+" "+activity.getComponentName().getShortClassName()+" 出栈");
+            ULog.i("来自: "+getName()+" "+activity.getComponentName().getShortClassName()+" 出栈");
             if(!activity.isChangingConfigurations()){
                 activity.finish();
                 activity = null;
@@ -174,7 +172,7 @@ public class ActivityManager {
                 activity = null;
             }else {
                 if(getName().equals(BASE))
-                    Logger.i("app 退出");
+                    ULog.i("app 退出");
                 break;
             }
         }

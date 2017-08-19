@@ -1,6 +1,5 @@
 package com.drcosu.ndileber.tools;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -16,7 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.drcosu.ndileber.app.SApplication;
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -36,7 +35,7 @@ public class TKeybord {
      */
     @Deprecated
     public static void openKeybord(EditText mEditText, Context mContext) {
-        Logger.d("openKeybord");
+        ULog.d("openKeybord");
         openKeybord(mEditText);
     }
 
@@ -69,7 +68,7 @@ public class TKeybord {
      */
     public static void closeKeybord(EditText mEditText)
     {
-        Logger.d("closeKeybord");
+        ULog.d("closeKeybord");
         InputMethodManager imm = (InputMethodManager) SApplication.getAppContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(mEditText.getWindowToken(), 0);
     }

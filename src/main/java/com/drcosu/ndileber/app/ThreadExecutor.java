@@ -1,6 +1,6 @@
 package com.drcosu.ndileber.app;
 
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -34,7 +34,7 @@ public class ThreadExecutor {
     }
 
     public void stop() {
-        Logger.w("关闭线程池");
+        ULog.w("关闭线程池");
         this.executor.shutdown();
     }
 

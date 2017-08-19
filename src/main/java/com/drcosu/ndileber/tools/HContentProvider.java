@@ -4,17 +4,14 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.renderscript.Sampler;
 
 import com.drcosu.ndileber.app.SApplication;
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -53,7 +50,7 @@ public class HContentProvider {
         while (cursor.moveToNext()) {
             T t = clazz.newInstance();
             for(int i=0;i<projection.length;i++){
-                //Logger.d(projection[i]+":"+cursor.getString(i));
+                //ULog.d(projection[i]+":"+cursor.getString(i));
                 Field field = clazz.getDeclaredField(projection[i]);
                 field.setAccessible(true);
                 invokeSet(t,projection[i], cursor.getString(cursor.getColumnIndex(projection[i])),field.getType());

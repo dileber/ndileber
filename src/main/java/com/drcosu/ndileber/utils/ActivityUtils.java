@@ -21,7 +21,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 
 /**

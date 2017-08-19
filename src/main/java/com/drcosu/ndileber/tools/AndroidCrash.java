@@ -1,35 +1,11 @@
 package com.drcosu.ndileber.tools;
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Looper;
-import android.text.TextUtils;
 import android.widget.Toast;
 
 import com.drcosu.ndileber.app.ActivityManager;
 import com.drcosu.ndileber.app.SApplication;
 import com.drcosu.ndileber.tools.crash.CrashSaver;
-import com.drcosu.ndileber.tools.storage.StorageType;
-import com.drcosu.ndileber.tools.storage.UStorage;
-import com.drcosu.ndileber.tools.string.MD5;
-import com.orhanobut.logger.Logger;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.LineNumberReader;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by shidawei on 16/8/8.

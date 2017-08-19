@@ -1,11 +1,10 @@
 package com.drcosu.ndileber.tools.net;
 
 import android.app.Activity;
-import android.content.Context;
 import android.util.Log;
 
 import com.drcosu.ndileber.app.ActivityManager;
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +42,7 @@ public class RetManager {
             if(act!=null){
                 String name = act.getLocalClassName();
                 if(req.containsKey(name)){
-                    Logger.sl(Log.DEBUG,name,"停止网络请求");
+                    ULog.d(name,"停止网络请求");
                     List<Call> lo = req.get(name);
                     for(int i=0;i<lo.size();i++){
                         Call call =lo.get(i);
@@ -62,7 +61,7 @@ public class RetManager {
             Activity act = ActivityManager.getCurrentActivity();
             if(act!=null){
                 String name = act.getLocalClassName();
-                Logger.sl(Log.DEBUG,name,"添加一个网络请求");
+                ULog.d(name,"添加一个网络请求");
 
                 if(req.containsKey(name)){
                     req.get(name).add(call);

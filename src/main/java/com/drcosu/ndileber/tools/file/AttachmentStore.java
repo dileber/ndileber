@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -205,7 +205,7 @@ public class AttachmentStore {
         	if(f!=null && f.exists()){
         		f.delete();
         	}
-            Logger.sl(Log.ERROR,"file", "save is to " + filePath + " failed: " + e.getMessage());
+            ULog.e("file", "save is to " + filePath + " failed: " + e.getMessage());
             return -1;
         } finally {
             try {

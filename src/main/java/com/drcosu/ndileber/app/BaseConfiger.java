@@ -5,7 +5,7 @@ package com.drcosu.ndileber.app;
  */
 public class BaseConfiger {
 
-    public static String BUG_NAME = "dileber2";
+    public static String DEFAULT_TAG = "DILEBER_LOG";
     /**
      * 调试模式打开的情况，缓存关闭
      */

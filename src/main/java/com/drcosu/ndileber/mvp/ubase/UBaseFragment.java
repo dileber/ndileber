@@ -1,6 +1,5 @@
 package com.drcosu.ndileber.mvp.ubase;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,9 +11,7 @@ import com.drcosu.ndileber.mvp.fragment.BaseFragment;
 import com.drcosu.ndileber.mvp.presenter.BasePresenter;
 import com.drcosu.ndileber.mvp.view.BView;
 import com.drcosu.ndileber.tools.DialogLinstener;
-import com.drcosu.ndileber.tools.UDialog;
-import com.drcosu.ndileber.tools.UUi;
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 /**
  * 直接可以使用的默认的fragment 使用UBaseFragment 必须使用 UBaseActivity或者继承 BaseActivity 实现 BView

@@ -7,12 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by shidawei on 16/2/9.
@@ -54,12 +51,12 @@ public class DBHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        //Logger.sl(Log.DEBUG,"数据库版本有变动","DROP TABLE IF EXISTS " ,DATABASE_NAME,i," fdsa ",i1);
+        //ULog.sl(Log.DEBUG,"数据库版本有变动","DROP TABLE IF EXISTS " ,DATABASE_NAME,i," fdsa ",i1);
         Cursor cursor = sqLiteDatabase.rawQuery("select name from sqlite_master where type='table' and name !='android_metadata' and name!='sqlite_sequence' order by name", null);
         while(cursor.moveToNext()){
             //遍历出表名
             String name = cursor.getString(0);
-            Logger.sl(Log.DEBUG,"数据库表名",name);
+            ULog.d("数据库表名",name);
 
             sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + name);
         }

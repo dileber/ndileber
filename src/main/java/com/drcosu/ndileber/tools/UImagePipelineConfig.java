@@ -2,7 +2,6 @@ package com.drcosu.ndileber.tools;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.os.Environment;
 
 import com.drcosu.ndileber.tools.okhttp.UOkHttp;
 import com.drcosu.ndileber.tools.storage.StorageType;
@@ -18,7 +17,7 @@ import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFact
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.core.ImagePipelineFactory;
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.io.File;
 
@@ -108,7 +107,7 @@ public final class UImagePipelineConfig {
 //            public void trim(MemoryTrimType trimType) {
 //                final double suggestedTrimRatio = trimType.getSuggestedTrimRatio();
 //
-//                Logger.d(String.format("onCreate suggestedTrimRatio : %d", suggestedTrimRatio));
+//                ULog.d(String.format("onCreate suggestedTrimRatio : %d", suggestedTrimRatio));
 //                if (MemoryTrimType.OnCloseToDalvikHeapLimit.getSuggestedTrimRatio() == suggestedTrimRatio
 //                        || MemoryTrimType.OnSystemLowMemoryWhileAppInBackground.getSuggestedTrimRatio() == suggestedTrimRatio
 //                        || MemoryTrimType.OnSystemLowMemoryWhileAppInForeground.getSuggestedTrimRatio() == suggestedTrimRatio
@@ -175,7 +174,7 @@ public final class UImagePipelineConfig {
             public void trim(MemoryTrimType trimType) {
                 final double suggestedTrimRatio = trimType.getSuggestedTrimRatio();
 
-                Logger.d(String.format("onCreate suggestedTrimRatio : %d", suggestedTrimRatio));
+                ULog.d(String.format("onCreate suggestedTrimRatio : %d", suggestedTrimRatio));
                 if (MemoryTrimType.OnCloseToDalvikHeapLimit.getSuggestedTrimRatio() == suggestedTrimRatio
                         || MemoryTrimType.OnSystemLowMemoryWhileAppInBackground.getSuggestedTrimRatio() == suggestedTrimRatio
                         || MemoryTrimType.OnSystemLowMemoryWhileAppInForeground.getSuggestedTrimRatio() == suggestedTrimRatio

@@ -7,7 +7,7 @@ import android.util.Log;
 import com.drcosu.ndileber.tools.storage.StorageType;
 import com.drcosu.ndileber.tools.storage.UStorage;
 import com.drcosu.ndileber.tools.string.MD5;
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -109,7 +109,7 @@ public class CrashSaver {
 			mBufferedWriter = new BufferedWriter(new FileWriter(mFile, true));// 追加模式写文件
 			mBufferedWriter.append(CrashSnapshot.snapshot(context, uncaught, timestamp, stackTrace, count));
 			mBufferedWriter.flush();
-			Logger.sl(Log.INFO,"奔溃日志已经记录在手机中");
+			ULog.i("奔溃日志已经记录在手机中");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

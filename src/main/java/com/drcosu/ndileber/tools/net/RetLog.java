@@ -1,7 +1,7 @@
 package com.drcosu.ndileber.tools.net;
 
 import com.drcosu.ndileber.app.SApplication;
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import okhttp3.Request;
 import retrofit2.Call;
@@ -21,7 +21,7 @@ public class RetLog {
 //                sb.append("\t{").append(n).append(" = ").append(headers.get(n)).append("}");
 //            }
             sb.append("请求URL:"+request.url()+" 请求METHOD:"+request.method()+" 请求是否是https:"+request.isHttps());
-            Logger.d(sb.toString());
+            ULog.d(sb.toString());
         }
     }
 

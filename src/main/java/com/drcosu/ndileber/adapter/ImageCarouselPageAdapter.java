@@ -4,7 +4,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class ImageCarouselPageAdapter extends PagerAdapter{
      */
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        Logger.w("移除了那里viewpager的显示页面"+position);
+        ULog.w("移除了那里viewpager的显示页面"+position);
         // container.removeView(mImageViewList.get(position%mImageViewList.size()));
     }
 

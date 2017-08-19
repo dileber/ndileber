@@ -1,15 +1,13 @@
 package com.drcosu.ndileber.mvp.data.source.local;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import android.provider.ContactsContract;
 import android.util.Log;
 
 import com.drcosu.ndileber.app.SApplication;
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.lang.reflect.*;
 import java.util.ArrayList;
@@ -17,7 +15,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by shidawei on 16/2/8.
@@ -90,7 +87,7 @@ public class DBManager {
                 statement.close();
             }
         }else{
-            Logger.i("数据库已关闭");
+            ULog.i("数据库已关闭");
         }
         return result;
     }
@@ -129,7 +126,7 @@ public class DBManager {
             }
             return res;
         }else{
-            Logger.i("数据库已关闭");
+            ULog.i("数据库已关闭");
             return 0;
         }
     }
@@ -169,7 +166,7 @@ public class DBManager {
             statement.close();
             return res;
         }else{
-            Logger.i( "数据库已关闭");
+            ULog.i( "数据库已关闭");
             return 0;
         }
     }
@@ -234,7 +231,7 @@ public class DBManager {
             }
             cursor.close();
         }else{
-            Logger.i( "数据库已关闭");
+            ULog.i( "数据库已关闭");
         }
         return mList;
     }
@@ -277,7 +274,7 @@ public class DBManager {
                 while(cursor.moveToNext()){
                     T t = clazz.newInstance();
                     for(int i=0;i<column.length;i++){
-                        Logger.d(column[i]+" "+ cursor.getString(cursor.getColumnIndex(column[i])));
+                        ULog.d(column[i]+" "+ cursor.getString(cursor.getColumnIndex(column[i])));
                         Field field = clazz.getDeclaredField(column[i]);
                         field.setAccessible(true);
                         invokeSet(t,column[i], cursor.getString(cursor.getColumnIndex(column[i])),field.getType());
@@ -287,7 +284,7 @@ public class DBManager {
             }
             cursor.close();
         }else{
-            Logger.i( "数据库已关闭");
+            ULog.i( "数据库已关闭");
         }
         return mList;
     }
@@ -324,7 +321,7 @@ public class DBManager {
             }
             cursor.close();
         }else{
-            Logger.i("数据库已关闭");
+            ULog.i("数据库已关闭");
         }
         return mList;
     }
@@ -359,7 +356,7 @@ public class DBManager {
             }
             cursor.close();
         }else{
-            Logger.i("数据库已关闭");
+            ULog.i("数据库已关闭");
         }
         return mList;
     }
@@ -403,7 +400,7 @@ public class DBManager {
         if(sqliteDatabase.isOpen()){
 
         }else{
-            Logger.i("数据库已关闭");
+            ULog.i("数据库已关闭");
         }
         // 采用事务处理，确保数据完整性
         sqliteDatabase.beginTransaction(); // 开始事务
@@ -509,7 +506,7 @@ public class DBManager {
         try {
             Object attribute;
             if(Date.class.isAssignableFrom(typeClass)){
-                Logger.sl(Log.DEBUG,"如果是date则进入");
+                ULog.d("如果是date则进入");
                 Constructor<? extends Object> cons = typeClass.getConstructor(long.class);
                 attribute = cons.newInstance(Long.parseLong(value));
             }else {
@@ -520,7 +517,7 @@ public class DBManager {
 
         } catch (Exception e) {
             e.printStackTrace();
-            //Logger.e("数据库插入报错",e);
+            //ULog.e("数据库插入报错",e);
         }
     }
 

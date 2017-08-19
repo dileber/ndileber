@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.drcosu.ndileber.tools.UUi;
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;;
 
 
 /**
@@ -105,10 +105,10 @@ public abstract class BaseFragment extends Fragment{
         super.onHiddenChanged(hidden);
         if (hidden) {// 不在最前端界面显示
             hidden();
-            Logger.i("hidden");
+            ULog.i("hidden");
         } else {// 重新显示到最前端中
             show();
-            Logger.i("show");
+            ULog.i("show");
 
         }
     }

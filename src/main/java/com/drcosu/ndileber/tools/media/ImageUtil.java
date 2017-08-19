@@ -1,6 +1,5 @@
 package com.drcosu.ndileber.tools.media;
 
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -19,7 +18,7 @@ import com.drcosu.ndileber.tools.file.AttachmentStore;
 import com.drcosu.ndileber.tools.file.FileUtil;
 import com.drcosu.ndileber.tools.storage.StorageType;
 import com.drcosu.ndileber.tools.storage.UStorage;
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -276,7 +275,7 @@ public class ImageUtil {
         String filePath = imageFile.getPath();
 
         if (!isInvalidPictureFile(mimeType)) {
-            Logger.sl(Log.INFO,"ImageUtil", "is invalid picture file");
+            ULog.i("ImageUtil", "is invalid picture file");
             return null;
         }
 

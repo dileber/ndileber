@@ -1,20 +1,12 @@
 package com.drcosu.ndileber.tools.net;
 
-import android.net.Network;
-import android.net.ParseException;
 import android.util.Log;
 
 import com.drcosu.ndileber.app.SApplication;
-import com.drcosu.ndileber.tools.UDialog;
-import com.google.gson.JsonParseException;
-import com.orhanobut.logger.Logger;
-
-import org.json.JSONException;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.net.ConnectException;
-import java.net.HttpRetryException;
 import java.net.SocketTimeoutException;
-import java.util.Set;
 
 import okhttp3.Headers;
 import okhttp3.Request;
@@ -59,7 +51,7 @@ public abstract class RetCallback<T> implements Callback<T>{
 
         String cookie = headers.get("Set-Cookie");
         TCookie.putCookies(cookie);
-        Logger.d("log:"+cookie);
+        ULog.d("log:"+cookie);
     }
 
 
@@ -68,8 +60,8 @@ public abstract class RetCallback<T> implements Callback<T>{
         RetLog.log(call);
         switch (response.code()){
             case SUCCESS:
-                Logger.d(networkSuccessMsg);
-                Logger.o(response.body());
+                ULog.d(networkSuccessMsg);
+                ULog.o(response.body());
                 onSuccess(call, response);
                 break;
             case NOT_FOUND:
@@ -94,7 +86,7 @@ public abstract class RetCallback<T> implements Callback<T>{
                 failure(call,new NetWorkException(UNAUTHORIZED,"身份验证未验证"));
                 break;
             case FORBIDDEN:
-                Logger.d(networkForbiddenMsg);
+                ULog.d(networkForbiddenMsg);
                 failure(call,new NetWorkException(FORBIDDEN,"服务器没有授权"));
                 SApplication.getInstance().appForbidden(call,response,this);
                 break;
@@ -104,13 +96,13 @@ public abstract class RetCallback<T> implements Callback<T>{
         }
 
 //        if(response.code()==SUCCESS){
-//            Logger.d(networkSuccessMsg);
+//            ULog.d(networkSuccessMsg);
 //        }
 //        if(response.code()== FORBIDDEN){
-//            Logger.d(networkForbiddenMsg);
+//            ULog.d(networkForbiddenMsg);
 //            SApplication.getInstance().appForbidden(call,response,this);
 //        }else{
-//            Logger.o(response.body());
+//            ULog.o(response.body());
 //            onSuccess(call, response);
 //        }
     }
@@ -120,7 +112,7 @@ public abstract class RetCallback<T> implements Callback<T>{
         RetLog.log(call);
 
         if (call.isCanceled()) {
-            Logger.sl(Log.DEBUG, "request is canceled");
+            ULog.d( "request is canceled");
         } else {
             Throwable throwable = e;
             //获取最根源的异常
@@ -131,14 +123,14 @@ public abstract class RetCallback<T> implements Callback<T>{
 
             if (e instanceof ConnectException) {
                 //UDialog.alert(UDialog.DIALOG_ERROR,networkMsg).show();
-                Logger.d(networkMsg);
+                ULog.d(networkMsg);
                 failure(call,new NetWorkException(networkMsg));
             } else if(e instanceof SocketTimeoutException){
                 //UDialog.alert(UDialog.DIALOG_ERROR,networkTimeOutMsg).show();
-                Logger.d(networkTimeOutMsg);
+                ULog.d(networkTimeOutMsg);
                 failure(call,new NetWorkException(networkTimeOutMsg));
             }else{
-                Logger.e(e,"网络错误");
+                ULog.e(e,"网络错误");
                 failure(call,e);
             }
         }
@@ -147,7 +139,7 @@ public abstract class RetCallback<T> implements Callback<T>{
 
 
 //        if (e instanceof HttpRetryException) {
-//            Logger.d("错误代码"+((HttpRetryException)e).responseCode());
+//            ULog.d("错误代码"+((HttpRetryException)e).responseCode());
 //        }
 
 
@@ -156,18 +148,18 @@ public abstract class RetCallback<T> implements Callback<T>{
 //        while (t != null) {
 //            if (t instanceof ConnectException) {
 //                UDialog.alert(UDialog.DIALOG_ERROR,networkMsg).show();
-//                Logger.d(networkMsg);
+//                ULog.d(networkMsg);
 //            }
 //            if (t instanceof HttpRetryException) {
-//                Logger.d("错误代码"+((HttpRetryException)t).responseCode());
+//                ULog.d("错误代码"+((HttpRetryException)t).responseCode());
 //            }
 //            if(t instanceof SocketTimeoutException){
 //                UDialog.alert(UDialog.DIALOG_ERROR,networkTimeOutMsg).show();
-//                Logger.d(networkTimeOutMsg);
+//                ULog.d(networkTimeOutMsg);
 //            }
 //            t = t.getCause();
 //        }
-//        Logger.e(throwable,"网络错误");
+//        ULog.e(throwable,"网络错误");
 //        failure(call,throwable);
     }
 
@@ -183,7 +175,7 @@ public abstract class RetCallback<T> implements Callback<T>{
 //                sb.append("\t{").append(n).append(" = ").append(headers.get(n)).append("}");
 //            }
             sb.append("请求URL:"+request.url()+" 请求METHOD:"+request.method()+" 请求是否是https:"+request.isHttps());
-            Logger.d(sb.toString());
+            ULog.d(sb.toString());
         }
     }
 

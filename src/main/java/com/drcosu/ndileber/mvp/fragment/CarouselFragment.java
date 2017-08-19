@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,9 +14,8 @@ import android.widget.LinearLayout;
 
 import com.drcosu.ndileber.adapter.ImageCarouselPageAdapter;
 import com.drcosu.ndileber.R;
-import com.drcosu.ndileber.app.ActivityManager;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.orhanobut.logger.Logger;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -211,7 +209,7 @@ public class CarouselFragment extends BaseFragment{
             @Override
             public void onPageSelected(int position) {
                 int select = position % point.size();
-                Logger.w("<><><><>"+position+select);
+                ULog.w("<><><><>"+position+select);
                 setPointBackground(select);
                 mHandler.sendMessage(Message.obtain(mHandler, MSG_PAGE_CHANGED, position, 0));
 
