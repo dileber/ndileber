@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import com.drcosu.ndileber.tools.AndroidCrash;
 import com.drcosu.ndileber.tools.TKeybord;
 import com.drcosu.ndileber.tools.UImagePipelineConfig;
+import com.drcosu.ndileber.tools.annotation.SDefaultFont;
 import com.drcosu.ndileber.tools.annotation.SFontdType;
 import com.drcosu.ndileber.tools.log.ULog;;
 import com.drcosu.ndileber.tools.net.RetCallback;
@@ -19,16 +20,20 @@ import retrofit2.Response;
 
 /**
  * Created by shidawei on 16/6/2.
+ *
+ * @SDefaultFont(true) //添加默认
+ * @SFontdType("defaultIcomoon.ttf") //添加自定义
  */
 public abstract class SApplication extends Application{
 
+	//自定义字体图标
 	public static Typeface icon_font;
-
+	//默认字体图标
 	public static Typeface default_icon_font;
+
 	public static boolean netLog = true;
 	private static SApplication instance;
 	private static Context context;
-	public static boolean loadDeaultFont = false;
 
 	@Override
 	public void onCreate() {
@@ -40,8 +45,6 @@ public abstract class SApplication extends Application{
 		context = instance.getApplicationContext();
 
 		Initializer.init(this);
-
-
 		/**
 		 * 字体图标注解
 		 */
@@ -49,12 +52,14 @@ public abstract class SApplication extends Application{
 			ULog.i("加载字体图标");
 			icon_font = Typeface.createFromAsset(getAssets(), this.getClass().getAnnotation(SFontdType.class).value());
 		}
-
-		if(loadDeaultFont){
-			default_icon_font = Typeface.createFromAsset(getAssets(),"defaultIcomoon.ttf");
+		/**
+		 * 默认字体图标注解
+		 */
+		if(this.getClass().isAnnotationPresent(SDefaultFont.class)){
+			if(this.getClass().getAnnotation(SDefaultFont.class).value()){
+				default_icon_font = Typeface.createFromAsset(getAssets(),"defaultIcomoon.ttf");
+			}
 		}
-
-
 		init();
 	}
 
