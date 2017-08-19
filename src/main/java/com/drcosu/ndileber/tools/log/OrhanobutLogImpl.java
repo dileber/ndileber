@@ -29,7 +29,7 @@ public class OrhanobutLogImpl implements ILog {
         FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
                 .showThreadInfo(true)  // (Optional) Whether to show thread info or not. Default true
                 .methodCount(3)         // 决定打印多少行（每一行代表一个方法）默认：2
-                .methodOffset(3)        // 设置方法的偏移量
+                .methodOffset(2)        // 设置方法的偏移量
                 .tag(tag)   // (Optional) Custom tag for each log. Default PRETTY_LOGGER
                 .build();
 
