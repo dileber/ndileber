@@ -233,13 +233,12 @@ public abstract class BaseActivity extends AppCompatActivity  implements ViewFin
         return (T) (findViewById(resId));
     }
 
-    @Override
-    public void setOnClickListener(View.OnClickListener listener, @IdRes int... ids) {
+    public void setOnClickListener(View.OnClickListener onClickListener, @IdRes int... ids) {
         if (ids == null) {
             return;
         }
         for (int id : ids) {
-            findView(id).setOnClickListener(listener);
+            findView(id).setOnClickListener(onClickListener);
         }
     }
 

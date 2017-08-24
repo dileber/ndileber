@@ -11,5 +11,15 @@ public class BaseConfiger {
      */
     public static boolean BUG_STATIC = true;
 
+    /**
+     * 加密CODE
+     */
+    public static String PRODUCT_SAFE_CODE = "DEFAULT_123456789";
+
+    public static void config(String tag,boolean bug,String safecode){
+        DEFAULT_TAG = tag;
+        BUG_STATIC = bug;
+        PRODUCT_SAFE_CODE = safecode;
+    }
 
 }

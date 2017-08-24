@@ -17,6 +17,12 @@ public class FrameContants {
 
     public static final String SYSTEM_PREFERANCE_SESSION = "SYSTEM_PREFERANCE_SESSION";
 
+    public static final String SYSTEM_PREFERANCE_DEBUG_TYPE = "SYSTEM_PREFERANCE_DEBUG_TYPE";
+
+    public static final String SYSTEM_PREFERANCE_DEBUG_TEST = "SYSTEM_PREFERANCE_DEBUG_TEST";
+
+    public static final String SYSTEM_PREFERANCE_DEBUG_ONLINE = "SYSTEM_PREFERANCE_DEBUG_ONLINE";
+
     //api 请求常量
     public static final String SYSTEM_API_DEVICE_ID = "SYSTEM_API_DEVICE_ID";
 
