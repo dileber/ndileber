@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.drcosu.ndileber.mvp.utils.OnBaseInteractionListener;
+import com.drcosu.ndileber.mvp.utils.ViewFinder;
 import com.drcosu.ndileber.tools.UUi;
 import com.drcosu.ndileber.tools.log.ULog;;
 
@@ -16,7 +18,7 @@ import com.drcosu.ndileber.tools.log.ULog;;
 /**
  * Created by shidawei on 16/6/2.
  */
-public abstract class BaseFragment extends Fragment{
+public abstract class BaseFragment extends Fragment implements ViewFinder{
 
     /**
      * 主要用于缓存view
@@ -26,35 +28,11 @@ public abstract class BaseFragment extends Fragment{
     @Deprecated
     protected final SparseArray<View> mViews = new SparseArray<View>();
 
-    /**
-     * 后期用 findView这个方法替换
-     * @param mView
-     * @param id
-     * @param <T>
-     * @return
-     */
-    @Deprecated
-    public <T extends View> T getView(View mView,int id) {
-        return UUi.getView(mView,mViews,id);
-    }
-
-    protected <T extends View> T findView(int resId) {
+    @Override
+    public <T extends View> T findView(int resId) {
         return (T) (getView().findViewById(resId));
     }
 
-    /**
-     * 优先使用
-     * @return
-     */
-    protected abstract int layoutViewId();
-
-    /**
-     * 多种情况，可以用绑定的view
-     * 下一版本将会改造
-     * @return
-     */
-    @Deprecated
-    protected abstract View layoutView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 
     /**
      * 为了能够做绑定，加一个判断
@@ -71,65 +49,19 @@ public abstract class BaseFragment extends Fragment{
     }
 
     protected View initLayout(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View layout = layoutView(inflater,container,savedInstanceState);
-        if(layoutViewId()!=0){
-            View view =  inflater.inflate(layoutViewId(), container, false);
-            return view;
-        }else if(layout!=null){
-            return layout;
-        }else {
-            return null;
-        }
+        View view =  inflater.inflate(layoutViewId(), container, false);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        initView(getView(),savedInstanceState);
         initView(savedInstanceState);
     }
 
     protected abstract void initView(Bundle savedInstanceState);
 
-    /**
-     * 后期用initView(Bundle savedInstanceState)来代替
-     * @param view
-     * @param savedInstanceState
-     */
-    @Deprecated
-    protected abstract void initView(View view, Bundle savedInstanceState);
-
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (hidden) {// 不在最前端界面显示
-            hidden();
-            ULog.i("hidden");
-        } else {// 重新显示到最前端中
-            show();
-            ULog.i("show");
-
-        }
-    }
-
-
-    /**
-     * fragment 显示时候调用的方法
-     */
-    protected abstract void show();
-
-    /**
-     * fragment 隐藏时候调用的方法
-     */
-    protected abstract void hidden();
-
     protected OnBaseInteractionListener mBaseListener;
-
-    public interface OnBaseInteractionListener {
-        void onRightButtonString(BaseFragment fragment,String str, View.OnClickListener onClickListener);
-        void onTitleName(BaseFragment fragment,String title);
-    }
 
     protected void setActivityRightButton(BaseFragment fragment,String str,View.OnClickListener onClickListener) {
         if (mBaseListener != null) {
@@ -149,6 +81,7 @@ public abstract class BaseFragment extends Fragment{
         mBaseListener = null;
     }
 
+    @Override
     public void setOnClickListener(View.OnClickListener listener, @IdRes int... ids) {
         if (ids == null) {
             return;
@@ -156,6 +89,5 @@ public abstract class BaseFragment extends Fragment{
         for (int id : ids) {
             findView(id).setOnClickListener(listener);
         }
-
     }
 }

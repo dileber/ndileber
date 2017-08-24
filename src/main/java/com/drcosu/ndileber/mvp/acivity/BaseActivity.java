@@ -6,6 +6,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
+import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.drcosu.ndileber.app.ActivityManager;
+import com.drcosu.ndileber.mvp.utils.ViewFinder;
 import com.drcosu.ndileber.tools.UUi;
 import com.drcosu.ndileber.tools.annotation.CheckKeyboard;
 import com.drcosu.ndileber.tools.annotation.CloseStatusBar;
@@ -34,7 +36,7 @@ import com.drcosu.ndileber.utils.UToolBar;
  * 继承最新的AppCompatActivity 来做基础activity
  * Created by shidawei on 16/6/2.
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity  implements ViewFinder {
 
     /**
      * 主要用于缓存view
@@ -129,8 +131,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected abstract void startView(Bundle savedInstanceState);
-
-    protected abstract int layoutViewId();
 
     protected abstract void initView(Bundle savedInstanceState);
 
@@ -228,19 +228,19 @@ public abstract class BaseActivity extends AppCompatActivity {
         onBackPressed();
     }
 
-    /**
-     * 通过id获取view 后期使用 findView来替换
-     * @param id
-     * @param <T>
-     * @return
-     */
-    @Deprecated
-    public <T extends View> T getView(int id) {
-        return UUi.getView(this,mViews,id);
+    @Override
+    public  <T extends View> T findView(int resId) {
+        return (T) (findViewById(resId));
     }
 
-    protected <T extends View> T findView(int resId) {
-        return (T) (findViewById(resId));
+    @Override
+    public void setOnClickListener(View.OnClickListener listener, @IdRes int... ids) {
+        if (ids == null) {
+            return;
+        }
+        for (int id : ids) {
+            findView(id).setOnClickListener(listener);
+        }
     }
 
     /**

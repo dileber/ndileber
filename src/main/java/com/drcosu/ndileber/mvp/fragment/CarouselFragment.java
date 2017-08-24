@@ -165,26 +165,18 @@ public class CarouselFragment extends BaseFragment{
     }
 
     @Override
-    protected int layoutViewId() {
+    public int layoutViewId() {
         return R.layout.fragment_carousel;
     }
 
-    @Override
-    protected View layoutView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return null;
-    }
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    protected void initView(View view, Bundle savedInstanceState) {
-        viewPager = getView(view,R.id.carousel_viewpager);
-        linearLayout = getView(view,R.id.carousel_point);
+        viewPager = findView(R.id.carousel_viewpager);
+        linearLayout = findView(R.id.carousel_point);
         init();
     }
+
 
     private void init(){
         weakReference = new WeakReference<CarouselFragment>(this);
@@ -247,8 +239,6 @@ public class CarouselFragment extends BaseFragment{
     }
 
 
-
-
     /**
      * fragment 隐藏和显示后调用
      * @param hidden
@@ -261,15 +251,5 @@ public class CarouselFragment extends BaseFragment{
         } else {// 重新显示到最前端中
             mHandler.sendEmptyMessage(MSG_BREAK_SILENT);
         }
-    }
-
-    @Override
-    protected void show() {
-
-    }
-
-    @Override
-    protected void hidden() {
-
     }
 }

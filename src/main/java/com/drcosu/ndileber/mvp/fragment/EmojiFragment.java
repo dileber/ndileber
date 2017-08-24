@@ -41,37 +41,15 @@ public class EmojiFragment extends BaseFragment {
         }
     }
 
-    @Override
-    protected int layoutViewId() {
+    public int layoutViewId() {
         return R.layout.fragment_emoji;
     }
 
     @Override
-    protected View layoutView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return null;
-    }
-
-    @Override
     protected void initView(Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    protected void initView(View view, Bundle savedInstanceState) {
-        Context context = view.getContext();
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.emoji_recycle);
-        recyclerView.setLayoutManager(new GridLayoutManager(context, EmojiRepository.lie));
+        RecyclerView recyclerView = findView(R.id.emoji_recycle);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), EmojiRepository.lie));
         recyclerView.setAdapter(new EmojiAdaper(EmojiRepository.getIcon(mPage),mListener));
-    }
-
-    @Override
-    protected void show() {
-
-    }
-
-    @Override
-    protected void hidden() {
-
     }
 
     @Override
