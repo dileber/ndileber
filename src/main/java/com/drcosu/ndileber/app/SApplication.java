@@ -12,6 +12,7 @@ import com.drcosu.ndileber.tools.annotation.SDefaultFont;
 import com.drcosu.ndileber.tools.annotation.SFontdType;
 import com.drcosu.ndileber.tools.log.ULog;;
 import com.drcosu.ndileber.tools.net.RetCallback;
+import com.drcosu.ndileber.tools.rx.RxBus;
 import com.drcosu.ndileber.tools.storage.UStorage;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
@@ -79,6 +80,7 @@ public abstract class SApplication extends Application{
 	 */
 	public void quit(){
 		ULog.i("退出整个app");
+		RxBus.removeAllStickyEvents();
 		ThreadExecutor.getInstance().stop();
 		TKeybord.fixFocusedViewLeak(this);
 	}
