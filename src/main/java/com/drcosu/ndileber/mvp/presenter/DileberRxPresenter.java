@@ -12,7 +12,7 @@ import rx.subscriptions.CompositeSubscription;
 /**
  * Created by shidawei on 2016/9/24.
  */
-public abstract class DileberRxPresenter<T1 extends BaseView,T2 extends BaseDataSource> implements RxBasePresenter {
+public abstract class DileberRxPresenter<T1 extends BaseView,T2 extends BaseDataSource> implements BasePresenter {
 
 
     protected T1 mView;
@@ -31,8 +31,21 @@ public abstract class DileberRxPresenter<T1 extends BaseView,T2 extends BaseData
         this.mView.setPresenter(this);
     }
 
-    @Override
     public void unsubscribe() {
         mSubscriptions.clear();
     }
+
+    abstract void subscribe();
+
+    @Override
+    public void onResume() {
+        subscribe();
+    }
+
+    @Override
+    public void onPause() {
+        unsubscribe();
+    }
+
+
 }

@@ -109,6 +109,22 @@ public abstract class UBaseFragment extends BaseFragment implements BView {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(presenter!=null){
+            presenter.onResume();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(presenter!=null){
+            presenter.onPause();
+        }
+    }
+
     /**
      * 将presenter设置进来，让父类管理生命周期
      * @param presenter

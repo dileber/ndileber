@@ -16,4 +16,8 @@ public interface BasePresenter {
      */
     void onDestroy();
 
+    void onResume();
+
+    void onPause();
+
 }

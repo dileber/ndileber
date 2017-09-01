@@ -77,6 +77,22 @@ public abstract class UBaseLazyFragment extends LazyFragment implements BView {
         }
     }
 
+    @Override
+    public void onResumeLazy() {
+        super.onResumeLazy();
+        if(presenter!=null){
+            presenter.onResume();
+        }
+    }
+
+    @Override
+    public void onPauseLazy() {
+        super.onPauseLazy();
+        if(presenter!=null){
+            presenter.onPause();
+        }
+    }
+
     /**
      * 将presenter设置进来，让父类管理生命周期
      * @param presenter
