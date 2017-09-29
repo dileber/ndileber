@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
@@ -186,6 +187,20 @@ public abstract class BaseActivity extends AppCompatActivity  implements ViewFin
         }
     }
 
+    public void setSubTitle(String subTitle) {
+        if (toolbar != null) {
+            toolbar.setSubtitle(subTitle);
+        }
+    }
+
+    public int getToolBarHeight() {
+        if (toolbar != null) {
+            return toolbar.getHeight();
+        }
+
+        return 0;
+    }
+
     public void setToolBar(int toolbarId, UToolBar uToolBar) {
         toolbar = findView(toolbarId);
         if (uToolBar.titleId != 0) {
@@ -321,5 +336,12 @@ public abstract class BaseActivity extends AppCompatActivity  implements ViewFin
         return (A) getApplication();
     }
 
+    private static Handler handler;
+    protected final Handler getHandler() {
+        if (handler == null) {
+            handler = new Handler(getMainLooper());
+        }
+        return handler;
+    }
 
 }
