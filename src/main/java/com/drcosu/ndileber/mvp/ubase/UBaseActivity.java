@@ -2,8 +2,14 @@ package com.drcosu.ndileber.mvp.ubase;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
+
 import com.drcosu.ndileber.mvp.acivity.BaseActivity;
+import com.drcosu.ndileber.mvp.presenter.BasePresenter;
 import com.drcosu.ndileber.mvp.view.BView;
+import com.drcosu.ndileber.mvp.view.BaseView;
 import com.drcosu.ndileber.tools.DialogLinstener;
 import com.drcosu.ndileber.tools.UDialog;
 import com.drcosu.ndileber.tools.UUi;
@@ -13,7 +19,7 @@ import com.drcosu.ndileber.tools.UUi;
  * Created by shidawei on 2017/4/20.
  */
 
-public abstract class UBaseActivity extends BaseActivity implements BView {
+public abstract class UBaseActivity<T extends BasePresenter> extends BaseActivity implements BaseView<T> {
 
 
     @Override
@@ -77,4 +83,19 @@ public abstract class UBaseActivity extends BaseActivity implements BView {
     public void finishActivity() {
         this.finish();
     }
+
+    protected T mPresenter;
+
+    @Override
+    public void setPresenter(T presenter) {
+        mPresenter = presenter;
+    }
+
+    @Override
+    protected void startView(Bundle savedInstanceState) {
+        mPresenter = this.createPresenterInstance();
+    }
+
+    protected abstract T createPresenterInstance();
+
 }

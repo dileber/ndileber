@@ -6,11 +6,13 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.drcosu.ndileber.mvp.fragment.BaseFragment;
 import com.drcosu.ndileber.mvp.presenter.BasePresenter;
 import com.drcosu.ndileber.mvp.utils.OnBaseInteractionListener;
 import com.drcosu.ndileber.mvp.view.BView;
+import com.drcosu.ndileber.mvp.view.BaseView;
 import com.drcosu.ndileber.tools.DialogLinstener;
 import com.drcosu.ndileber.tools.log.ULog;
 
@@ -19,8 +21,7 @@ import com.drcosu.ndileber.tools.log.ULog;
  * Created by shidawei on 2017/4/20.
  */
 
-public abstract class UBaseFragment extends BaseFragment implements BView {
-    protected BasePresenter presenter;
+public abstract class UBaseFragment<T extends BasePresenter> extends BaseFragment implements BaseView<T> {
 
     @Override
     public void toast(String msg, int duration) {
@@ -92,36 +93,37 @@ public abstract class UBaseFragment extends BaseFragment implements BView {
     }
 
 
+    protected T mPresenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(presenter!=null){
-            presenter.start();
+        if(mPresenter!=null){
+            mPresenter.start();
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(presenter!=null){
-            presenter.onDestroy();
+        if(mPresenter!=null){
+            mPresenter.onDestroy();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if(presenter!=null){
-            presenter.onResume();
+        if(mPresenter!=null){
+            mPresenter.onResume();
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if(presenter!=null){
-            presenter.onPause();
+        if(mPresenter!=null){
+            mPresenter.onPause();
         }
     }
 
@@ -129,18 +131,22 @@ public abstract class UBaseFragment extends BaseFragment implements BView {
      * 将presenter设置进来，让父类管理生命周期
      * @param presenter
      */
-    protected void setPresenter(BasePresenter presenter) {
-        this.presenter = presenter;
+    @Override
+    public void setPresenter(T presenter) {
+        this.mPresenter = presenter;
     }
 
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        mPresenter = this.createPresenterInstance();
         if (context instanceof OnBaseInteractionListener) {
             mBaseListener = (OnBaseInteractionListener) context;
         }
     }
+
+    protected abstract T createPresenterInstance();
 
     @Override
     public void finishActivity() {

@@ -332,9 +332,9 @@ public abstract class BaseActivity extends AppCompatActivity  implements ViewFin
         transaction.hide(from).show(to).commitAllowingStateLoss(); // 隐藏当前的fragment，显示下一个
     }
 
-    public <A extends Application> A getMyApplication() {
-        return (A) getApplication();
-    }
+//    public <A extends Application> A getMyApplication() {
+//        return (A) getApplication();
+//    }
 
     private static Handler handler;
     protected final Handler getHandler() {

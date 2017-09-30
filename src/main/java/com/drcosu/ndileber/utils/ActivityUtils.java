@@ -64,30 +64,7 @@ public class ActivityUtils {
         return fragment;
     }
 
-    /**
-     * 如果原来的fragment不再使用,可用如下方法用新的替换旧的,如果你的fragment依旧要使用的话 用 {@link #switchFragment(FragmentManager, int, Fragment, Fragment)}  }
-     * @param fragmentManager
-     * @param fragmentId
-     * @param myFragment
-     * @param <T>
-     * @return
-     */
-    public static  <T extends Fragment>T replaceFragment(@NonNull FragmentManager fragmentManager, @NonNull int fragmentId, @NonNull T myFragment){
-        Check.checkNotNull(fragmentManager);
-        Check.checkNotNull(fragmentId);
-        Check.checkNotNull(myFragment);
-        T fragment = (T)fragmentManager.findFragmentById(fragmentId);
-        if (fragment == null) {
-            fragment = myFragment;
-            addFragmentToActivity(fragmentManager, fragment,fragmentId);
-        }else{
-            fragment = myFragment;
-            FragmentTransaction transaction = fragmentManager.beginTransaction();
-            transaction.replace(fragmentId, fragment);
-            transaction.commit();
-        }
-        return fragment;
-    }
+
 
     /**
      * 切换 fragment 显示
@@ -120,5 +97,57 @@ public class ActivityUtils {
         return to;
     }
 
+
+    /**
+     * 如果原来的fragment不再使用,可用如下方法用新的替换旧的,如果你的fragment依旧要使用的话 用 {@link #switchFragment(FragmentManager, int, Fragment, Fragment)}  }
+     * @param fragmentManager
+     * @param fragmentId
+     * @param myFragment
+     * @param needAddToBackStack 是否可以用back按键退栈
+     * @param <T>
+     * @return
+     */
+    public static <T extends Fragment> T replaceFragment(@NonNull FragmentManager fragmentManager, @NonNull int fragmentId, T myFragment, boolean needAddToBackStack) {
+        Check.checkNotNull(fragmentManager);
+        Check.checkNotNull(myFragment);
+        Check.checkNotNull(fragmentId);
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(fragmentId, myFragment);
+        if (needAddToBackStack) {
+            fragmentTransaction.addToBackStack(null);
+        }
+        try {
+            fragmentTransaction.commitAllowingStateLoss();
+        } catch (Exception e) {
+
+        }
+        return myFragment;
+    }
+
+    /**
+     * 如果原来的fragment不再使用,可用如下方法用新的替换旧的,如果你的fragment依旧要使用的话 用 {@link #switchFragment(FragmentManager, int, Fragment, Fragment)}  }
+     * @param fragmentManager
+     * @param fragmentId
+     * @param myFragment
+     * @param <T>
+     * @return
+     */
+    public static  <T extends Fragment>T replaceFragment(@NonNull FragmentManager fragmentManager, @NonNull int fragmentId, @NonNull T myFragment){
+//        Check.checkNotNull(fragmentManager);
+//        Check.checkNotNull(fragmentId);
+//        Check.checkNotNull(myFragment);
+//        T fragment = (T)fragmentManager.findFragmentById(fragmentId);
+//        if (fragment == null) {
+//            fragment = myFragment;
+//            addFragmentToActivity(fragmentManager, fragment,fragmentId);
+//        }else{
+//            fragment = myFragment;
+//            FragmentTransaction transaction = fragmentManager.beginTransaction();
+//            transaction.replace(fragmentId, fragment);
+//            transaction.commit();
+//        }
+//        return fragment;
+        return replaceFragment(fragmentManager, fragmentId, myFragment,false);
+    }
 
 }
