@@ -1,6 +1,7 @@
 package com.drcosu.ndileber.mvp.fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -90,4 +91,5 @@ public abstract class BaseFragment extends Fragment implements ViewFinder{
             findView(id).setOnClickListener(listener);
         }
     }
+
 }
