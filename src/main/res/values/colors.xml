@@ -29,8 +29,7 @@
 
     <color name="carousel_red">#ff0000</color>
 
-    <color name="carousel_gray">#F4F4F1</color>
-    <color name="global_bg">#eeeff3</color>
+
 
     <color name="dileber_white">#ffffff</color>
     <color name="dileber_topbar">#339EFE</color>
@@ -38,5 +37,6 @@
     <color name="dileber_line">#dddddd</color>
     <color name="dileber_alpha50">#50000000</color>
 
+    <color name="global_bg">#eeeff3</color>
 
 </resources>
