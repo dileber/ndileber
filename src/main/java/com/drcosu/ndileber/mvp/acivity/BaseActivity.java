@@ -21,6 +21,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ScrollView;
 
 import com.drcosu.ndileber.app.ActivityManager;
 import com.drcosu.ndileber.mvp.utils.ViewFinder;
@@ -100,6 +101,7 @@ public abstract class BaseActivity extends AppCompatActivity  implements ViewFin
 
     public interface CheckOnGlobaLinstener{
         void showKeyboard();
+        void hideKeyboard();
     }
 
     /**
@@ -122,8 +124,18 @@ public abstract class BaseActivity extends AppCompatActivity  implements ViewFin
                 int hight = decorView.getHeight();
                 boolean visible = (double) displayHight / hight < 0.8;
 
-                if(visible&&visible!= check_laast){
-                    checkOnGlobaLinstener.showKeyboard();
+//                if(visible&&visible!= check_laast){
+//                    checkOnGlobaLinstener.showKeyboard();
+//                }
+//                check_laast = visible;
+
+                if(visible!= check_laast){
+                    if(!visible){
+                        checkOnGlobaLinstener.hideKeyboard();
+                    }
+                    if(visible){
+                        checkOnGlobaLinstener.showKeyboard();
+                    }
                 }
                 check_laast = visible;
             }
