@@ -10,6 +10,7 @@ import com.drcosu.ndileber.tools.TKeybord;
 import com.drcosu.ndileber.tools.UImagePipelineConfig;
 import com.drcosu.ndileber.tools.annotation.SDefaultFont;
 import com.drcosu.ndileber.tools.annotation.SFontdType;
+import com.drcosu.ndileber.tools.debug.DebugViewHelper;
 import com.drcosu.ndileber.tools.log.ULog;;
 import com.drcosu.ndileber.tools.net.RetCallback;
 import com.drcosu.ndileber.tools.rx.RxBus;
@@ -83,6 +84,7 @@ public abstract class SApplication extends Application{
 		RxBus.removeAllStickyEvents();
 		ThreadExecutor.getInstance().stop();
 		TKeybord.fixFocusedViewLeak(this);
+		DebugViewHelper.removeFloatView();
 	}
 
 

@@ -100,7 +100,5 @@ public class SocketLog {
                 mWebSocketClient.send(msg);
             }
         }
-
     }
-
 }
