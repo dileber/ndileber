@@ -1,5 +1,8 @@
 package com.drcosu.ndileber.tools.okhttp;
 
+import com.drcosu.ndileber.tools.SSystem;
+import com.drcosu.ndileber.tools.SysInfoUtil;
+import com.drcosu.ndileber.tools.TVersion;
 import com.drcosu.ndileber.tools.net.TCookie;
 import com.drcosu.ndileber.tools.storage.StorageType;
 import com.drcosu.ndileber.tools.storage.UStorage;
@@ -64,15 +67,12 @@ public class UOkHttp {
                                 .addHeader("Accept", "*/*")
                                 .addHeader("Cookie", TCookie.getCookie())
                                 .addHeader("platform", "android")//平台
-                                .addHeader("sysVersion", "sysVersion")//系统版本号
+                                .addHeader("sysVersion", "0")//系统版本号
                                 .addHeader("device", "device")//设备信息
-                                .addHeader("screen", "screen")//屏幕大小
-                                .addHeader("uuid", "uuid")//设备唯一码
-                                .addHeader("version", "version")//app版本
-                                .addHeader("apiVersion", "apiVersion")//api版本
-                                .addHeader("token", "token")//令牌
-                                .addHeader("channelId", "channelId")//渠道
-                                .addHeader("networkType", "networkType")//网络类型
+                                .addHeader("screen", SSystem.getScreen().getScreenWidth()+"x"+ SSystem.getScreen().getScreenHeight())//屏幕大小
+                                .addHeader("uuid", SSystem.getOnlyId())//设备唯一码
+                                .addHeader("version", "0")//app版本
+                                .addHeader("networkType", "0")//网络类型
                                 .build();
                         return chain.proceed(request);
                     }
