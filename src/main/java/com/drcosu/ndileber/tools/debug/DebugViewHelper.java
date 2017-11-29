@@ -26,7 +26,7 @@ public class DebugViewHelper {
             if(debugView == null){
                 debugView = new DebugView(context.getApplicationContext());
                 debugView.setmDebugViewClickLinsenter(mDebugViewClickLinsenter);
-                debugView.setImageResource(R.mipmap.debug);
+                debugView.setImageResource(R.mipmap.dileber_debug);
             }
             debugView.show();
         }
