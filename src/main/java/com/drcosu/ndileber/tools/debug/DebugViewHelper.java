@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.drcosu.ndileber.R;
 import com.drcosu.ndileber.app.BaseConfiger;
+import com.drcosu.ndileber.tools.debug.debugwindows.FloatWindowPermissionChecker;
 
 
 /**
@@ -24,6 +25,10 @@ public class DebugViewHelper {
                 return;
             }
             if(debugView == null){
+                if (!FloatWindowPermissionChecker.checkFloatWindowPermission()) {
+                    FloatWindowPermissionChecker.askForFloatWindowPermission(context);
+                    return;
+                }
                 debugView = new DebugView(context.getApplicationContext());
                 debugView.setmDebugViewClickLinsenter(mDebugViewClickLinsenter);
                 debugView.setImageResource(R.mipmap.dileber_debug);

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.xiaohe.baonahao_school.utils.debug.debugwindows.DebugWindowsView
+        android:id="@+id/debug"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:background="#3f037cff">
+
+        <TextView
+            android:id="@+id/debugLog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="false"
+            android:textColor="@color/black"
+            />
+
+
+    </com.xiaohe.baonahao_school.utils.debug.debugwindows.DebugWindowsView>
+
+    <ImageView
+        android:id="@+id/close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="top|end"
+        android:src="@mipmap/dileber_close_yellow"/>
+
+    <ImageView
+        android:id="@+id/big"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@mipmap/dileber_debug"/>
+
+</FrameLayout>
