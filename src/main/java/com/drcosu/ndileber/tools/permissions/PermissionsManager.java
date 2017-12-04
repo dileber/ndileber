@@ -28,9 +28,11 @@ import android.util.Log;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -90,6 +92,31 @@ public void onDenied(String permission) {
  *
  */
 public class PermissionsManager {
+
+  public final static Map<String, String> permissions = new HashMap<>();
+
+  static {
+    permissions.put(Manifest.permission.READ_EXTERNAL_STORAGE, "读取存储卡内容");
+    permissions.put(Manifest.permission.WRITE_EXTERNAL_STORAGE, "写入文件到存储卡");
+    permissions.put(Manifest.permission.CAMERA, "照相功能");
+//    permissions.put(Manifest.permission.READ_CALL_LOG, "读取通话日志");
+//    permissions.put(Manifest.permission.READ_PHONE_STATE, "获取电话状态");
+//    permissions.put(Manifest.permission.CALL_PHONE, "拨打电话");
+//    permissions.put(Manifest.permission.USE_SIP, "");
+//    permissions.put(Manifest.permission.PROCESS_OUTGOING_CALLS, "");
+//    permissions.put(Manifest.permission.ADD_VOICEMAIL, "");
+//    permissions.put(Manifest.permission.READ_CALENDAR, "获取日历");
+//    permissions.put(Manifest.permission.WRITE_CALENDAR, "修改日历");
+//    permissions.put(Manifest.permission.BODY_SENSORS, "传感器");
+//    permissions.put(Manifest.permission.ACCESS_FINE_LOCATION, "访问精确位置");
+//    permissions.put(Manifest.permission.ACCESS_COARSE_LOCATION, "访问大概位置");
+//    permissions.put(Manifest.permission.RECORD_AUDIO, "录音");
+//    permissions.put(Manifest.permission.READ_SMS, "读取短信息");
+//    permissions.put(Manifest.permission.RECEIVE_WAP_PUSH, "接收WAP推送");
+//    permissions.put(Manifest.permission.RECEIVE_MMS, "接收彩信");
+//    permissions.put(Manifest.permission.RECEIVE_SMS, "接收短信");
+//    permissions.put(Manifest.permission.SEND_SMS, "发送短信");
+  }
 
   private static final String TAG = PermissionsManager.class.getSimpleName();
 
