@@ -56,12 +56,13 @@ public final class HString {
         StringBuilder ret = new StringBuilder();
         for(Object temp:args){
             if (temp == null) {
-                ret.append(splt).append("null");
+                ret.append("null").append(splt);
             } else {
-                ret.append(splt).append(temp.toString());
+                ret.append(temp.toString()).append(splt);
             }
         }
-        return ret.toString();
+        String result = ret.toString();
+        return result.substring(0,result.length()-1);
     }
 
     public static String getStringValue(Object obj){

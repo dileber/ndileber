@@ -25,10 +25,6 @@ public class ULog{
         iLog.d(message);
     }
 
-    public static void d(Object message) {
-        iLog.d(message);
-    }
-
     public static void e(Object... message) {
         iLog.e(message);
     }
@@ -96,4 +92,78 @@ public class ULog{
         iLog.o(o);
 
     }
+
+
+    public static void dt(String tag,Object... message) {
+        iLog.dt(tag,message);
+    }
+
+    public static void et(String tag,Object... message) {
+        iLog.et(tag,message);
+    }
+
+    public static void et(String tag,Throwable throwable, Object... message) {
+        iLog.et(tag,throwable,message);
+    }
+
+    public static void wt(String tag,Object... message) {
+        iLog.wt(tag,message);
+    }
+
+    public static void it(String tag,Object... message) {
+        iLog.it(tag,message);
+    }
+
+    public static void vt(String tag,Object... message) {
+        iLog.vt(tag,message);
+    }
+
+    public static void wtft(String tag,Object... message) {
+        iLog.wtft(tag,message);
+    }
+
+    public static void dmt(String tag,String message, Object... args) {
+        iLog.dmt(tag,message,args);
+    }
+
+    public static void emt(String tag,String message, Object... args) {
+        iLog.emt(tag,message,args);
+    }
+
+    public static void emt(String tag,Throwable throwable, String message, Object... args) {
+        iLog.emt(tag,throwable,message,args);
+    }
+
+    public static void wmt(String tag,String message, Object... args) {
+        iLog.wmt(tag,message,args);
+    }
+
+    public static void imt(String tag,String message, Object... args) {
+        iLog.imt(tag,message,args);
+    }
+
+    public static void vmt(String tag,String message, Object... args) {
+        iLog.vmt(tag,message,args);
+    }
+
+    public static void wtfmt(String tag,String message, Object... args) {
+        iLog.wtfmt(tag,message,args);
+
+    }
+
+    public static void jsont(String tag,String json) {
+        iLog.jsont(tag,json);
+
+    }
+
+    public static void xmlt(String tag,String xml) {
+        iLog.xmlt(tag,xml);
+
+    }
+
+    public static void ot(String tag,Object o) {
+        iLog.ot(tag,o);
+
+    }
+
 }

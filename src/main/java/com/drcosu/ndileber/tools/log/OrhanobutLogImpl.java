@@ -46,15 +46,6 @@ public class OrhanobutLogImpl implements ILog {
         Logger.d(s);
     }
 
-    /**
-     * 打印数据等数据
-     * @param message
-     */
-    @Override
-    public void d(Object message) {
-        Logger.d(message);
-    }
-
     @Override
     public void e(Object... message) {
         String s = HString.concatObject(" ",message);
@@ -144,5 +135,103 @@ public class OrhanobutLogImpl implements ILog {
     @Override
     public void o(Object o) {
         json(HJson.toJson(o));
+    }
+
+
+    @Override
+    public void dt(String tag,Object... message) {
+        String s = HString.concatObject(" ",message);
+        Logger.t(tag).d(s);
+    }
+
+    @Override
+    public void et(String tag,Object... message) {
+        String s = HString.concatObject(" ",message);
+        Logger.t(tag).e(s);
+    }
+
+    @Override
+    public void et(String tag,Throwable throwable, Object... message) {
+        String s = HString.concatObject(" ",message);
+        Logger.t(tag).e(throwable,s);
+    }
+
+    @Override
+    public void wt(String tag,Object... message) {
+        String s = HString.concatObject(" ",message);
+        Logger.t(tag).w(s);
+    }
+
+    @Override
+    public void it(String tag,Object... message) {
+        String s = HString.concatObject(" ",message);
+        Logger.t(tag).i(s);
+    }
+
+    @Override
+    public void vt(String tag,Object... message) {
+        String s = HString.concatObject(" ",message);
+        Logger.t(tag).v(s);
+    }
+
+    @Override
+    public void wtft(String tag,Object... message) {
+        String s = HString.concatObject(" ",message);
+        Logger.t(tag).wtf(s);
+    }
+
+    /**
+     * Logger.d("hello %s %d", "world", 100);
+     * @param message
+     * @param args
+     */
+    @Override
+    public void dmt(String tag,String message, Object... args) {
+        Logger.t(tag).d(message,args);
+    }
+
+    @Override
+    public void emt(String tag,String message, Object... args) {
+        Logger.t(tag).e(message,args);
+    }
+
+    @Override
+    public void emt(String tag,Throwable throwable, String message, Object... args) {
+        Logger.t(tag).e(throwable,message,args);
+    }
+
+    @Override
+    public void wmt(String tag,String message, Object... args) {
+        Logger.t(tag).w(message,args);
+    }
+
+    @Override
+    public void imt(String tag,String message, Object... args) {
+        Logger.t(tag).i(message,args);
+    }
+
+    @Override
+    public void vmt(String tag,String message, Object... args) {
+        Logger.t(tag).v(message,args);
+    }
+
+    @Override
+    public void wtfmt(String tag,String message, Object... args) {
+        Logger.t(tag).wtf(message,args);
+    }
+
+    @Override
+    public void jsont(String tag,String json) {
+        Logger.t(tag).json(json);
+    }
+
+    @Override
+    public void xmlt(String tag,String xml) {
+        Logger.t(tag).xml(xml);
+    }
+
+    @Override
+    public void ot(String tag,Object o) {
+        jsont(tag,HJson.toJson(o));
     }
 }
