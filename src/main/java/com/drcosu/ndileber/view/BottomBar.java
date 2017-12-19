@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
  */
 public class BottomBar extends LinearLayout {
 
+
     private LinearLayout mTabLayout;
 
     private LayoutParams mTabParams;
