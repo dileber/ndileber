@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -124,5 +125,33 @@ public class UUi {
         float fontScale = SApplication.getAppContext().getResources().getDisplayMetrics().scaledDensity;
         return (int)(spValue * fontScale + 0.5F);
     }
+
+    /**
+     * 设置activity背景恢复原先透明
+     * @param activity
+     */
+    public static void becomeNormal(Activity activity) {
+        if(activity instanceof Activity) {
+            WindowManager.LayoutParams params = activity.getWindow().getAttributes();
+            params.alpha = 1.0F;
+            activity.getWindow().setAttributes(params);
+        }
+
+    }
+
+    /**
+     * 设置activity透明度
+     * @param activity
+     * @param alpha
+     */
+    public static void becomeDark(Activity activity, float alpha) {
+        if(activity instanceof Activity) {
+            WindowManager.LayoutParams params = activity.getWindow().getAttributes();
+            params.alpha = alpha;
+            activity.getWindow().setAttributes(params);
+        }
+
+    }
+
 
 }
