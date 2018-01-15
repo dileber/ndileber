@@ -1,5 +1,6 @@
 package com.drcosu.ndileber.view.recycle;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -26,7 +27,7 @@ public class FooterHolder extends DileberHolder {
     }
 
     @Override
-    public void load() {
+    public void load(Context context) {
         if(item!=null){
             switch (item){
                 case Normal:

@@ -11,5 +11,5 @@ public interface IDileberData<T> {
     void addData(List<T> data);
     void addData(T data);
     void clean();
-
+    void refresh(List<T> data);
 }

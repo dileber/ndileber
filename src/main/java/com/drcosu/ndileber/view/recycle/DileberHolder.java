@@ -1,5 +1,6 @@
 package com.drcosu.ndileber.view.recycle;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -17,7 +18,7 @@ public abstract class DileberHolder<M extends SModel> extends RecyclerView.ViewH
         super(itemView);
     }
 
-    public abstract void load();
+    public abstract void load(Context context);
 
     protected <T extends View> T findView(int resId) {
         return (T) (itemView.findViewById(resId));

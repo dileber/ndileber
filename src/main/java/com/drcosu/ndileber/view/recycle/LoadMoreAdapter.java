@@ -1,18 +1,31 @@
 package com.drcosu.ndileber.view.recycle;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.drcosu.ndileber.mvp.data.model.SModel;
+import com.drcosu.ndileber.mvp.presenter.BasePresenter;
+
 /**
  * Created by shidawei on 2017/4/27.
  */
 
-public abstract class LoadMoreAdapter<VH extends DileberHolder> extends DileberAdapter<DileberHolder>{
+public abstract class LoadMoreAdapter<VH extends DileberHolder,T extends SModel> extends DileberAdapter<DileberHolder,T>{
 
     private final int NORMALLAYOUT = 0x100;
     private final int FOOTERLAYOUT = 0x110;
+
+    public LoadMoreAdapter(Context context) {
+        super(context);
+    }
+
+    public LoadMoreAdapter(Context context, BasePresenter mBasePresenter) {
+        super(context, mBasePresenter);
+    }
+
 
     @Override
     public DileberHolder onCreateViewHolder(ViewGroup parent, int viewType) {
