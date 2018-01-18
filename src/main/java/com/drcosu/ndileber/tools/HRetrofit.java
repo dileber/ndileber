@@ -1,5 +1,6 @@
 package com.drcosu.ndileber.tools;
 
+import com.drcosu.ndileber.tools.net.parser.form.FormConverterFactory;
 import com.drcosu.ndileber.tools.okhttp.UOkHttp;
 
 import java.util.Map;
@@ -21,6 +22,7 @@ public class HRetrofit {
         retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(FormConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(HJson.getGson()))
                 .client(UOkHttp.getInstance().okHttpClient)
