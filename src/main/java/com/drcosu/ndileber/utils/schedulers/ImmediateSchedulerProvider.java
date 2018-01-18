@@ -27,4 +27,10 @@ public class ImmediateSchedulerProvider implements BaseSchedulerProvider {
     public Scheduler ui() {
         return Schedulers.immediate();
     }
+
+    @NonNull
+    @Override
+    public Scheduler newThread() {
+        return Schedulers.newThread();
+    }
 }
