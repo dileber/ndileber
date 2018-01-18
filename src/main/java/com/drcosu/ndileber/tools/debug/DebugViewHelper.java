@@ -14,37 +14,37 @@ import com.drcosu.ndileber.tools.debug.debugwindows.FloatWindowPermissionChecker
 
 public class DebugViewHelper {
 
-    private static final String TAG = "DebugViewHelper";
-
-    private static DebugView debugView;
-
-    public static void showFloatView(final Context context,DebugView.DebugViewClickLinsenter mDebugViewClickLinsenter){
-
-        if(BaseConfiger.BUG_STATIC){
-            if(!UDebug.isAppOnForeground(context)){
-                return;
-            }
-            if(debugView == null){
-                if (!FloatWindowPermissionChecker.checkFloatWindowPermission()) {
-                    FloatWindowPermissionChecker.askForFloatWindowPermission(context);
-                    return;
-                }
-                debugView = new DebugView(context.getApplicationContext());
-                debugView.setmDebugViewClickLinsenter(mDebugViewClickLinsenter);
-                debugView.setImageResource(R.mipmap.dileber_debug);
-            }
-            debugView.show();
-        }
-
-    }
-
-    public static void removeFloatView(){
-        if(BaseConfiger.BUG_STATIC){
-            if(debugView ==null||debugView.getWindowToken()==null){
-                return;
-            }
-            debugView.dismiss();
-        }
-    }
+//    private static final String TAG = "DebugViewHelper";
+//
+//    private static DebugView debugView;
+//
+//    public static void showFloatView(final Context context,DebugView.DebugViewClickLinsenter mDebugViewClickLinsenter){
+//
+//        if(BaseConfiger.BUG_STATIC){
+//            if(!UDebug.isAppOnForeground(context)){
+//                return;
+//            }
+//            if(debugView == null){
+//                if (!FloatWindowPermissionChecker.checkFloatWindowPermission()) {
+//                    FloatWindowPermissionChecker.askForFloatWindowPermission(context);
+//                    return;
+//                }
+//                debugView = new DebugView(context.getApplicationContext());
+//                debugView.setmDebugViewClickLinsenter(mDebugViewClickLinsenter);
+//                debugView.setImageResource(R.mipmap.dileber_debug);
+//            }
+//            debugView.show();
+//        }
+//
+//    }
+//
+//    public static void removeFloatView(){
+//        if(BaseConfiger.BUG_STATIC){
+//            if(debugView ==null||debugView.getWindowToken()==null){
+//                return;
+//            }
+//            debugView.dismiss();
+//        }
+//    }
 
 }

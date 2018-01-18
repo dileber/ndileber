@@ -67,4 +67,8 @@ public abstract class DileberAdapter <VH extends DileberHolder,T extends SModel>
         notifyDataSetChanged();
     }
 
+    @Override
+    public int getItemCount() {
+        return mModel.size();
+    }
 }

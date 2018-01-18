@@ -85,8 +85,8 @@ public abstract class SApplication extends Application{
 		RxBus.removeAllStickyEvents();
 		ThreadExecutor.getInstance().stop();
 		TKeybord.fixFocusedViewLeak(this);
-		DebugViewHelper.removeFloatView();
-		FloatWindowManager.getInstance().removeFromWindow();
+//		DebugViewHelper.removeFloatView();
+//		FloatWindowManager.getInstance().removeFromWindow();
 	}
 
 
