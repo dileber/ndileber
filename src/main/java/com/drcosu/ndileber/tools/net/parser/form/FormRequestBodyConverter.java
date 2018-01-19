@@ -12,9 +12,6 @@ import okio.Buffer;
 import okio.BufferedSink;
 import retrofit2.Converter;
 
-/**
- * Created by congtaowang on 16/6/22.
- */
 public class FormRequestBodyConverter<T> implements Converter<T, RequestBody> {
 
     static final String TAG = FormRequestBodyConverter.class.getSimpleName();
