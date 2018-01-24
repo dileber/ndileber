@@ -1,6 +1,7 @@
 package com.drcosu.ndileber.tools.net.parser.form;
 
 import com.drcosu.ndileber.tools.HJson;
+import com.drcosu.ndileber.tools.log.ULog;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -21,6 +22,7 @@ public class FormRequestBodyConverter<T> implements Converter<T, RequestBody> {
     @Override
     public RequestBody convert(final T value) throws IOException {
         String paramsJson = HJson.toJson(value);
+        ULog.json(paramsJson);
         final Map<String, Object> paramsMap = HJson.toMaps(paramsJson,Object.class);
         return new RequestBody() {
             @Override

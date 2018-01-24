@@ -80,6 +80,7 @@ public class UTime {
 
     public interface Pattern{
         String y_m_d = "yyyy-MM-dd";
+        String ymd = "yyyyMMdd";
         String y_m_d_h_m_s = "yyyy-MM-dd HH:mm:ss";
     }
 
