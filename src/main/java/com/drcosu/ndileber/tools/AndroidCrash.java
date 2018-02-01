@@ -6,6 +6,7 @@ import android.widget.Toast;
 import com.drcosu.ndileber.app.ActivityManager;
 import com.drcosu.ndileber.app.SApplication;
 import com.drcosu.ndileber.tools.crash.CrashSaver;
+import com.drcosu.ndileber.tools.log.ULog;
 
 /**
  * Created by shidawei on 16/8/8.
@@ -26,6 +27,7 @@ public class AndroidCrash{
             public void uncaughtException(Thread thread, final Throwable ex) {
                 // save log
                 saveException(ex, true);
+                ULog.e(ex);
                 showToast( "很抱歉,程序发生异常,即将推出.");
                 try {
                     Thread.sleep(3500);
