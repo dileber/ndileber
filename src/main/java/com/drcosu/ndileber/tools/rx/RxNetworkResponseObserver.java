@@ -1,11 +1,16 @@
 package com.drcosu.ndileber.tools.rx;
 
 import com.drcosu.ndileber.tools.log.ULog;
+import com.drcosu.ndileber.tools.net.NetWorkException;
+
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
+
 import rx.Observer;
 
-/**
- * Created by congtaowang 2016/11/3.
- */
+import static com.drcosu.ndileber.tools.net.RetCallback.networkMsg;
+import static com.drcosu.ndileber.tools.net.RetCallback.networkTimeOutMsg;
+
 
 public abstract class RxNetworkResponseObserver<T> implements Observer<T> {
 
@@ -17,15 +22,37 @@ public abstract class RxNetworkResponseObserver<T> implements Observer<T> {
 
     @Override
     public final void onError(Throwable e) {
-        ULog.e(e,TAG);
+        try {
+            Throwable throwable = e;
+            //获取最根源的异常
+            while(throwable.getCause() != null){
+                e = throwable;
+                throwable = throwable.getCause();
+            }
+            onBeforeResponseOperation();
+            if (e instanceof ConnectException) {
+
+                ULog.d(networkMsg);
+                onResponseFail(new NetWorkException(networkMsg));
+            } else if(e instanceof SocketTimeoutException){
+                ULog.d(networkTimeOutMsg);
+                onResponseFail(new NetWorkException(networkTimeOutMsg));
+            }else{
+                ULog.e(e,"网络错误");
+                onResponseFail(new NetWorkException("网络错误"));
+            }
+        } catch (Exception ex) {
+            e.printStackTrace();
+            ex.printStackTrace();
+        }
+
     }
 
     /**
-     * Invoked when {@link Observer#onError(Throwable)}
-     *
-     * @param msg Detail error message to display.
+     * 错误
+     * @param e
      */
-    public abstract void onResponseFail(String msg);
+    public abstract void onResponseFail(Exception e);
 
     @Override
     public final void onCompleted() {
@@ -34,68 +61,20 @@ public abstract class RxNetworkResponseObserver<T> implements Observer<T> {
 
     @Override
     public final void onNext(T t) {
-        try {
-            onBeforeResponseOperation();
-            onResponse(t);
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            onBeforeResponseOperation();
-            onResponseStatusFail("11111111");
-            ULog.e(TAG,"11111111");
-
-            onResponseOptionFail();
-            ULog.e(e,"Exception");
-        } finally {
-            onNextFinally();
-        }
+        onBeforeResponseOperation();
+        onResponse(t);
     }
 
     /**
-     * Invoke before {@link RxNetworkResponseObserver#onResponse(Object)},
-     * {@link RxNetworkResponseObserver#onResponseFail(String)},
-     * {@link RxNetworkResponseObserver#onResponseStatusFail(String)}
+     * 执行一些起始操作
      */
-    public void onBeforeResponseOperation() {
-
-    }
+    public abstract void onBeforeResponseOperation();
 
     /**
-     * Invoked when {@link Observer#onNext(Object)} success.<br/>
-     * If some exceptions maybe throws, implement {@link RxNetworkResponseObserver#onResponseOptionFail()}.
-     *
-     * @param t Response entity.
+     * 返回值
+     * @param t
      */
     public abstract void onResponse(T t);
 
-    /**
-     * Invoked when response success but status false.
-     *
-     * @param msgCode From server.
-     */
-    public abstract void onResponseStatusFail(String msgCode);
 
-    /**
-     * Form some scene that need response entity.
-     *
-     * @param msgCode From server.
-     * @param t       Response entity.
-     */
-    public void onResponseStatusFail(String msgCode, T t) {
-
-    }
-
-    /**
-     * Invoked when {@link RxNetworkResponseObserver#onResponse(Object)} throws some exception.
-     */
-    public void onResponseOptionFail() {
-
-    }
-
-    /**
-     * Invoked for some tail work.
-     */
-    public void onNextFinally() {
-
-    }
 }
