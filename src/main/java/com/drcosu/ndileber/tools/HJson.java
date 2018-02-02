@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by shidawei on 16/1/20.
@@ -41,6 +42,7 @@ public class HJson {
                     .registerTypeAdapter(Date.class,new DateSerializer())
                     .setDateFormat(DateFormat.LONG)
                     .create();
+
 
         }
     }
@@ -115,7 +117,7 @@ public class HJson {
 
     /**
      * 转成map的
-     *
+     * 注意：整型会转为double
      * @param gsonString
      * @return
      */
@@ -127,7 +129,6 @@ public class HJson {
         }
         return map;
     }
-
 
     /**
      * 转成maplist
