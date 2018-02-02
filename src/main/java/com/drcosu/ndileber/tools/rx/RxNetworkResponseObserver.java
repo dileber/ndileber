@@ -62,6 +62,7 @@ public abstract class RxNetworkResponseObserver<T> implements Observer<T> {
     @Override
     public final void onNext(T t) {
         onBeforeResponseOperation();
+        ULog.o(t);
         onResponse(t);
     }
 
