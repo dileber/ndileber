@@ -1,5 +1,6 @@
 package com.drcosu.ndileber.tools.rx;
 
+import com.drcosu.ndileber.mvp.data.model.SModel;
 import com.drcosu.ndileber.tools.log.ULog;
 import com.drcosu.ndileber.tools.net.NetWorkException;
 
@@ -62,7 +63,9 @@ public abstract class RxNetworkResponseObserver<T> implements Observer<T> {
     @Override
     public final void onNext(T t) {
         onBeforeResponseOperation();
-        ULog.o(t);
+        if(t instanceof SModel){
+            ULog.o(t);
+        }
         onResponse(t);
     }
 
