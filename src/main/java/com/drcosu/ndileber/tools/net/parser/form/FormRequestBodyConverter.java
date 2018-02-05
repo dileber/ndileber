@@ -23,9 +23,9 @@ public class FormRequestBodyConverter<T> implements Converter<T, RequestBody> {
     @Override
     public RequestBody convert(final T value) throws IOException {
         String paramsJson = HJson.toJson(value);
-        ULog.json(paramsJson);
         final Map paramsMap =MapToFormMap.httpBuildQueryMap(HJson.toMaps(paramsJson,Object.class));
-//        final Map paramsMap =HJson.toMaps(paramsJson,Object.class);
+        ULog.o(paramsMap);
+
         return new RequestBody() {
             @Override
             public MediaType contentType() {
