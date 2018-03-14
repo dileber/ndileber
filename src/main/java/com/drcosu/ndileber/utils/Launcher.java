@@ -19,6 +19,7 @@ package com.drcosu.ndileber.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 /**
@@ -29,6 +30,8 @@ import android.support.v4.app.Fragment;
 public interface Launcher {
 
     void launch(Context launcher, Class<? extends Activity> actClass);
+
+    void launch(Context launcher, Class<? extends Activity> actClass, Bundle bundle);
 
     void launchForResult(Activity launcher, Class<? extends Activity> actClass, int requestCode);
 

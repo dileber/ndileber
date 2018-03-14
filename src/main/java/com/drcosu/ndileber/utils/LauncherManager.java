@@ -19,6 +19,7 @@ package com.drcosu.ndileber.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.drcosu.ndileber.tools.log.ULog;
 
@@ -36,6 +37,15 @@ public class LauncherManager {
         @Override
         public void launch(Context launcher, Class<? extends Activity> actClass) {
             launch(launcher, new Intent(launcher, actClass));
+        }
+
+        @Override
+        public void launch(Context launcher, Class<? extends Activity> actClass, Bundle bundle) {
+            Intent intent = new Intent(launcher, actClass);
+            if(bundle!=null) {
+                intent.putExtras(bundle);
+            }
+            launch(launcher, intent);
         }
 
         @Override
