@@ -178,7 +178,7 @@ public class ActivityManager {
         }
     }
 
-    public void finishOtherActivity(Activity now){
+    public void finishOtherActivity(Class now){
         while (true){
             if(activityInStack()>0){
                 Activity activity = activityStack.pop();
