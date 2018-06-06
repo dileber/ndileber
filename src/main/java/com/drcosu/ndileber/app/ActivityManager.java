@@ -178,6 +178,20 @@ public class ActivityManager {
         }
     }
 
+    public void finishOtherActivity(Activity now){
+        while (true){
+            if(activityInStack()>0){
+                Activity activity = activityStack.pop();
+                if(now.getClass().getName().equals(activity.getClass().getName())){
+                    continue;
+                }
+                activity.finish();
+                activity = null;
+            }else {
+                break;
+            }
+        }
+    }
 
     @Deprecated
     public void finishOtherActivity(NewActivityCallBack newActivityCallBack){
