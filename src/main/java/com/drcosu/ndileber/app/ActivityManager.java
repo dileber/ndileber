@@ -182,7 +182,7 @@ public class ActivityManager {
         while (true){
             if(activityInStack()>0){
                 Activity activity = activityStack.pop();
-                if(now.getClass().getName().equals(activity.getClass().getName())){
+                if(now!=null&&activity!=null&&now.getClass().getName().equals(activity.getClass().getName())){
                     continue;
                 }
                 activity.finish();
